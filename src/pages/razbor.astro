@@ -1,0 +1,79 @@
+---
+// Страница Экспресс-разбора 5 инвойсов за 24 часа
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LeadForm from "../components/LeadForm.astro";
+import SecurityNoDemoBanner from "../components/SecurityNoDemoBanner.astro";
+import { SITE_CANONICAL_BASE } from "../consts";
+---
+
+<BaseLayout
+  title="Бесплатный экспресс-разбор 5 инвойсов за 24 часа — ДОКА ВЭД"
+  description="Пришлите до 5 обезличенных файлов инвойсов или спецификаций. Экспертный разбор кодов ТН ВЭД, рисков КТС и потенциала автоматизации за 24 часа."
+  canonical={`${SITE_CANONICAL_BASE}/razbor/`}
+>
+  <section class="section" style="padding-top: 48px;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; margin-bottom: 40px;" class="razbor-grid">
+        <!-- Left: Information & Process explanation -->
+        <div>
+          <span class="doka-badge doka-badge-orange" style="margin-bottom: 12px;">Бесплатный демо-разбор (0 ₽)</span>
+          <h1 style="font-size: clamp(2rem, 3.5vw, 2.75rem); line-height: 1.2; margin-bottom: 16px; color: var(--color-doka-primary);">
+            Бесплатный экспресс-разбор 5 инвойсов за 24 часа
+          </h1>
+          <p style="font-size: 1.125rem; color: var(--color-doka-text-muted); line-height: 1.6; margin-bottom: 24px;">
+            Узнайте, где ваша компания теряет человеко-часы при таможенном декларировании и каков реальный потенциал внедрения ИИ-консилиума ДОКА.
+          </p>
+
+          <div style="background: var(--color-doka-surface); border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); padding: 20px; margin-bottom: 28px;">
+            <h3 style="font-size: 1.1rem; margin-bottom: 12px; color: var(--color-doka-primary);">Что вы получите в рамках разбора:</h3>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 0.9375rem; color: var(--color-doka-text-muted);">
+              <li style="display: flex; gap: 10px;">
+                <span style="color: var(--color-doka-accent); font-weight: 700;">✓</span>
+                <span><strong>Демо-выдачу распознавания:</strong> Извлечение табличных данных из ваших 5 сканов/PDF.</span>
+              </li>
+              <li style="display: flex; gap: 10px;">
+                <span style="color: var(--color-doka-accent); font-weight: 700;">✓</span>
+                <span><strong>Анализ сложности кодов ТН ВЭД:</strong> Оценка неоднозначности товаров и рисков доначислений.</span>
+              </li>
+              <li style="display: flex; gap: 10px;">
+                <span style="color: var(--color-doka-accent); font-weight: 700;">✓</span>
+                <span><strong>Проверка рисков КТС:</strong> Выявление уязвимых позиций под профили риска ФТС ЕЭК.</span>
+              </li>
+              <li style="display: flex; gap: 10px;">
+                <span style="color: var(--color-doka-accent); font-weight: 700;">✓</span>
+                <span><strong>Расчёт ROI и экономии часов:</strong> Оценка времени сокращения цикла (со 180 мин до 3 мин).</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Trust box -->
+          <div style="background: rgba(124, 58, 237, 0.05); border: 1px solid rgba(124, 58, 237, 0.2); border-radius: var(--radius-doka-lg); padding: 20px;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+              <div style="color: var(--color-doka-ai);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <span style="font-weight: 700; font-size: 0.9375rem; color: var(--color-doka-ai);">Гарантия безопасности данных:</span>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--color-doka-text-muted); line-height: 1.5; margin: 0;">
+              Файлы используются исключительно для выполнения тестового прогона в локальном контуре. Мы подписываем NDA по запросу. Никакой передачи третьим лицам.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Lead Form -->
+        <div>
+          <LeadForm />
+        </div>
+      </div>
+
+      <!-- Security & No Public Demo Rationale Banner -->
+      <SecurityNoDemoBanner />
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:raw>
+  @media (max-width: 900px) {
+    .razbor-grid { grid-template-columns: 1fr !important; }
+  }
+</style>

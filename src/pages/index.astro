@@ -1,0 +1,845 @@
+---
+// Главная — P1: крючок, «для кого», distill, anti-slop pain
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  HERO,
+  PILLARS,
+  LONG_LETTER,
+  FAQ,
+  SERVICES_STAIRCASE,
+  CERT_ID,
+  COMPANY,
+  SITE_CANONICAL_BASE,
+  PAIN_POINTS,
+  AUDIENCES,
+  buildSoftwareJsonLd,
+  buildHowToJsonLd,
+  buildFaqJsonLd,
+} from "../consts";
+import InvoiceParserDemo from "../components/InvoiceParserDemo.astro";
+import RoiCalculator from "../components/RoiCalculator.astro";
+import LeadForm from "../components/LeadForm.astro";
+import SecurityNoDemoBanner from "../components/SecurityNoDemoBanner.astro";
+
+const SCREENSHOTS = [
+  {
+    src: "/screens/doka-split-view-council.jpg",
+    alt: "Split-View: PDF инвойса и выводы ИИ-экспертов",
+    title: "PDF + консилиум в одном окне",
+    caption: "Подсветка данных в инвойсе и выводы Юриста, Инспектора и Координатора.",
+  },
+  {
+    src: "/screens/doka-items-grafa31-hs-code.jpg",
+    alt: "Графа 31 и код ТН ВЭД 8517620002",
+    title: "Графа 31 и пошлины",
+    caption: "Обоснование кода, пошлина, НДС и нетарифные меры по позиции.",
+  },
+  {
+    src: "/screens/doka-server-hs-code-8471300000.jpg",
+    alt: "Обоснование кода ТН ВЭД для сервера Dell",
+    title: "Почему не другие коды",
+    caption: "Явный отказ от ложных субпозиций — аргумент для таможни.",
+  },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    buildSoftwareJsonLd(),
+    buildHowToJsonLd(),
+    buildFaqJsonLd(),
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE_CANONICAL_BASE}/` },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={`ДОКА — ${HERO.headline}`}
+  description="Автоматизация ВЭД: инвойс → коды ТН ВЭД → риски КТС → XML Альта-ГТД. On-Premises. Бесплатный разбор 5 файлов за 24 часа."
+  canonical={`${SITE_CANONICAL_BASE}/`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <!-- 1. HERO: боль → выгода → CTA -->
+  <section class="hero-section" aria-labelledby="hero-title">
+    <div class="container">
+      <div class="hero-main-grid">
+        <div class="hero-copy">
+          <p class="hero-eyebrow">ДОКА · ВЭД · On-Premises · Роспатент №{CERT_ID}</p>
+          <h1 id="hero-title" class="hero-title">
+            {HERO.h1}
+          </h1>
+          <p class="hero-pain">{HERO.pain}</p>
+          <p class="hero-lead">{HERO.lead}</p>
+
+          <ul class="hero-bullets">
+            <li>PDF/скан → спецификация без ручного переноса в Альта</li>
+            <li>Коды ТН ВЭД ЕАЭС с обоснованием, почему не другой код</li>
+            <li>Риски КТС до подачи и XML-проект в закрытом контуре</li>
+          </ul>
+
+          <div class="hero-actions">
+            <a href="/razbor/" class="doka-btn doka-btn-primary hero-cta-primary">
+              <span>Разбор 5 файлов — 0 ₽</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="/services/" class="doka-btn doka-btn-outline">Цены и этапы</a>
+          </div>
+          <p class="hero-slot-line">Слоты разбора · без обязательства покупать лицензию</p>
+        </div>
+
+        <!-- Offer card — текстовый крючок (не мелкий UI) -->
+        <aside class="hero-offer" aria-label="Оффер: бесплатный разбор">
+          <span class="hero-offer-badge">Без обязательств</span>
+          <p class="hero-offer-title">Бесплатный разбор</p>
+          <div class="hero-offer-highlight">
+            <span class="hero-offer-num">24 часа</span>
+            <span class="hero-offer-sub">на 5 ваших инвойсов · 0 ₽</span>
+          </div>
+          <ul class="hero-offer-points">
+            <li>Пришлите до 5 обезличенных PDF/сканов инвойсов или спецификаций</li>
+            <li>В ответ: таблица позиций, коды ТН ВЭД, ориентир пошлин, риски КТС, XML для Альта-ГТД</li>
+            <li>Если формат не подходит — без счетов и давления «купить софт»</li>
+          </ul>
+          <a href="/razbor/" class="doka-btn doka-btn-primary hero-offer-cta">Отправить 5 файлов</a>
+          <p class="hero-offer-foot">
+            Дальше: пилот от 250&nbsp;000&nbsp;₽ · Enterprise от 650&nbsp;000&nbsp;₽ · железо on-prem — отдельно
+          </p>
+          <p class="hero-offer-proof">
+            <a href="#proof">Скриншоты UI</a>
+            <span aria-hidden="true">·</span>
+            <a href="/cases/">Кейсы и сценарии</a>
+          </p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. PAIN — editorial list, no icon tiles -->
+  <section class="section section-muted" aria-labelledby="pain-title">
+    <div class="container">
+      <div class="section-header section-header-wide">
+        <h2 id="pain-title" class="section-title">Знакомо отделу ВЭД?</h2>
+        <p class="section-subtitle">Типичные узкие места, которые закрывает ДОКА — без «AI magic», на ваших документах.</p>
+      </div>
+
+      <ol class="pain-list">
+        {PAIN_POINTS.map((p, i) => (
+          <li class="pain-row">
+            <span class="pain-num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
+            <div>
+              <h3 class="pain-title">{p.title}</h3>
+              <p class="pain-body">{p.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 3. ДЛЯ КОГО -->
+  <section class="section" aria-labelledby="audience-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="audience-title" class="section-title">Для кого ДОКА</h2>
+        <p class="section-subtitle">Один продукт — разные крючки для ролей в сделке.</p>
+      </div>
+      <div class="audience-grid">
+        {AUDIENCES.map((a) => (
+          <article class="audience-card">
+            <h3 class="audience-role">{a.role}</h3>
+            <p class="audience-hook">{a.hook}</p>
+            <p class="audience-outcome"><strong>Результат:</strong> {a.outcome}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. PROOF: screenshots + case link -->
+  <section class="section section-muted" id="proof" aria-labelledby="proof-title">
+    <div class="container">
+      <div class="section-header section-header-wide">
+        <h2 id="proof-title" class="section-title">Как это выглядит у декларанта</h2>
+        <p class="section-subtitle">
+          Реальные экраны и
+          <a href="/cases/">4 сценария</a>:
+          многостраничный инвойс, Графа 31, XML в Альта, on-prem 152-ФЗ.
+        </p>
+      </div>
+
+      <div class="proof-grid">
+        {SCREENSHOTS.map((s) => (
+          <figure class="proof-card">
+            <div class="proof-img-wrap">
+              <img src={s.src} alt={s.alt} loading="lazy" decoding="async" width="800" height="500" />
+            </div>
+            <figcaption>
+              <strong>{s.title}</strong>
+              <span>{s.caption}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <div class="proof-cta-row">
+        <a href="/cases/" class="doka-btn doka-btn-navy">Все кейсы и сценарии</a>
+        <a href="#demo-section" class="doka-btn doka-btn-outline">Интерактивный интерфейс</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. КАК РАБОТАЕТ — 4 столпа без card-icon monotony -->
+  <section class="section" aria-labelledby="pillars-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="pillars-title" class="section-title">Что делает система</h2>
+        <p class="section-subtitle">От PDF до XML в Альта-ГТД и 1С — в закрытом контуре.</p>
+      </div>
+      <div class="pillar-list">
+        {PILLARS.map((p, idx) => (
+          <div class="pillar-row">
+            <span class="pillar-num">0{idx + 1}</span>
+            <div>
+              <h3>{p.title}</h3>
+              <p>{p.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="inline-more">
+        <a href="/method/">Архитектура и метод →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 6. ОФФЕР + ФОРМА -->
+  <section class="section section-muted" id="offer" aria-labelledby="pricing-title">
+    <div class="container">
+      <div class="section-header section-header-wide">
+        <h2 id="pricing-title" class="section-title">Старт с 0 ₽ — внедрение по этапам</h2>
+        <p class="section-subtitle">Без покупки лицензии до подтверждения результата на ваших данных.</p>
+      </div>
+
+      <div class="offer-grid">
+        {SERVICES_STAIRCASE.map((item) => (
+          <div class:list={["offer-card", { "offer-card-primary": item.isPrimary }]}>
+            {item.isPrimary && <span class="doka-badge doka-badge-orange">Начать здесь</span>}
+            <h3>{item.name}</h3>
+            <div class="offer-price">{item.price}</div>
+            <div class="offer-meta">Срок: {item.duration}{item.limit ? ` · ${item.limit}` : ""}</div>
+            <p class="offer-body">{item.deliverables}</p>
+            <p class="doka-callout-success offer-result">✓ {item.result}</p>
+            <a href={item.link} class:list={["doka-btn", item.isPrimary ? "doka-btn-primary" : "doka-btn-outline", "offer-btn"]}>
+              {item.isPrimary ? "Запросить разбор" : "Подробнее"}
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <div class="offer-form-wrap" id="lead-form-section-title">
+        <LeadForm />
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. TRUST -->
+  <section class="section" aria-labelledby="author-title">
+    <div class="container">
+      <div class="section-header section-header-wide">
+        <h2 id="author-title" class="section-title">Правообладатель и авторы</h2>
+        <ul class="trust-lines">
+          <li>
+            <span class="trust-label">Свидетельство</span>
+            <span class="trust-value">Роспатент №{CERT_ID}</span>
+          </li>
+          <li>
+            <span class="trust-label">Правообладатель</span>
+            <span class="trust-value">ООО «ГК Фороней»</span>
+          </li>
+          <li>
+            <span class="trust-label">Авторы</span>
+            <span class="trust-value">Аксёнов Ю.В., Наумов П.В.</span>
+          </li>
+        </ul>
+        <div class="hero-actions" style="margin-bottom: 0;">
+          <a href="/2026681995.eod.pdf" target="_blank" rel="noopener" class="doka-btn doka-btn-navy">Свидетельство (PDF)</a>
+          <a href="/about/" class="doka-btn doka-btn-outline">О разработчиках</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FAQ (short) -->
+  <section class="section section-muted" aria-labelledby="faq-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="faq-title" class="section-title">Частые вопросы</h2>
+      </div>
+      <div class="faq-wrap">
+        {FAQ.slice(0, 6).map((f) => (
+          <details class="faq-item">
+            <summary>{f.question}</summary>
+            <div class="faq-answer">{f.answer}</div>
+          </details>
+        ))}
+        <div class="proof-cta-row">
+          <a href="/faq/" class="doka-btn doka-btn-outline">Вся база знаний</a>
+        </div>
+      </div>
+      <div class="security-wrap">
+        <SecurityNoDemoBanner />
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. SECONDARY: demo + ROI (ниже fold) -->
+  <section class="section" id="demo-section" aria-labelledby="demo-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="demo-title" class="section-title">Интерфейс в работе</h2>
+        <p class="section-subtitle">Симулятор для знакомства с логикой. Боевой контур — только on-prem.</p>
+      </div>
+      <InvoiceParserDemo />
+    </div>
+  </section>
+
+  <section class="section section-muted" aria-labelledby="roi-title">
+    <div class="container">
+      <div class="section-header">
+        <h2 id="roi-title" class="section-title">Ориентир по экономии часов и ₽</h2>
+        <p class="section-subtitle">Грубая оценка: подставьте объём инвойсов и ставку специалиста.</p>
+      </div>
+      <RoiCalculator />
+    </div>
+  </section>
+
+  <!-- 10. Letter (calm close) -->
+  <section class="section" aria-labelledby="letter-title">
+    <div class="container">
+      <div class="letter-block">
+        <h2 id="letter-title">Если нужно спокойно прочитать</h2>
+        <div class="letter-body">{LONG_LETTER}</div>
+        <div class="hero-actions">
+          <a href="/razbor/" class="doka-btn doka-btn-primary">Отправить 5 файлов</a>
+          <a href={COMPANY.phoneHref} class="doka-btn doka-btn-outline">{COMPANY.phone}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:raw>
+  .hero-section {
+    padding: 40px 0 36px;
+    background: linear-gradient(180deg, #F1F5F9 0%, #F8FAFC 100%);
+  }
+  .hero-main-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.9fr);
+    gap: 36px;
+    align-items: stretch;
+  }
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-doka-accent);
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .hero-title {
+    font-family: var(--font-sans);
+    font-size: clamp(1.7rem, 3.2vw, 2.35rem);
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+    color: var(--color-doka-primary);
+    font-weight: 700;
+    margin-bottom: 14px;
+    max-width: 38ch;
+  }
+  .hero-pain {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-doka-primary);
+    line-height: 1.4;
+    margin: 0 0 10px;
+    max-width: 48ch;
+  }
+  .hero-lead {
+    font-size: 1rem;
+    color: var(--color-doka-text-muted);
+    line-height: 1.55;
+    margin-bottom: 16px;
+    max-width: 52ch;
+  }
+  .hero-bullets {
+    list-style: none;
+    margin: 0 0 18px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: 52ch;
+  }
+  .hero-bullets li {
+    position: relative;
+    padding-left: 1.15rem;
+    font-size: 0.9375rem;
+    color: var(--color-doka-text-muted);
+    line-height: 1.45;
+  }
+  .hero-bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-doka-accent);
+  }
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .hero-cta-primary { padding: 14px 22px; font-size: 0.9375rem; }
+  .hero-slot-line {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--color-doka-text-dim);
+    font-family: var(--font-mono);
+  }
+
+  /* Offer card — right column hook */
+  .hero-offer {
+    background: #fff;
+    border: 1px solid var(--color-doka-border);
+    border-radius: var(--radius-doka-lg);
+    box-shadow: var(--shadow-doka-md);
+    padding: 28px 26px 24px;
+    display: flex;
+    flex-direction: column;
+    align-self: start;
+    position: sticky;
+    top: 100px;
+  }
+  .hero-offer-badge {
+    display: inline-flex;
+    align-self: flex-start;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9A3412;
+    background: rgba(221, 107, 32, 0.1);
+    border: 1px solid rgba(194, 65, 12, 0.28);
+    border-radius: 999px;
+    padding: 4px 10px;
+    margin-bottom: 12px;
+  }
+  .hero-offer-title {
+    margin: 0 0 14px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-doka-primary);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .hero-offer-highlight {
+    background: linear-gradient(135deg, #122A42 0%, #1A365D 100%);
+    color: #fff;
+    border-radius: var(--radius-doka);
+    padding: 18px 16px;
+    margin-bottom: 18px;
+  }
+  .hero-offer-num {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: clamp(1.75rem, 3vw, 2.15rem);
+    font-weight: 700;
+    color: #FDBA74;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .hero-offer-sub {
+    display: block;
+    font-size: 0.9375rem;
+    color: #CBD5E1;
+    line-height: 1.4;
+  }
+  .hero-offer-points {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hero-offer-points li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 0.9rem;
+    color: var(--color-doka-text-muted);
+    line-height: 1.5;
+  }
+  .hero-offer-points li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #047857;
+    font-weight: 700;
+    font-size: 0.875rem;
+  }
+  .hero-offer-cta {
+    width: 100%;
+    text-align: center;
+    padding: 14px 18px;
+    font-size: 0.9375rem;
+    margin-bottom: 14px;
+  }
+  .hero-offer-foot {
+    margin: 0 0 12px;
+    font-size: 0.8125rem;
+    color: var(--color-doka-text-dim);
+    line-height: 1.45;
+  }
+  .hero-offer-proof {
+    margin: 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-doka-border);
+    font-size: 0.8125rem;
+    color: var(--color-doka-text-dim);
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .hero-offer-proof a {
+    color: var(--color-doka-accent);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .hero-offer-proof a:hover { text-decoration: underline; }
+
+  .section-muted { background: var(--color-doka-surface-muted); }
+  .section-header-wide { max-width: 720px; }
+
+  /* Pain list */
+  .pain-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--color-doka-border);
+    border-radius: var(--radius-doka-lg);
+    background: #fff;
+    overflow: hidden;
+  }
+  .pain-row {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 8px 16px;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--color-doka-border);
+    align-items: start;
+  }
+  .pain-row:last-child { border-bottom: none; }
+  .pain-num {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-doka-accent);
+    padding-top: 2px;
+  }
+  .pain-title {
+    font-size: 1.05rem;
+    margin: 0 0 4px;
+    color: var(--color-doka-primary);
+  }
+  .pain-body {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--color-doka-text-muted);
+    line-height: 1.55;
+  }
+
+  /* Audience */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .audience-card {
+    background: #fff;
+    border: 1px solid var(--color-doka-border);
+    border-radius: var(--radius-doka-lg);
+    padding: 22px;
+  }
+  .audience-role {
+    font-size: 1.05rem;
+    color: var(--color-doka-primary);
+    margin: 0 0 10px;
+  }
+  .audience-hook {
+    font-size: 0.9375rem;
+    color: var(--color-doka-text-muted);
+    line-height: 1.5;
+    margin: 0 0 12px;
+  }
+  .audience-outcome {
+    font-size: 0.875rem;
+    color: var(--color-doka-text-main);
+    line-height: 1.5;
+    margin: 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-doka-border);
+  }
+
+  /* Proof screenshots */
+  .proof-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .proof-card {
+    margin: 0;
+    background: #fff;
+    border: 1px solid var(--color-doka-border);
+    border-radius: var(--radius-doka-lg);
+    overflow: hidden;
+  }
+  .proof-img-wrap {
+    border-bottom: 1px solid var(--color-doka-border);
+  }
+  .proof-img-wrap img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .proof-card figcaption {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .proof-card figcaption strong {
+    font-size: 0.9375rem;
+    color: var(--color-doka-primary);
+  }
+  .proof-card figcaption span {
+    font-size: 0.8125rem;
+    color: var(--color-doka-text-muted);
+    line-height: 1.45;
+  }
+  .proof-cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  /* Pillars as list */
+  .pillar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--color-doka-border);
+  }
+  .pillar-row {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--color-doka-border);
+    align-items: start;
+  }
+  .pillar-num {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: var(--color-doka-accent);
+  }
+  .pillar-row h3 {
+    font-size: 1.1rem;
+    margin: 0 0 6px;
+    color: var(--color-doka-primary);
+  }
+  .pillar-row p {
+    margin: 0;
+    font-size: 0.9375rem;
+    color: var(--color-doka-text-muted);
+    line-height: 1.55;
+  }
+  .inline-more {
+    margin-top: 20px;
+    font-size: 0.9375rem;
+  }
+  .inline-more a {
+    color: var(--color-doka-accent);
+    font-weight: 600;
+  }
+
+  /* Offer cards */
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  .offer-card {
+    background: #fff;
+    border: 1px solid var(--color-doka-border);
+    border-radius: var(--radius-doka-lg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .offer-card-primary {
+    border-color: rgba(194, 65, 12, 0.4);
+    box-shadow: var(--shadow-doka-md);
+  }
+  .offer-card h3 {
+    font-size: 1.05rem;
+    margin: 0;
+    color: var(--color-doka-primary);
+  }
+  .offer-price {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--color-doka-accent);
+  }
+  .offer-meta {
+    font-size: 0.75rem;
+    color: var(--color-doka-text-dim);
+  }
+  .offer-body {
+    font-size: 0.8125rem;
+    color: var(--color-doka-text-muted);
+    line-height: 1.5;
+    flex: 1;
+    margin: 0;
+  }
+  .offer-result { margin: 4px 0 8px; }
+  .offer-btn { width: 100%; text-align: center; margin-top: auto; }
+  .offer-form-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* Trust lines */
+  .trust-lines {
+    list-style: none;
+    margin: 0 0 24px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 36rem;
+  }
+  .trust-lines li {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr;
+    gap: 12px 16px;
+    align-items: baseline;
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+  .trust-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-doka-accent);
+  }
+  .trust-value {
+    color: var(--color-doka-primary);
+    font-weight: 600;
+  }
+  @media (max-width: 520px) {
+    .trust-lines li {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+  }
+
+  /* FAQ */
+  .faq-wrap { max-width: 840px; margin: 0 auto; }
+  .faq-item {
+    background: #fff;
+    border: 1px solid var(--color-doka-border);
+    border-radius: var(--radius-doka);
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  .faq-item summary {
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: var(--color-doka-primary);
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-answer {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-doka-border);
+    font-size: 0.9375rem;
+    color: var(--color-doka-text-muted);
+    line-height: 1.6;
+  }
+  .security-wrap {
+    max-width: 860px;
+    margin: 32px auto 0;
+  }
+
+  .letter-block {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--color-doka-surface);
+    padding: 32px;
+    border-radius: var(--radius-doka-lg);
+    border: 1px solid var(--color-doka-border);
+  }
+  .letter-block h2 {
+    font-size: 1.4rem;
+    margin: 0 0 16px;
+    color: var(--color-doka-primary);
+  }
+  .letter-body {
+    font-size: 0.9375rem;
+    color: var(--color-doka-text-muted);
+    line-height: 1.8;
+    white-space: pre-line;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 1000px) {
+    .hero-main-grid { grid-template-columns: 1fr; }
+    .hero-offer { position: static; }
+    .audience-grid { grid-template-columns: 1fr; }
+    .proof-grid { grid-template-columns: 1fr; }
+    .offer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 700px) {
+    .offer-grid { grid-template-columns: 1fr; }
+    .pain-row { grid-template-columns: 40px 1fr; padding: 14px 16px; }
+    .hero-section { padding: 24px 0 20px; }
+    .hero-title { max-width: none; }
+    .hero-offer { padding: 22px 18px 20px; }
+  }
+</style>

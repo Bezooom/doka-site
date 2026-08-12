@@ -1,0 +1,104 @@
+---
+// Подробный кейс системы ДОКА с реальными скриншотами интерфейса
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { AUTHOR, CO_AUTHOR, CERT_ID, SITE_CANONICAL_BASE } from "../../consts";
+import LeadForm from "../../components/LeadForm.astro";
+---
+
+<BaseLayout
+  title="Кейс: Внедрение ИИ-системы ДОКА для декларирования сложной номенклатуры"
+  description="Подробный кейс автоматизации разбора 32-страничных инвойсов, классификации кодов ТН ВЭД и выгрузки XML-проектов в Альта-ГТД."
+  canonical={`${SITE_CANONICAL_BASE}/cases/doka/`}
+>
+  <section class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 900px;">
+      <div style="margin-bottom: 32px;">
+        <span class="doka-badge doka-badge-orange" style="margin-bottom: 12px;">Практический кейс</span>
+        <h1 style="font-size: clamp(2rem, 3.8vw, 2.8rem); line-height: 1.2; color: var(--color-doka-primary); margin-bottom: 16px;">
+          Автоматизация разбора инвойсов и подбора кодов ТН ВЭД для дистрибьютора промышленного оборудования
+        </h1>
+        <div style="font-size: 1.0625rem; color: var(--color-doka-text-muted); line-height: 1.6;">
+          Как команда ИИ-экспертов ДОКА сократила время подготовки таможенной декларации с 4 часов до 3 минут на один инвойс.
+        </div>
+      </div>
+
+      <!-- Case Key Stats Banner -->
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; background: var(--color-doka-primary); color: #FFFFFF; padding: 24px; border-radius: var(--radius-doka-lg); margin-bottom: 40px;" class="case-kpi-grid">
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700; color: #ED8936;">4 часа → 3 мин</div>
+          <div style="font-size: 0.75rem; color: #CBD5E1;">Время обработки</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700; color: #34D399;">Графа 31</div>
+          <div style="font-size: 0.75rem; color: #CBD5E1;">+ обоснование кода</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700; color: #A78BFA;">XML OK</div>
+          <div style="font-size: 0.75rem; color: #CBD5E1;">схема Альта-ГТД</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: #FBBF24;">Ваш сервер</div>
+          <div style="font-size: 0.75rem; color: #CBD5E1;">Безопасный контур</div>
+        </div>
+      </div>
+
+      <!-- Main Case Article Content -->
+      <div style="font-size: 1rem; color: var(--color-doka-text-muted); line-height: 1.8; margin-bottom: 40px;">
+        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">1. Проблема: Сверхплотные инвойсы и ручной ввод</h2>
+        <p>
+          До внедрения системы ДОКА специалисты по таможенному оформлению вручную переносили данные из коммерческих инвойсов (PDF и сканов) в программу Альта-ГТД. При поступлении многостраничных спецификаций на 30–50 страниц декларант тратил до 4 часов на ввод наименований, сопоставление весов, подсчет сумм и определение кодов ТН ВЭД ЕАЭС.
+        </p>
+
+        <!-- Screenshot 1 -->
+        <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;">
+          <img src="/screens/doka-split-view-council.jpg" alt="Интерфейс ДОКА: Разбор инвойса Eastman и ИИ-Консилиум" style="width: 100%; height: auto; display: block;" />
+          <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+            <strong>Рис 1.</strong> Рабочее окно системы ДОКА. Слева: просмотр инвойса Eastman с интеллектуальным распознаванием. Справа: выводы команды ИИ-экспертов (Инспектор, Юрист, Координатор).
+          </div>
+        </div>
+
+        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">2. Решение: Умное распознавание и команда виртуальных экспертов</h2>
+        <p>
+          ДОКА применила эффективную технологию: систему умного визуального анализа сложных таблиц и трехступенчатый контроль (Инспектор, Юрист, Координатор). Система не просто извлекла тексты, но и сгенерировала Графу 31 с подробным юридическим обоснованием кода ТН ВЭД.
+        </p>
+
+        <!-- Screenshot 2 -->
+        <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;">
+          <img src="/screens/doka-items-grafa31-hs-code.jpg" alt="Спецификация позиции: Графа 31 и Обоснование ТН ВЭД 8517620002" style="width: 100%; height: auto; display: block;" />
+          <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+            <strong>Рис 2.</strong> Карточка позиции в ДОКА (Коммутатор Dell EMC). Сформирована Графа 31, присвоен код ТН ВЭД 8517620002 с уверенностью 95%, рассчитаны пошлина 0%, НДС 20% и проверены нетарифные меры.
+          </div>
+        </div>
+
+        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">3. Аргументация отказов от ложных кодов (Защита от КТС)</h2>
+        <p>
+          Ключевой фактор защиты от доначислений на таможне — прозрачное пояснение, почему отброшены альтернативные коды ТН ВЭД. На рисунке ниже показано обоснование для сервера Dell PowerEdge R7525: система четко указала, почему код 8471300000 верный, а альтернативы 84714 (машины без процессоров) отброшены.
+        </p>
+
+        <!-- Screenshot 3 -->
+        <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;">
+          <img src="/screens/doka-server-hs-code-8471300000.jpg" alt="Обоснование кода ТН ВЭД 8471300000 для сервера Dell PowerEdge" style="width: 100%; height: auto; display: block;" />
+          <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+            <strong>Рис 3.</strong> Разбор сервера Dell PowerEdge. Детализированное обоснование ТН ВЭД 8471300000 и явное указание причин отбрасывания субпозиций 84714 и 84716.
+          </div>
+        </div>
+
+        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">4. Результат: Мгновенный экспорт в Альта-ГТД и 1С:ERP</h2>
+        <p>
+          По нажатию кнопки XML система формирует проект декларации, прошедший schema-валидацию, для импорта в Альта-ГТД. Финальную проверку перед подачей выполняет декларант.
+        </p>
+      </div>
+
+      <!-- Lead form block -->
+      <div style="margin-top: 40px;">
+        <LeadForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:raw>
+  @media (max-width: 600px) {
+    .case-kpi-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+</style>

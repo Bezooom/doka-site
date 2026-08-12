@@ -1,0 +1,375 @@
+---
+// LeadForm — заявка на экспресс-разбор. Файлы уходят вложением на email правообладателя.
+import { COMPANY, LEAD_FORM } from "../consts";
+---
+
+<div class="doka-card lead-card">
+  <div class="lead-intro">
+    <div class="lead-intro-row">
+      <span class="doka-badge doka-badge-orange">Бесплатный демо-разбор (0 ₽)</span>
+      <span class="lead-nda">Конфиденциально · NDA</span>
+    </div>
+    <h3 class="lead-title">Получить экспресс-разбор 5 инвойсов за 24 часа</h3>
+    <p class="lead-desc">
+      Заявка и файлы уходят на {COMPANY.email}. До {LEAD_FORM.maxFiles} файлов (PDF, скан, XLSX), каждый до {LEAD_FORM.maxFileMb} МБ.
+    </p>
+  </div>
+
+  <form id="doka-lead-form" class="lead-form" novalidate>
+    <input type="text" name="_honey" class="lead-honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+    <div>
+      <label class="doka-label" for="form-name">Ваше имя *</label>
+      <input type="text" id="form-name" name="name" class="doka-input" placeholder="Иван Петров (Декларант / Руководитель ВЭД)" required />
+    </div>
+
+    <div class="form-contacts-row">
+      <div>
+        <label class="doka-label" for="form-contact">Телефон или Email *</label>
+        <input type="text" id="form-contact" name="contact" class="doka-input" placeholder="+7 (812) 000-00-00 или email@company.ru" required />
+      </div>
+      <div>
+        <label class="doka-label" for="form-company">Компания / Отрасль</label>
+        <input type="text" id="form-company" name="company" class="doka-input" placeholder="ООО ИмпортПром, Машиностроение" />
+      </div>
+    </div>
+
+    <div>
+      <label class="doka-label" for="form-files">Файлы для разбора (до {LEAD_FORM.maxFiles})</label>
+      <div id="drop-zone" class="lead-drop">
+        <div class="lead-drop-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+        </div>
+        <div class="lead-drop-title">Перетащите или выберите файлы</div>
+        <div class="lead-drop-hint">PDF, PNG, JPG, XLSX · до {LEAD_FORM.maxFiles} шт. · до {LEAD_FORM.maxFileMb} МБ каждый</div>
+        <input type="file" id="form-files" name="files" multiple accept=".pdf,.png,.jpg,.jpeg,.xlsx,.xls,.doc,.docx" hidden />
+      </div>
+      <div id="file-list-preview" class="lead-files" aria-live="polite"></div>
+    </div>
+
+    <div>
+      <label class="doka-label" for="form-note">Комментарий к задаче (опционально)</label>
+      <textarea id="form-note" name="note" class="doka-input" rows="2" placeholder="Не читаются сканы, путаница с кодами ТН ВЭД, задержки на таможне..."></textarea>
+    </div>
+
+    <button type="submit" id="lead-submit" class="doka-btn doka-btn-primary lead-submit">
+      <span>Отправить заявку</span>
+    </button>
+
+    <p id="lead-status" class="lead-status" role="status" aria-live="polite"></p>
+
+    <p class="lead-legal">
+      Отправляя форму, вы соглашаетесь с <a href="/privacy/">политикой конфиденциальности</a>.
+    </p>
+  </form>
+
+  <div id="lead-success" class="lead-success" hidden>
+    <p class="lead-success-title">Заявка отправлена</p>
+    <p class="lead-success-body">
+      Мы получили обращение. Ответ по разбору — в течение 24 часов на указанные контакты.
+    </p>
+  </div>
+
+  <div class="lead-direct">
+    <span>Прямая связь:</span>
+    <div class="doka-cluster">
+      <a href={`mailto:${COMPANY.email}`} class="doka-btn doka-btn-outline lead-direct-btn">{COMPANY.email}</a>
+      <a href={COMPANY.phoneHref} class="doka-btn doka-btn-outline lead-direct-btn">{COMPANY.phone}</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .lead-card { padding: 28px; }
+  .lead-intro { margin-bottom: 20px; }
+  .lead-intro-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .lead-nda {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-doka-accent);
+    font-weight: 600;
+  }
+  .lead-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-doka-primary);
+    margin: 0 0 6px;
+  }
+  .lead-desc {
+    font-size: 0.875rem;
+    color: var(--color-doka-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .lead-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .lead-honey {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .form-contacts-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .lead-drop {
+    border: 2px dashed var(--color-doka-border-dark);
+    border-radius: var(--radius-doka);
+    padding: 20px;
+    text-align: center;
+    background: var(--color-doka-surface-muted);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .lead-drop.is-drag {
+    border-color: #C05621;
+    background: rgba(192, 86, 33, 0.06);
+  }
+  .lead-drop-icon {
+    margin-bottom: 6px;
+    color: var(--color-doka-primary);
+    display: flex;
+    justify-content: center;
+  }
+  .lead-drop-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-doka-primary);
+  }
+  .lead-drop-hint {
+    font-size: 0.75rem;
+    color: var(--color-doka-text-dim);
+    margin-top: 4px;
+    line-height: 1.4;
+  }
+  .lead-files {
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-doka-accent);
+    line-height: 1.45;
+  }
+  .lead-files.is-error { color: var(--color-doka-danger); }
+  .lead-submit { width: 100%; padding: 14px; font-size: 0.9375rem; }
+  .lead-submit:disabled { opacity: 0.65; cursor: wait; }
+  .lead-status {
+    margin: 0;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    text-align: center;
+    min-height: 1.2em;
+  }
+  .lead-status.is-error { color: var(--color-doka-danger); }
+  .lead-legal {
+    font-size: 0.75rem;
+    color: var(--color-doka-text-dim);
+    text-align: center;
+    line-height: 1.4;
+    margin: 0;
+  }
+  .lead-legal a { color: var(--color-doka-accent); }
+  .lead-success { padding: 8px 0 4px; }
+  .lead-success-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-doka-primary);
+    margin: 0 0 8px;
+  }
+  .lead-success-body {
+    font-size: 0.9375rem;
+    color: var(--color-doka-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .lead-direct {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-doka-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .lead-direct > span {
+    font-size: 0.8125rem;
+    color: var(--color-doka-text-muted);
+  }
+  .lead-direct-btn { padding: 6px 12px; font-size: 0.8125rem; }
+  @media (max-width: 600px) {
+    .form-contacts-row { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script define:vars={{ submitUrl: LEAD_FORM.endpoint, maxFiles: LEAD_FORM.maxFiles, maxFileMb: LEAD_FORM.maxFileMb }}>
+  const form = document.getElementById("doka-lead-form");
+  const dropZone = document.getElementById("drop-zone");
+  const fileInput = document.getElementById("form-files");
+  const preview = document.getElementById("file-list-preview");
+  const statusEl = document.getElementById("lead-status");
+  const submitBtn = document.getElementById("lead-submit");
+  const successEl = document.getElementById("lead-success");
+  const maxBytes = maxFileMb * 1024 * 1024;
+
+  function setStatus(text, isError) {
+    if (!statusEl) return;
+    statusEl.textContent = text || "";
+    statusEl.classList.toggle("is-error", Boolean(isError));
+  }
+
+  function selectedFiles() {
+    if (!fileInput || !fileInput.files) return [];
+    return Array.from(fileInput.files).slice(0, maxFiles);
+  }
+
+  function renderFiles(errorText) {
+    if (!preview) return;
+    preview.classList.toggle("is-error", Boolean(errorText));
+    if (errorText) {
+      preview.textContent = errorText;
+      return;
+    }
+    const files = selectedFiles();
+    if (!files.length) {
+      preview.textContent = "";
+      return;
+    }
+    preview.textContent = "К отправке (" + files.length + "): " + files.map(function (f) { return f.name; }).join(", ");
+  }
+
+  function validateFiles() {
+    const all = fileInput && fileInput.files ? Array.from(fileInput.files) : [];
+    if (all.length > maxFiles) {
+      return "Можно приложить не больше " + maxFiles + " файлов.";
+    }
+    const tooBig = all.find(function (f) { return f.size > maxBytes; });
+    if (tooBig) {
+      return "«" + tooBig.name + "» больше " + maxFileMb + " МБ. Сожмите файл или уберите его.";
+    }
+    return "";
+  }
+
+  if (dropZone && fileInput) {
+    dropZone.addEventListener("click", function () { fileInput.click(); });
+    dropZone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        fileInput.click();
+      }
+    });
+    dropZone.setAttribute("role", "button");
+    dropZone.setAttribute("tabindex", "0");
+    dropZone.setAttribute("aria-controls", "form-files");
+
+    dropZone.addEventListener("dragover", function (e) {
+      e.preventDefault();
+      dropZone.classList.add("is-drag");
+    });
+    dropZone.addEventListener("dragleave", function () {
+      dropZone.classList.remove("is-drag");
+    });
+    dropZone.addEventListener("drop", function (e) {
+      e.preventDefault();
+      dropZone.classList.remove("is-drag");
+      if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+        fileInput.files = e.dataTransfer.files;
+        renderFiles(validateFiles());
+      }
+    });
+    fileInput.addEventListener("change", function () {
+      renderFiles(validateFiles());
+    });
+  }
+
+  if (form) {
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      setStatus("");
+
+      const honey = form.querySelector('input[name="_honey"]');
+      if (honey && honey.value) {
+        form.hidden = true;
+        if (successEl) successEl.hidden = false;
+        return;
+      }
+
+      const name = document.getElementById("form-name").value.trim();
+      const contact = document.getElementById("form-contact").value.trim();
+      const company = document.getElementById("form-company").value.trim();
+      const note = document.getElementById("form-note").value.trim();
+
+      if (!name || !contact) {
+        setStatus("Укажите имя и телефон или email.", true);
+        return;
+      }
+
+      const fileError = validateFiles();
+      if (fileError) {
+        renderFiles(fileError);
+        setStatus(fileError, true);
+        return;
+      }
+
+      const files = selectedFiles();
+      const body = new FormData();
+      body.append("_subject", "Заявка на экспресс-разбор 5 инвойсов (ДОКА)");
+      body.append("_template", "table");
+      body.append("_captcha", "false");
+      body.append("name", name);
+      body.append("contact", contact);
+      body.append("company", company || "—");
+      body.append("note", note || "—");
+      body.append("page", window.location.href);
+      files.forEach(function (file, i) {
+        body.append("attachment" + (i + 1), file, file.name);
+      });
+      if (!files.length) {
+        body.append("files", "(файлы не приложены)");
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.querySelector("span").textContent = "Отправляем…";
+      }
+      setStatus("Отправляем заявку…");
+
+      try {
+        const res = await fetch(submitUrl, {
+          method: "POST",
+          body: body,
+          headers: { Accept: "application/json" },
+        });
+        const data = await res.json().catch(function () { return {}; });
+        if (!res.ok) {
+          throw new Error(data.message || "Не удалось отправить заявку.");
+        }
+        form.hidden = true;
+        if (successEl) successEl.hidden = false;
+        setStatus("");
+      } catch (err) {
+        setStatus(
+          "Не отправилось автоматически. Напишите на почту в блоке «Прямая связь» или позвоните — заявку примем так же.",
+          true
+        );
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.querySelector("span").textContent = "Отправить заявку";
+        }
+      }
+    });
+  }
+</script>

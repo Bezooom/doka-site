@@ -1,0 +1,111 @@
+---
+// Услуги и Прайс — Лестница продуктов системы ДОКА
+import BaseLayout from "../layouts/BaseLayout.astro";
+import RoiCalculator from "../components/RoiCalculator.astro";
+import {
+  SERVICES_STAIRCASE,
+  SITE_CANONICAL_BASE,
+  INFRA_NOTE,
+  buildSoftwareJsonLd,
+} from "../consts";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    buildSoftwareJsonLd(),
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE_CANONICAL_BASE}/` },
+        { "@type": "ListItem", position: 2, name: "Услуги", item: `${SITE_CANONICAL_BASE}/services/` },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Услуги и Прайс — Система ДОКА"
+  description="Стоимость автоматизации ВЭД: разбор 5 файлов 0 ₽, пилот от 250 000 ₽, Enterprise on-prem от 650 000 ₽, поддержка ФТС."
+  canonical={`${SITE_CANONICAL_BASE}/services/`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <section class="section" style="padding-top: 48px;">
+    <div class="container">
+      <div class="section-header" style="max-width: 800px;">
+        <span class="section-tag">// Продуктовая лестница & Цены</span>
+        <h1 class="section-title">Внедрение по этапам: от разбора 5 инвойсов до контура на ваших серверах</h1>
+        <p class="section-subtitle">
+          Оплата по этапам с фиксацией результата. Мы не продаём «ИИ под ключ» до проверки на ваших данных.
+        </p>
+      </div>
+
+      <!-- Staircase grid -->
+      <div style="display: flex; flex-direction: column; gap: 24px; margin-bottom: 56px;">
+        {SERVICES_STAIRCASE.map((step, idx) => (
+          <div id={step.id} class={`doka-card staircase-card${step.isPrimary ? ' staircase-card-primary' : ''}`} style="padding: 28px; display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+            <div>
+              <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px;">
+                <span style="font-family: var(--font-mono); font-weight: 700; font-size: 0.875rem; color: var(--color-doka-accent);">
+                  Этап 0{idx + 1}
+                </span>
+                {step.isPrimary && <span class="doka-badge doka-badge-orange">Первый шаг</span>}
+              </div>
+              <h2 style="font-size: 1.4rem; margin-bottom: 12px; color: var(--color-doka-primary);">{step.name}</h2>
+              <p style="font-size: 0.9375rem; color: var(--color-doka-text-muted); line-height: 1.6; margin-bottom: 14px;">
+                <strong>Результаты и выдача:</strong> {step.deliverables}
+              </p>
+              <div class="doka-callout-success" style="display: inline-block;">
+                Выгода: {step.result}
+              </div>
+            </div>
+
+            <div style="background: var(--color-doka-surface-muted); padding: 20px; border-radius: var(--radius-doka); display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="font-size: 0.75rem; color: var(--color-doka-text-muted); font-family: var(--font-mono); letter-spacing: 0.04em;">Стоимость</div>
+                <div style="font-family: var(--font-mono); font-size: 1.75rem; font-weight: 700; color: var(--color-doka-accent); margin-bottom: 4px;">
+                  {step.price}
+                </div>
+                <div style="font-size: 0.8125rem; color: var(--color-doka-text-muted);">
+                  Срок: {step.duration}
+                </div>
+              </div>
+
+              <div style="margin-top: 16px;">
+                <a href={step.isPrimary ? '/razbor/' : '/contact/'} class="doka-btn doka-btn-primary" style="width: 100%; text-align: center;">
+                  {step.isPrimary ? 'Начать с разбора' : 'Обсудить этап'}
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Infra / hardware transparency -->
+      <div id="infra" class="doka-surface doka-surface-pad" style="margin: 8px 0 40px; border-color: rgba(194, 65, 12, 0.25);">
+        <h2 style="font-size: 1.25rem; color: var(--color-doka-primary); margin: 0 0 10px;">{INFRA_NOTE.title}</h2>
+        <p style="font-size: 0.9375rem; color: var(--color-doka-text-muted); line-height: 1.6; margin: 0 0 14px; max-width: 70ch;">
+          {INFRA_NOTE.body}
+        </p>
+        <ul style="margin: 0; padding-left: 1.15rem; color: var(--color-doka-text-muted); font-size: 0.9rem; line-height: 1.55;">
+          {INFRA_NOTE.bullets.map((b) => <li style="margin-bottom: 6px;">{b}</li>)}
+        </ul>
+      </div>
+
+      <!-- ROI Calculator -->
+      <div style="margin-top: 24px;">
+        <RoiCalculator />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:raw>
+  .staircase-card-primary {
+    box-shadow: var(--shadow-doka-md);
+    border-color: rgba(194, 65, 12, 0.35);
+  }
+  @media (max-width: 800px) {
+    .staircase-card { grid-template-columns: 1fr !important; }
+  }
+</style>

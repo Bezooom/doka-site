@@ -1,0 +1,82 @@
+---
+// AuthorSignatureBadge — подпись автора/разработчика
+interface Props {
+  author?: string;
+  coAuthor?: string;
+  role?: string;
+  site?: string;
+}
+
+const { author, coAuthor, role, site } = Astro.props;
+const siteHref = site
+  ? site.startsWith("http")
+    ? site
+    : `https://${site}`
+  : undefined;
+const siteLabel = site
+  ? site.replace(/^https?:\/\//, "").replace(/\/$/, "")
+  : undefined;
+---
+
+<div class="author-badge" role="contentinfo" aria-label="Подпись автора">
+  <div class="author-badge__inner">
+    <div class="author-badge__avatar">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="8" r="4" fill="currentColor" opacity="0.3"/>
+        <path d="M4 20c0-4 4-7 8-7s8 3 8 7" fill="currentColor" opacity="0.3"/>
+      </svg>
+    </div>
+    <div class="author-badge__text">
+      {author && <span class="author-badge__name">{author}</span>}
+      {role && <span class="author-badge__role">{role}</span>}
+      {coAuthor && <span class="author-badge__co">автор: {coAuthor}</span>}
+      {siteHref && siteLabel && (
+        <span class="author-badge__site"><a href={siteHref} target="_blank" rel="noopener noreferrer">{siteLabel}</a></span>
+      )}
+    </div>
+  </div>
+</div>
+
+<style is:raw>
+.author-badge {
+  display: inline-block;
+  margin: 12px 0;
+}
+.author-badge__inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-alt);
+}
+.author-badge__avatar {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.author-badge__name {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text);
+}
+.author-badge__role {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+.author-badge__co {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.author-badge__site {
+  display: block;
+  font-size: 12px;
+  color: var(--accent);
+  margin-top: 2px;
+}
+.author-badge__site a { color: var(--accent); }
+</style>

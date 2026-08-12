@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+.idea/
+.vscode/
+
+# Сборочные копии вне dist/ (деплой — только `npm run build` → dist/)
+# Сырые скриншоты; боевые кадры лежат в public/screens/
+Screens/

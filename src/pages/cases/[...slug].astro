@@ -1,0 +1,7 @@
+---
+// Catch-all: no orphan case pages. Real case lives in doka.astro.
+// Returning empty paths avoids 404 catalog links and duplicate /cases/doka/.
+export async function getStaticPaths() {
+  return [];
+}
+---

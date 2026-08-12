@@ -1,0 +1,34 @@
+---
+// Условия использования
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { CERT_ID, SITE_CANONICAL_BASE } from "../consts";
+---
+
+<BaseLayout
+  title="Условия использования — ДОКА"
+  description="Условия использования портала и системы ДОКА. Правообладатель ООО «ГК Фороней», Свидетельство Роспатента №2026681995."
+  canonical={`${SITE_CANONICAL_BASE}/terms/`}
+>
+  <section class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 760px;">
+      <h1 class="section-title">Условия использования</h1>
+      <p style="color: var(--color-doka-text-muted); font-size: 0.875rem; margin-bottom: 24px;">Дата обновления: 12 августа 2026 г.</p>
+
+      <div style="font-size: 0.9375rem; color: var(--color-doka-text-muted); line-height: 1.7; display: flex; flex-direction: column; gap: 16px;">
+        <p>
+          Настоящие Условия регулируют порядок использования портала системы «ДОКА» (Свидетельство Роспатента №{CERT_ID}).
+        </p>
+
+        <h2 style="font-size: 1.2rem; color: var(--color-doka-primary);">1. Интеллектуальная собственность</h2>
+        <p>
+          Все права на программу для ЭВМ «ДОКА», включая названия, алгоритмы Когнитивного ИИ-Консилиума, логотипы и графические элементы, принадлежат ООО «ГК Фороней» (авторы: Аксёнов Ю.В., Наумов П.В.). Копирование и реверс-инжиниринг без письменного согласия запрещены.
+        </p>
+
+        <h2 style="font-size: 1.2rem; color: var(--color-doka-primary);">2. Отказ от прямого финансового автоматизма</h2>
+        <p>
+          Результаты работы демонстрационного ИИ-консилиума являются рекомендательными проектными материалами. Финальное решение по коду ТН ВЭД ЕАЭС и подаче таможенной декларации подтверждается уполномоченным специалистом по таможенному оформлению.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

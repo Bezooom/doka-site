@@ -1,0 +1,105 @@
+---
+// Архитектура и Метод работы системы ДОКА
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AgentCouncilVisualizer from "../components/AgentCouncilVisualizer.astro";
+import {
+  METHOD_STEPS,
+  SITE_CANONICAL_BASE,
+  buildHowToJsonLd,
+  buildSoftwareJsonLd,
+} from "../consts";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    buildHowToJsonLd(),
+    buildSoftwareJsonLd(),
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Главная", item: `${SITE_CANONICAL_BASE}/` },
+        { "@type": "ListItem", position: 2, name: "Метод", item: `${SITE_CANONICAL_BASE}/method/` },
+      ],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Архитектура & Метод — Система ДОКА"
+  description="Как ДОКА готовит XML из инвойса: распознавание, ИИ-консилиум (Юрист, Инспектор, Координатор), риски КТС, экспорт в Альта-ГТД. On-Premises."
+  canonical={`${SITE_CANONICAL_BASE}/method/`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <section class="section" style="padding-top: 48px;">
+    <div class="container">
+      <div class="section-header" style="max-width: 800px;">
+        <h1 class="section-title">Как устроена система ДОКА изнутри</h1>
+        <p class="section-subtitle">
+          Мы отказались от публичных нейросетей с выносом данных. В основе ДОКА — перекрёстная проверка тремя ролями и валидация структуры XML перед экспортом в Альта-ГТД.
+        </p>
+      </div>
+
+      <!-- Agent Council Live Component -->
+      <div style="margin-bottom: 48px;">
+        <AgentCouncilVisualizer />
+      </div>
+
+      <!-- Architectural Modules Grid -->
+      <div class="grid-2" style="margin-bottom: 48px;">
+        <div class="doka-card">
+          <span class="doka-badge doka-badge-ai" style="margin-bottom: 10px;">Модуль 1</span>
+          <h3 style="font-size: 1.25rem; margin-bottom: 10px;">Команда из 3 виртуальных экспертов</h3>
+          <p style="font-size: 0.9375rem; color: var(--color-doka-text-muted); line-height: 1.6;">
+            Каждый инвойс одновременно проверяется тремя виртуальными специалистами:
+            <br />• <strong>Юрист:</strong> сверка нормативно-правовых актов ЕЭК и приказов ФТС.
+            <br />• <strong>Инспектор:</strong> подбор точных кодов ТН ВЭД по актуальной базе решений ФТС.
+            <br />• <strong>Координатор:</strong> проверка рисков КТС и формирование итогового документа.
+          </p>
+        </div>
+
+        <div class="doka-card">
+          <span class="doka-badge doka-badge-orange" style="margin-bottom: 10px;">Модуль 2</span>
+          <h3 style="font-size: 1.25rem; margin-bottom: 10px;">Умное зрение для сложных сканов</h3>
+          <p style="font-size: 0.9375rem; color: var(--color-doka-text-muted); line-height: 1.6;">
+            При разборе нестандартных, плотных или размытых табличных сканов система включает визуальный анализатор. Извлечение таблиц происходит с полным сохранением структуры и логических связей строк.
+          </p>
+        </div>
+
+        <div class="doka-card">
+          <span class="doka-badge doka-badge-ai" style="margin-bottom: 10px;">Модуль 3</span>
+          <h3 style="font-size: 1.25rem; margin-bottom: 10px;">Накопление корпоративного опыта</h3>
+          <p style="font-size: 0.9375rem; color: var(--color-doka-text-muted); line-height: 1.6;">
+            База знаний запоминает решения и правки ваших декларантов. Система «впитывает» специфику товаров вашего предприятия, с каждым днём ускоряя подбор кодов.
+          </p>
+        </div>
+
+        <div class="doka-card">
+          <span class="doka-badge doka-badge-orange" style="margin-bottom: 10px;">Модуль 4</span>
+          <h3 style="font-size: 1.25rem; margin-bottom: 10px;">Мгновенный экспорт в Альта-ГТД и 1С</h3>
+          <p style="font-size: 0.9375rem; color: var(--color-doka-text-muted); line-height: 1.6;">
+            Готовая спецификация мгновенно преобразуется в стандартизированные файлы декларации (ГТД) для Альта-ГТД и автоматического прихода товаров в 1С:ERP.
+          </p>
+        </div>
+      </div>
+
+      <!-- Method Steps -->
+      <div style="background: var(--color-doka-surface-muted); padding: 32px; border-radius: var(--radius-doka-lg); border: 1px solid var(--color-doka-border);">
+        <h2 style="font-size: 1.5rem; margin-bottom: 24px;">Четыре шага обработки инвойса:</h2>
+        <div>
+          {METHOD_STEPS.map((step) => (
+            <div style="display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start;">
+              <div style="font-family: var(--font-mono); font-weight: 700; font-size: 1.25rem; color: var(--color-doka-accent); background: #FFFFFF; width: 44px; height: 44px; border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--color-doka-border); flex-shrink: 0;">
+                {step.num}
+              </div>
+              <div>
+                <h3 style="font-size: 1.1rem; margin-bottom: 4px;">{step.title}</h3>
+                <p style="font-size: 0.9375rem; color: var(--color-doka-text-muted); margin: 0; line-height: 1.5;">{step.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

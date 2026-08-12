@@ -1,0 +1,64 @@
+---
+// Каталог кейсов и сценариев применения ДОКА
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE_CANONICAL_BASE, CASE_STUDIES } from "../../consts";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Кейсы и сценарии ДОКА",
+  url: `${SITE_CANONICAL_BASE}/cases/`,
+  hasPart: CASE_STUDIES.map((c) => ({
+    "@type": "Article",
+    name: c.title,
+    url: `${SITE_CANONICAL_BASE}/cases/${c.slug}/`,
+    description: c.description,
+  })),
+};
+---
+
+<BaseLayout
+  title="Кейсы и сценарии — Система ДОКА"
+  description="Сценарии применения ДОКА: многостраничные инвойсы, Графа 31 и обоснование ТН ВЭД, XML в Альта-ГТД, on-prem 152-ФЗ."
+  canonical={`${SITE_CANONICAL_BASE}/cases/`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <section class="section" style="padding-top: 48px;">
+    <div class="container">
+      <div class="section-header" style="max-width: 720px;">
+        <h1 class="section-title">Кейсы и сценарии применения</h1>
+        <p class="section-subtitle">
+          Не один «демо-прогон», а линейка рабочих сценариев: от 32-страничного инвойса до XML и закрытого контура.
+          Метрики — с тестовых и пилотных прогонов; финальная подача декларации — зона ответственности декларанта.
+        </p>
+      </div>
+
+      <div class="grid-2" style="gap: 20px;">
+        {CASE_STUDIES.map((c) => (
+          <a href={`/cases/${c.slug}/`} style="text-decoration:none; color:inherit;">
+            <article class="doka-card" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px">
+                  <span class="doka-badge doka-badge-orange">{c.tag}</span>
+                  <span class="doka-badge">{c.industry}</span>
+                  {c.tags.slice(0, 2).map((t) => <span class="doka-badge">{t}</span>)}
+                </div>
+                <h2 style="font-size: 1.2rem; margin-bottom: 10px; color: var(--color-doka-primary); font-weight: 700;">{c.title}</h2>
+                <p style="font-size: 0.9rem; color: var(--color-doka-text-muted); line-height: 1.55; margin: 0;">{c.description}</p>
+              </div>
+              <div style="padding-top: 14px; margin-top: 16px; border-top: 1px solid var(--color-doka-border); display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+                <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: #047857;">{c.kpi}</span>
+                <span style="font-size: 13px; color: var(--color-doka-accent); font-weight: 600;">Читать →</span>
+              </div>
+            </article>
+          </a>
+        ))}
+      </div>
+
+      <p style="margin-top: 28px; font-size: 0.875rem; color: var(--color-doka-text-dim); max-width: 60ch; line-height: 1.5;">
+        Нужен разбор на ваших файлах — это следующий шаг после сценариев:
+        <a href="/razbor/" style="color: var(--color-doka-accent); font-weight: 600;">экспресс-разбор 5 инвойсов (0 ₽)</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE_CANONICAL_BASE } from "../../consts";
+import LeadForm from "../../components/LeadForm.astro";
+---
+
+<BaseLayout
+  title="Кейс: Графа 31 и отказ от ложных кодов ТН ВЭД — ДОКА"
+  description="Сценарий классификации ИТ-номенклатуры: обоснование кода ТН ВЭД, пошлины, отказ от альтернативных субпозиций."
+  canonical={`${SITE_CANONICAL_BASE}/cases/tnved-obosnovanie/`}
+  ogImage={`${SITE_CANONICAL_BASE}/screens/doka-server-hs-code-8471300000.jpg`}
+>
+  <section class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 900px;">
+      <nav aria-label="Хлебные крошки" style="font-size: 14px; color: var(--color-doka-text-dim); margin-bottom: 20px;">
+        <a href="/">Главная</a> / <a href="/cases/">Кейсы</a> / Графа 31
+      </nav>
+
+      <span class="doka-badge doka-badge-orange" style="margin-bottom: 12px;">Классификация ТН ВЭД</span>
+      <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); line-height: 1.2; color: var(--color-doka-primary); margin-bottom: 14px;">
+        Графа 31 и отказ от ложных кодов: сервер Dell и коммутатор
+      </h1>
+      <p style="font-size: 1.05rem; color: var(--color-doka-text-muted); line-height: 1.6; margin-bottom: 28px;">
+        Не «угадать код», а выдать декларанту формулировку и аргументы: почему этот код верный и почему соседние субпозиции отброшены.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: var(--color-doka-primary); color: #fff; padding: 20px; border-radius: var(--radius-doka-lg); margin-bottom: 32px;" class="case-kpi-grid">
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 1.35rem; font-weight: 700; color: #FDBA74;">Графа 31</div>
+          <div style="font-size: 0.75rem; color: #CBD5E1;">автосборка описания</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 1.35rem; font-weight: 700; color: #6EE7B7;">0% / 20%</div>
+          <div style="font-size: 0.75rem; color: #CBD5E1;">пошлина / НДС (пример)</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 1.35rem; font-weight: 700; color: #A78BFA;">Альт. отброшены</div>
+          <div style="font-size: 0.75rem; color: #CBD5E1;">84714, 84716…</div>
+        </div>
+      </div>
+
+      <div style="font-size: 1rem; color: var(--color-doka-text-muted); line-height: 1.75;">
+        <h2 style="font-size: 1.35rem; color: var(--color-doka-primary); margin: 28px 0 12px;">Проблема</h2>
+        <p>
+          По ИТ-оборудованию поставщик часто указывает «свой» HS или размытое описание. Ошибка в одной цифре ТН ВЭД ЕАЭС — риск доначислений, КТС и спора с таможней.
+          Декларанту нужны не только код, но и <strong>письменное обоснование</strong>.
+        </p>
+
+        <h2 style="font-size: 1.35rem; color: var(--color-doka-primary); margin: 28px 0 12px;">Что сделала ДОКА</h2>
+        <p>
+          На позиции коммутатора Dell EMC система собрала Графу 31, предложила код с уровнем уверенности, рассчитала пошлину/НДС и проверила нетарифные меры.
+          На сервере PowerEdge — явно указала, почему отброшены альтернативы (блоки без процессора, дисплеи и т.п.).
+        </p>
+
+        <figure style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #fff;">
+          <img src="/screens/doka-items-grafa31-hs-code.jpg" alt="Карточка позиции: Графа 31 и код ТН ВЭД" style="width: 100%; height: auto; display: block;" loading="lazy" />
+          <figcaption style="padding: 12px; font-size: 0.8125rem; background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+            Спецификация позиции: Графа 31, код, пошлины, нетарифные меры.
+          </figcaption>
+        </figure>
+
+        <figure style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #fff;">
+          <img src="/screens/doka-server-hs-code-8471300000.jpg" alt="Обоснование кода ТН ВЭД для сервера" style="width: 100%; height: auto; display: block;" loading="lazy" />
+          <figcaption style="padding: 12px; font-size: 0.8125rem; background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+            Отказ от ложных субпозиций — аргумент «почему не соседний код».
+          </figcaption>
+        </figure>
+
+        <h2 style="font-size: 1.35rem; color: var(--color-doka-primary); margin: 28px 0 12px;">Результат для декларанта</h2>
+        <ul style="padding-left: 1.2rem;">
+          <li>Меньше «кодирования на ощупь» по спорной ИТ-номенклатуре</li>
+          <li>Материал для внутренней проверки и ответа инспектору</li>
+          <li>Финальное решение о подаче остаётся за человеком</li>
+        </ul>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <LeadForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:raw>
+  @media (max-width: 700px) {
+    .case-kpi-grid { grid-template-columns: 1fr !important; }
+  }
+</style>

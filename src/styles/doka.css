@@ -1,0 +1,559 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&family=Russo+One&display=swap');
+
+:root {
+  /* DOKA Brand Triad: Navy + Orange + Purple(AI) */
+  --color-doka-primary: #122A42;         /* Deep Navy Header/Accents */
+  --color-doka-primary-light: #28557A;
+  --color-doka-accent: #DD6B20;          /* Industrial Accent Orange */
+  --color-doka-accent-bright: #ED8936;
+  --color-doka-ai: #7C3AED;              /* AI Purple */
+  --color-doka-ai-light: #8B5CF6;
+  --color-doka-ai-bg: rgba(124, 58, 237, 0.08);
+
+  /* High-Contrast Light Enterprise Surfaces (No Untinted Grays) */
+  --color-doka-bg: #F8FAFC;
+  --color-doka-bg-silver: #E2E8F0;
+  --color-doka-border: #E2E8F0;
+  --color-doka-border-dark: #CBD5E1;
+  --color-doka-text-main: #0F172A;       /* High-contrast Slate Text (WCAG AAA) */
+  --color-doka-text-muted: #334155;      /* Deep Muted Slate Text (WCAG AA) */
+  --color-doka-text-dim: #64748B;
+  --color-doka-surface: #FFFFFF;
+  --color-doka-surface-muted: #F1F5F9;
+
+  /* Status Colors */
+  --color-doka-success: #059669;
+  --color-doka-warning: #D97706;
+  --color-doka-danger: #DC2626;
+
+  /* Radii */
+  --radius-doka: 6px;
+  --radius-doka-lg: 10px;
+  --radius-doka-xl: 16px;
+
+  /* Elevation Shadows */
+  --shadow-doka-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-doka-md: 0 6px 18px rgba(15, 23, 42, 0.08);
+  --shadow-doka-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
+  --shadow-doka-orange: 0 6px 20px rgba(221, 107, 32, 0.3);
+
+  /* Typography */
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-display: 'Russo One', sans-serif;
+
+  --max-width: 1140px;
+  --header-h: 70px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--color-doka-bg);
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-doka-bg);
+  color: var(--color-doka-text-main);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Decorative grids — only for demo/blueprint surfaces (Impeccable: not page-wide) */
+.doka-bg-tech {
+  background-color: var(--color-doka-bg);
+  background-image: radial-gradient(circle at 1px 1px, rgba(18, 42, 66, 0.08) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.doka-bg-circuit {
+  background-color: var(--color-doka-bg);
+  background-image:
+    linear-gradient(rgba(18, 42, 66, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 42, 66, 0.03) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+/* --- Kit primitives (prefer over page-local inline) --- */
+.doka-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.doka-stack-lg { gap: 24px; }
+
+.doka-cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.doka-prose {
+  max-width: 65ch;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-doka-text-muted);
+}
+
+.doka-prose-tight { max-width: 52ch; }
+
+.doka-surface {
+  background: var(--color-doka-surface);
+  border: 1px solid var(--color-doka-border);
+  border-radius: var(--radius-doka-lg);
+}
+
+.doka-surface-pad {
+  padding: 20px 24px;
+}
+
+.doka-list-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--color-doka-border);
+  border-radius: var(--radius-doka-lg);
+  background: var(--color-doka-surface);
+  overflow: hidden;
+}
+.doka-list-rows > li,
+.doka-list-rows > .doka-list-row {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 12px 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-doka-border);
+}
+.doka-list-rows > li:last-child,
+.doka-list-rows > .doka-list-row:last-child {
+  border-bottom: none;
+}
+
+/* Typography ramp (Impeccable: fewer steps, clearer hierarchy)
+   12 / 13 / 15 / 18 / 24 / 32 / fluid display */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--color-doka-text-main);
+  letter-spacing: -0.02em;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Display H1 (marketing) — Russo One only for short impact lines */
+.doka-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--color-doka-primary);
+}
+
+/* Container */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Buttons */
+.doka-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: var(--radius-doka);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.doka-btn:active {
+  transform: scale(0.98) translateY(0) !important;
+}
+
+.doka-btn-primary {
+  /* Darker orange for WCAG AA white-on-fill contrast (~4.6:1 on #B45309) */
+  background: linear-gradient(180deg, #C05621 0%, #9A3412 100%);
+  color: #FFFFFF !important;
+  letter-spacing: 0.01em;
+  font-weight: 700;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18) inset, 0 4px 12px rgba(15, 23, 42, 0.18);
+}
+
+.doka-btn-primary:hover {
+  background: linear-gradient(180deg, #DD6B20 0%, #C05621 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.22) inset, 0 6px 16px rgba(15, 23, 42, 0.22);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.doka-btn-ai {
+  background: linear-gradient(180deg, #6D28D9 0%, #5B21B6 100%);
+  color: #FFFFFF !important;
+  letter-spacing: 0.01em;
+  font-weight: 700;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18) inset, 0 4px 12px rgba(15, 23, 42, 0.18);
+}
+
+.doka-btn-ai:hover {
+  background: linear-gradient(180deg, #7C3AED 0%, #6D28D9 100%);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.22);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.doka-btn-navy {
+  background: var(--color-doka-primary);
+  color: #FFFFFF !important;
+  box-shadow: var(--shadow-doka-sm);
+}
+
+.doka-btn-navy:hover {
+  background: var(--color-doka-primary-light);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.doka-btn-outline {
+  background: #FFFFFF;
+  border: 1px solid var(--color-doka-primary);
+  color: var(--color-doka-primary) !important;
+  font-weight: 600;
+}
+
+.doka-btn-outline:hover {
+  border-color: var(--color-doka-accent);
+  color: var(--color-doka-accent) !important;
+  background: rgba(221, 107, 32, 0.05);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+/* Badges */
+.doka-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--color-doka-border-dark);
+  background: #FFFFFF;
+  color: var(--color-doka-text-main);
+}
+
+.doka-badge-ai {
+  background: rgba(124, 58, 237, 0.08);
+  border-color: rgba(124, 58, 237, 0.3);
+  color: #5B21B6; /* darker purple for AA on soft fill */
+}
+
+.doka-badge-orange {
+  background: rgba(221, 107, 32, 0.1);
+  border-color: rgba(194, 65, 12, 0.35);
+  color: #9A3412; /* darker orange for AA on soft fill */
+}
+
+.doka-badge-risk-high {
+  background: #FEF2F2;
+  border-color: #FCA5A5;
+  color: #7F1D1D;
+}
+
+.doka-badge-risk-med {
+  background: #FFFBEB;
+  border-color: #FDE68A;
+  color: #78350F;
+}
+
+.doka-badge-risk-low {
+  background: #ECFDF5;
+  border-color: #A7F3D0;
+  color: #064E3B;
+}
+
+/* Result / success callouts used on pricing cards */
+.doka-callout-success {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #064E3B;
+  background: #ECFDF5;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #A7F3D0;
+}
+
+.doka-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-doka-accent);
+  /* Static by default — animate only with .is-live (Impeccable: no decorative pulse) */
+  opacity: 1;
+}
+.doka-pulse-dot.is-live {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .doka-pulse-dot.is-live { animation: none; }
+  .doka-card:hover { transform: none; }
+  .doka-btn:hover { transform: none; }
+}
+
+/* Cards (High contrast white surface) */
+.doka-card {
+  background: var(--color-doka-surface);
+  border: 1px solid var(--color-doka-border);
+  border-radius: var(--radius-doka-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-doka-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.doka-card:hover {
+  box-shadow: var(--shadow-doka-md);
+  border-color: var(--color-doka-border-dark);
+  transform: translateY(-2px);
+}
+
+/* Sections */
+.section {
+  padding: 64px 0;
+  border-top: 1px solid var(--color-doka-border);
+}
+
+.section-header {
+  max-width: 680px;
+  margin-bottom: 40px;
+}
+
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-doka-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.section-title {
+  font-size: clamp(1.5rem, 2.8vw, 2rem); /* ~24–32px */
+  line-height: 1.25;
+  margin-bottom: 12px;
+  color: var(--color-doka-primary);
+}
+
+.section-subtitle {
+  font-size: 1rem; /* 16px body lead */
+  color: var(--color-doka-text-muted);
+  line-height: 1.6;
+  max-width: 62ch;
+}
+
+/* Soft-hide decorative section tags when present (prefer none on main) */
+.section-tag {
+  max-width: 100%;
+}
+
+/* Grid utilities */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+@media (max-width: 900px) {
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .grid-3, .grid-4, .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* Forms & Inputs */
+.doka-input {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid var(--color-doka-border-dark);
+  border-radius: var(--radius-doka);
+  padding: 10px 14px;
+  font-size: 0.9375rem;
+  font-family: var(--font-sans);
+  color: var(--color-doka-text-main);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  outline: none;
+}
+
+.doka-input:focus {
+  border-color: var(--color-doka-accent);
+  box-shadow: 0 0 0 3px rgba(221, 107, 32, 0.15);
+}
+
+.doka-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-doka-text-main);
+  margin-bottom: 6px;
+}
+
+/* Media Placeholders */
+.doka-placeholder-media {
+  width: 100%;
+  min-height: 220px;
+  background: var(--color-doka-primary);
+  border: 1px dashed rgba(237, 137, 54, 0.6);
+  border-radius: var(--radius-doka-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  padding: 24px;
+  text-align: center;
+}
+
+.doka-placeholder-media-title {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: #ED8936;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.doka-placeholder-media-desc {
+  font-size: 0.875rem;
+  color: #CBD5E1;
+  max-width: 440px;
+  line-height: 1.5;
+}
+
+/* Focus States */
+:focus-visible {
+  outline: 2px solid var(--color-doka-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   MOBILE RESPONSIVE OVERRIDES (320–768px)
+   ============================================ */
+
+/* Tablet: reduce section padding and grid gaps */
+@media (max-width: 768px) {
+  .section {
+    padding: 48px 0;
+  }
+  .section-header {
+    margin-bottom: 28px;
+  }
+}
+
+/* Small mobile: aggressive space savings */
+@media (max-width: 600px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .section {
+    padding: 36px 0;
+  }
+
+  .section-header {
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: clamp(1.4rem, 5vw, 1.75rem);
+  }
+
+  .section-subtitle {
+    font-size: 0.9375rem;
+  }
+
+  /* Fix button text overflow on mobile */
+  .doka-btn {
+    white-space: normal;
+    text-align: center;
+    padding: 12px 18px;
+    font-size: 0.875rem;
+  }
+
+  /* Reduce card padding on mobile */
+  .doka-card {
+    padding: 18px 16px;
+  }
+
+  /* Ensure monospace blocks don't overflow */
+  [style*="font-family: var(--font-mono)"],
+  .font-mono {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+/* Extra small devices (320px) */
+@media (max-width: 380px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .section {
+    padding: 28px 0;
+  }
+
+  .doka-btn {
+    padding: 10px 14px;
+    font-size: 0.8125rem;
+  }
+
+  .doka-card {
+    padding: 14px 12px;
+  }
+
+  .doka-badge {
+    font-size: 0.6875rem;
+    padding: 3px 8px;
+  }
+}

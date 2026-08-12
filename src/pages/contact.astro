@@ -1,0 +1,59 @@
+---
+// Страница Контактов системы ДОКА
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LeadForm from "../components/LeadForm.astro";
+import { COMPANY, AUTHOR, CO_AUTHOR, CERT_ID, SITE_CANONICAL_BASE } from "../consts";
+---
+
+<BaseLayout
+  title="Контакты — Система ДОКА"
+  description="Связаться с правообладателем ООО «ГК Фороней» и разработчиками системы ДОКА. Заявка на экспресс-разбор 5 инвойсов, телефон, email и адрес."
+  canonical={`${SITE_CANONICAL_BASE}/contact/`}
+>
+  <section class="section" style="padding-top: 48px;">
+    <div class="container">
+      <div class="grid-2" style="align-items: start;">
+        <div>
+          <span class="section-tag">// Контакты & Правообладатель</span>
+          <h1 class="section-title">Свяжитесь с ООО «ГК Фороней»</h1>
+          <p class="section-subtitle">
+            Мы отвечаем на все обращения по внедрению автономного ПО ДОКА в корпоративный контур предприятий.
+          </p>
+
+          <div class="doka-card" style="padding: 28px; margin-bottom: 24px; border: 1px solid var(--color-doka-border);">
+            <div style="display: flex; flex-direction: column; gap: 18px; font-size: 0.9375rem;">
+              <div>
+                <div style="font-size: 0.75rem; color: var(--color-doka-text-muted); font-family: var(--font-mono); text-transform: uppercase; margin-bottom: 2px;">Правообладатель & Разработка:</div>
+                <div style="font-weight: 700; color: var(--color-doka-primary); font-size: 1.15rem;">{COMPANY.name}</div>
+                <div style="font-size: 0.8125rem; color: var(--color-doka-text-muted); margin-top: 2px;">Свидетельство Роспатента №{CERT_ID}</div>
+              </div>
+
+              <div>
+                <div style="font-size: 0.75rem; color: var(--color-doka-text-muted); font-family: var(--font-mono); text-transform: uppercase; margin-bottom: 2px;">Телефон:</div>
+                <a href={COMPANY.phoneHref} style="font-weight: 700; color: var(--color-doka-accent); font-size: 1.2rem;">{COMPANY.phone}</a>
+              </div>
+
+              <div>
+                <div style="font-size: 0.75rem; color: var(--color-doka-text-muted); font-family: var(--font-mono); text-transform: uppercase; margin-bottom: 2px;">E-mail службы внедрения:</div>
+                <a href={`mailto:${COMPANY.email}`} style="font-weight: 700; color: var(--color-doka-primary); font-size: 1.05rem;">{COMPANY.email}</a>
+              </div>
+
+              <div>
+                <div style="font-size: 0.75rem; color: var(--color-doka-text-muted); font-family: var(--font-mono); text-transform: uppercase; margin-bottom: 2px;">Официальный сайт ГК:</div>
+                <a href={COMPANY.url} target="_blank" rel="noopener noreferrer" style="font-weight: 600; color: var(--color-doka-ai);">{COMPANY.url}</a>
+              </div>
+
+              <div style="padding-top: 14px; border-top: 1px solid var(--color-doka-border); font-size: 0.8125rem; color: var(--color-doka-text-muted); line-height: 1.5;">
+                <strong>Архитекторы ПО:</strong> {CO_AUTHOR.name}, {AUTHOR.name}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <LeadForm />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

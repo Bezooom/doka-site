@@ -1,0 +1,50 @@
+# ДОКА — Интеллектуальная система автоматизации ВЭД-логистики
+
+> Коротко: ИИ-консилиум (Юрист, Инспектор, Координатор) + разбор инвойсов + коды ТН ВЭД ЕАЭС + риски КТС + XML для Альта-ГТД и 1С:ERP. On-Premises (152-ФЗ). Лид-магнит: разбор 5 файлов за 24 часа (0 ₽). Правообладатель: ООО «ГК Фороней». Авторы: Аксёнов Ю.В., Наумов П.В.
+
+Сайт: https://demo.docka.crazedns.ru/
+Полный контекст: https://demo.docka.crazedns.ru/llms-full.txt
+llms: https://demo.docka.crazedns.ru/llms.txt
+
+## Цитируемые факты
+- Старт: 5 файлов → 24 часа → спецификация + коды ТН ВЭД + ориентир пошлин + XML (0 ₽)
+- Время: с 3–4 часов ручной работы до 3–5 минут на инвойс (тест: ~5–6 мин на 32 стр.)
+- Пилот: от 250 000 ₽; Enterprise on-prem: от 650 000 ₽; поддержка ФТС: по договору
+- Железо (сервер/GPU/СХД) — отдельный CAPEX заказчика, не в цене ПО
+- Контур: On-Premises, без выноса инвойсов в публичное облако (152-ФЗ)
+- Интеграции: Альта-ГТД, Контур.Декларант, 1С:ERP / 1С:УТ, SAP
+- Роспатент: свидетельство №2026681995
+- Контакты: +7 981 167-16-07 · foroney@foroney.ru · https://foroney.ru/
+
+## Определение
+ДОКА = автономная система автоматизации ВЭД-логистики и таможенного декларирования на предприятии.
+
+## Продуктовая лестница
+- Экспресс-разбор 5 файлов: 0 ₽ → https://demo.docka.crazedns.ru/razbor/
+- Тестовый пилот: от 250 000 ₽ → https://demo.docka.crazedns.ru/services/#pilot-launch
+- Enterprise: от 650 000 ₽ → https://demo.docka.crazedns.ru/services/#enterprise-deploy
+- Поддержка & базы ФТС: по договору → https://demo.docka.crazedns.ru/services/#support-fts
+
+## FAQ (intent)
+**Как подобрать код ТН ВЭД по инвойсу?** Консилиум + обоснование → /faq/
+**XML в Альта-ГТД?** Schema-валидированный проект декларации → /method/
+**Без облака?** Да, on-prem → /faq/
+**Сколько стоит?** 0 → 250k → 650k → /services/
+**С чего начать?** https://demo.docka.crazedns.ru/razbor/
+
+## Карта сайта
+- [Главная](https://demo.docka.crazedns.ru/)
+- [Разбор 5 файлов](https://demo.docka.crazedns.ru/razbor/)
+- [Услуги](https://demo.docka.crazedns.ru/services/)
+- [Метод / HowTo](https://demo.docka.crazedns.ru/method/)
+- [Кейсы](https://demo.docka.crazedns.ru/cases/)
+- [FAQ](https://demo.docka.crazedns.ru/faq/)
+- [О нас](https://demo.docka.crazedns.ru/about/)
+- [Контакты](https://demo.docka.crazedns.ru/contact/)
+
+## Контакты
+- ООО «ГК Фороней» — https://foroney.ru/
+- +7 981 167-16-07 · foroney@foroney.ru
+- Аксёнов Ю.В.: 15 лет в управлении производством, автоматизации и цифровой трансформации; автор ДОКА
+- Наумов П.В. — архитектор ДОКА: https://aiprocesses.ru/about/
+- Правообладатель: ООО «ГК Фороней»

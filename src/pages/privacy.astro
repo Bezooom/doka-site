@@ -1,0 +1,39 @@
+---
+// Политика конфиденциальности
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { COMPANY, SITE_CANONICAL_BASE } from "../consts";
+---
+
+<BaseLayout
+  title="Политика конфиденциальности — ДОКА"
+  description="Политика обработки персональных данных и защиты коммерческой тайны системы ДОКА."
+  canonical={`${SITE_CANONICAL_BASE}/privacy/`}
+>
+  <section class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 760px;">
+      <h1 class="section-title">Политика конфиденциальности</h1>
+      <p style="color: var(--color-doka-text-muted); font-size: 0.875rem; margin-bottom: 24px;">Дата обновления: 12 августа 2026 г.</p>
+
+      <div style="font-size: 0.9375rem; color: var(--color-doka-text-muted); line-height: 1.7; display: flex; flex-direction: column; gap: 16px;">
+        <p>
+          Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных и конфиденциальной информации клиентов системы «ДОКА» (Правообладатель: ООО «ГК Фороней»).
+        </p>
+
+        <h2 style="font-size: 1.2rem; color: var(--color-doka-primary);">1. Сбор и использование информации</h2>
+        <p>
+          Через форму заявки мы получаем имя, контакт (телефон или email), наименование компании, комментарий и приложенные файлы инвойсов. Заявка уходит на почту ООО «ГК Фороней» ({COMPANY.email}) и используется только для экспресс-разбора и расчёта экономии. Сайт не хранит файлы на своих серверах.
+        </p>
+
+        <h2 style="font-size: 1.2rem; color: var(--color-doka-primary);">2. Защита документов и коммерческой тайны</h2>
+        <p>
+          Приложенные файлы обрабатываются в изолированном контуре для тестового прогона. Данные не передаются во внешние публичные нейросети. По завершении разбора файлы удаляются либо хранятся в рамках подписанного NDA.
+        </p>
+
+        <h2 style="font-size: 1.2rem; color: var(--color-doka-primary);">3. Права пользователей</h2>
+        <p>
+          Вы имеете право в любой момент запросить полное удаление ваших контактных данных и документов, направив запрос в службу поддержки ООО «ГК Фороней» по адресу <a href="mailto:foroney@foroney.ru" style="color: var(--color-doka-accent);">foroney@foroney.ru</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

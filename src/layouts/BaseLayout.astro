@@ -1,0 +1,510 @@
+---
+// BaseLayout — основной layout системы ДОКА с крупным премиальным логотипом и увеличенной навигацией
+import "../styles/doka.css";
+import {
+  SITE_UVP,
+  SITE_DESCRIPTION,
+  SITE_CANONICAL_BASE,
+  SITE_OG_IMAGE,
+  SITE_OG_IMAGE_ALT,
+  SITE_KEYWORDS,
+  GEO,
+  NAV,
+  CERT_ID,
+  COMPANY,
+  buildOrganizationJsonLd,
+  buildWebSiteJsonLd,
+} from "../consts";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  noindex?: boolean;
+  /** Absolute or site-path OG image; default product screenshot */
+  ogImage?: string;
+  ogImageAlt?: string;
+}
+
+const {
+  title = "ДОКА — " + SITE_UVP,
+  description = SITE_DESCRIPTION,
+  canonical = SITE_CANONICAL_BASE + "/",
+  noindex = false,
+  ogImage = SITE_OG_IMAGE,
+  ogImageAlt = SITE_OG_IMAGE_ALT,
+} = Astro.props;
+
+const ogImageAbs = ogImage.startsWith("http") ? ogImage : `${SITE_CANONICAL_BASE}${ogImage}`;
+
+const pathNorm = Astro.url.pathname.endsWith("/") || Astro.url.pathname === "/"
+  ? Astro.url.pathname
+  : `${Astro.url.pathname}/`;
+
+function isNavCurrent(href: string) {
+  if (href === "/") return pathNorm === "/";
+  return pathNorm === href || pathNorm.startsWith(href);
+}
+
+const baseJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [buildOrganizationJsonLd(), buildWebSiteJsonLd()],
+};
+---
+
+<!doctype html>
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="geo.region" content={GEO.region} />
+    <meta name="geo.placename" content={GEO.placename} />
+    <meta name="geo.position" content={GEO.position} />
+    <meta name="ICBM" content={GEO.icbm} />
+    <meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow"} />
+    <meta name="author" content="Аксёнов Юрий Васильевич, Наумов Павел Владимирович" />
+    <meta name="theme-color" content="#122A42" />
+    <meta name="keywords" content={SITE_KEYWORDS.join(", ")} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="alternate" type="application/rss+xml" title="ДОКА RSS Feed" href="/rss.xml" />
+    <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt" />
+
+    <!-- OG Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="ДОКА ВЭД" />
+    <meta property="og:image" content={ogImageAbs} />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta property="og:image:type" content="image/jpeg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbs} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(baseJsonLd)} />
+
+    <style is:raw>
+      #site-header {
+        position: sticky !important;
+        top: 0 !important;
+        background: #FFFFFF !important;
+        border-bottom: 1px solid #E2E8F0 !important;
+        z-index: 1000 !important;
+        box-shadow: 0 2px 10px rgba(15, 23, 42, 0.06) !important;
+      }
+      .header-inner {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        height: 84px !important;
+        gap: 20px !important;
+      }
+      .brand {
+        display: flex !important;
+        align-items: center !important;
+        text-decoration: none !important;
+        flex-shrink: 0 !important;
+      }
+      .brand:hover { text-decoration: none !important; }
+      .brand-logo-img {
+        height: 64px !important;
+        width: 174px !important;
+        display: block !important;
+        object-fit: contain !important;
+      }
+
+      nav ul {
+        list-style: none !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 4px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      nav a {
+        display: inline-block !important;
+        padding: 8px 14px !important;
+        border-radius: 6px !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        color: #334155 !important;
+        text-decoration: none !important;
+        white-space: nowrap !important;
+        background: transparent !important;
+        transition: all 0.15s ease !important;
+      }
+      nav a:hover {
+        color: #DD6B20 !important;
+        background: rgba(221, 107, 32, 0.08) !important;
+        text-decoration: none !important;
+      }
+      nav a[aria-current="page"] {
+        color: #DD6B20 !important;
+        font-weight: 700 !important;
+        background: rgba(221, 107, 32, 0.1) !important;
+      }
+
+      .header-cta-group {
+        display: flex !important;
+        align-items: center !important;
+        gap: 16px !important;
+        flex-shrink: 0 !important;
+      }
+
+      .header-tg-link {
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        color: #334155 !important;
+        text-decoration: none !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        padding: 6px 10px !important;
+        border-radius: 6px !important;
+        transition: background 0.15s ease !important;
+      }
+      .header-tg-link:hover {
+        color: #0088cc !important;
+        background: rgba(0, 136, 204, 0.08) !important;
+        text-decoration: none !important;
+      }
+
+      .nav-toggle {
+        display: none !important;
+        background: #FFFFFF !important;
+        border: 1px solid #CBD5E1 !important;
+        border-radius: 8px !important;
+        padding: 6px 12px !important;
+        cursor: pointer !important;
+        color: #0F172A !important;
+        font-size: 20px !important;
+      }
+
+      @media (max-width: 1180px) {
+        .header-tg-link { display: none !important; }
+      }
+
+      .header-cta-btn {
+        padding: 8px 14px !important;
+        font-size: 0.8125rem !important;
+        min-height: 40px;
+        white-space: nowrap !important;
+      }
+
+      @media (max-width: 980px) {
+        .nav-toggle { display: block !important; }
+        .header-cta-group { display: none !important; }
+        nav ul {
+          display: none !important;
+          flex-direction: column !important;
+          position: absolute !important;
+          top: 84px !important;
+          left: 0 !important;
+          right: 0 !important;
+          background: #FFFFFF !important;
+          border-bottom: 1px solid #E2E8F0 !important;
+          padding: 16px 0 !important;
+          box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12) !important;
+        }
+        nav ul.open { display: flex !important; }
+        nav a { padding: 14px 28px !important; border-radius: 0 !important; width: 100% !important; font-size: 16px !important; }
+      }
+
+      /* Skip link */
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px; height: 1px; overflow: hidden;
+      }
+      .skip-link:focus {
+        position: fixed;
+        left: 20px; top: 20px; width: auto; height: auto;
+        background: #FFFFFF; border: 2px solid #DD6B20;
+        padding: 10px 16px; border-radius: 6px; z-index: 9999;
+        color: #122A42; font-weight: 700; text-decoration: none;
+      }
+
+      /* Footer */
+      footer {
+        background: #0F172A;
+        border-top: 1px solid var(--color-doka-border);
+        padding: 56px 0 40px;
+        color: #94A3B8;
+        font-size: 14px;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1.2fr;
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+      @media (max-width: 768px) {
+        .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      }
+      @media (max-width: 480px) {
+        .footer-grid { grid-template-columns: 1fr; }
+      }
+      footer a { color: #CBD5E1; text-decoration: none; transition: color 0.2s; }
+      footer a:hover { color: #ED8936; text-decoration: underline; }
+      .footer-col .footer-heading {
+        font-family: var(--font-sans);
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 16px;
+        color: #FFFFFF;
+        font-weight: 700;
+      }
+      .footer-col ul { list-style: none; padding: 0; margin: 0; }
+      .footer-col li { margin-bottom: 10px; }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-size: 13px;
+      }
+
+      /* ======== MOBILE HEADER & FOOTER FIXES ======== */
+
+      @media (max-width: 600px) {
+        .header-inner {
+          height: 64px !important;
+          gap: 12px !important;
+          padding: 0 16px !important;
+        }
+        .brand-logo-img {
+          height: 44px !important;
+          width: auto !important;
+        }
+        nav ul {
+          top: 64px !important;
+        }
+        .header-cta-group {
+          display: none !important;
+        }
+        footer {
+          padding: 36px 0 28px;
+          font-size: 13px;
+        }
+        .footer-grid {
+          gap: 24px;
+          margin-bottom: 28px;
+        }
+        .footer-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+          font-size: 12px;
+        }
+      }
+
+      @media (max-width: 380px) {
+        .header-inner {
+          height: 56px !important;
+          gap: 8px !important;
+          padding: 0 12px !important;
+        }
+        .brand-logo-img {
+          height: 36px !important;
+        }
+        nav ul {
+          top: 56px !important;
+        }
+        nav a {
+          padding: 12px 20px !important;
+          font-size: 15px !important;
+        }
+      }
+
+      /* Mobile sticky CTA bar */
+      .mobile-sticky-cta {
+        display: none;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 900;
+        gap: 8px;
+        padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+        background: rgba(255, 255, 255, 0.96);
+        border-top: 1px solid #E2E8F0;
+        box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08);
+        backdrop-filter: blur(8px);
+      }
+      .mobile-sticky-primary {
+        flex: 1 1 auto;
+        padding: 12px 14px !important;
+        font-size: 0.875rem !important;
+        min-height: 44px;
+      }
+      .mobile-sticky-phone {
+        flex: 0 0 auto;
+        padding: 12px 12px !important;
+        font-size: 0.8125rem !important;
+        min-height: 44px;
+      }
+      @media (max-width: 768px) {
+        .mobile-sticky-cta {
+          display: flex;
+          align-items: stretch;
+        }
+        body {
+          padding-bottom: 72px;
+        }
+      }
+      @media (min-width: 769px) {
+        .mobile-sticky-cta { display: none !important; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main-content">Перейти к контенту</a>
+
+    <header id="site-header" role="banner">
+      <div class="container header-inner">
+        <!-- Official Vector Logo (Large Premium Size) -->
+        <a href="/" class="brand" aria-label="ДОКА — На главную">
+          <img src="/logo_doka_clean.svg" alt="ДОКА — Умный разбор документов" class="brand-logo-img" width="174" height="64" />
+        </a>
+
+        <!-- Mobile Toggle Button -->
+        <button class="nav-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="main-nav">
+          ☰
+        </button>
+
+        <nav aria-label="Основная навигация">
+          <ul id="main-nav">
+            {NAV.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  aria-current={isNavCurrent(item.href) ? "page" : undefined}
+                >{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div class="header-cta-group">
+          <a href={COMPANY.phoneHref} class="header-tg-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>{COMPANY.phone}</span>
+          </a>
+          <a href="/razbor/" class="doka-btn doka-btn-primary header-cta-btn">Разбор 0 ₽</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content" role="main">
+      <slot />
+    </main>
+
+    <!-- Mobile sticky CTA (P1) -->
+    <div class="mobile-sticky-cta" role="region" aria-label="Быстрые действия">
+      <a href="/razbor/" class="doka-btn doka-btn-primary mobile-sticky-primary">Разбор 5 файлов · 0 ₽</a>
+      <a href={COMPANY.phoneHref} class="doka-btn doka-btn-outline mobile-sticky-phone">{COMPANY.phone}</a>
+    </div>
+
+    <footer role="contentinfo">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <p class="footer-heading" style="display:flex;align-items:center;gap:8px;">
+              <span class="font-display" style="font-size:18px;color:#ED8936;">ДОКА</span>
+              <span style="font-weight:600;text-transform:none;letter-spacing:0;">— ВЭД</span>
+            </p>
+            <p style="margin-bottom:12px;line-height:1.6;">
+              Интеллектуальная система автоматизации ВЭД-логистики и таможенного декларирования.
+              Трёхступенчатая ИИ-проверка, распознавание сложных инвойсов и формирование проектов деклараций.
+            </p>
+            <p style="font-size:12px;color:#94A3B8;">
+              Правообладатель: <a href="https://foroney.ru/" target="_blank" rel="noopener noreferrer" style="color:#CBD5E1;">ООО «ГК Фороней»</a><br />
+              Свидетельство Роспатента №{CERT_ID}
+            </p>
+          </div>
+          <div class="footer-col">
+            <p class="footer-heading">Продукт и Метод</p>
+            <ul>
+              <li><a href="/services/">Услуги и Прайс</a></li>
+              <li><a href="/razbor/">Разбор 5 файлов (0 ₽)</a></li>
+              <li><a href="/method/">Архитектура и Метод</a></li>
+              <li><a href="/cases/">Практические Кейсы</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-heading">Поддержка & База знаний</p>
+            <ul>
+              <li><a href="/faq/">База знаний / FAQ</a></li>
+              <li><a href="/about/">О разработчиках</a></li>
+              <li><a href="/contact/">Связаться</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <p class="footer-heading">Правовая база</p>
+            <ul>
+              <li><a href="/privacy/">Конфиденциальность</a></li>
+              <li><a href="/terms/">Условия использования</a></li>
+              <li><a href="/2026681995.eod.pdf" target="_blank">Свидетельство №{CERT_ID}</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div>
+            © {new Date().getFullYear()} ДОКА. ООО «ГК Фороней». Все права защищены.
+          </div>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;">
+            <a href={COMPANY.url} target="_blank" rel="noopener noreferrer" style="color:#94A3B8;">foroney.ru</a>
+            <span style="color:#475569;">|</span>
+            <span style="color:#94A3B8;">On-Premises · 152-ФЗ</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script is:inline>
+      (function () {
+        const toggle = document.querySelector(".nav-toggle");
+        const nav = document.getElementById("main-nav");
+        if (!toggle || !nav) return;
+
+        function setOpen(open) {
+          nav.classList.toggle("open", open);
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+          toggle.setAttribute("aria-label", open ? "Закрыть меню" : "Открыть меню");
+          toggle.textContent = open ? "✕" : "☰";
+        }
+
+        toggle.addEventListener("click", function () {
+          setOpen(!nav.classList.contains("open"));
+        });
+        nav.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () { setOpen(false); });
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") setOpen(false);
+        });
+      })();
+    </script>
+  </body>
+</html>

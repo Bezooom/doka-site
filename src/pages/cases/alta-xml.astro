@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE_CANONICAL_BASE } from "../../consts";
+import LeadForm from "../../components/LeadForm.astro";
+---
+
+<BaseLayout
+  title="Кейс: XML-проект декларации для Альта-ГТД — ДОКА"
+  description="От спецификации ДОКА к XML для Альта-ГТД: schema-валидация и меньше ручной сборки файла декларации."
+  canonical={`${SITE_CANONICAL_BASE}/cases/alta-xml/`}
+  ogImage={`${SITE_CANONICAL_BASE}/screens/doka-ai-analytics-fastpath.jpg`}
+>
+  <section class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 900px;">
+      <nav aria-label="Хлебные крошки" style="font-size: 14px; color: var(--color-doka-text-dim); margin-bottom: 20px;">
+        <a href="/">Главная</a> / <a href="/cases/">Кейсы</a> / XML Альта-ГТД
+      </nav>
+
+      <span class="doka-badge doka-badge-orange" style="margin-bottom: 12px;">Альта-ГТД / XML</span>
+      <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); line-height: 1.2; color: var(--color-doka-primary); margin-bottom: 14px;">
+        XML-проект декларации без ручной сборки схемы с нуля
+      </h1>
+      <p style="font-size: 1.05rem; color: var(--color-doka-text-muted); line-height: 1.6; margin-bottom: 28px;">
+        После разбора инвойса и проверки кодов декларанту нужен не «ещё один Excel», а файл, который уходит в привычную Альта-ГТД.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: var(--color-doka-primary); color: #fff; padding: 20px; border-radius: var(--radius-doka-lg); margin-bottom: 32px;" class="case-kpi-grid">
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 1.35rem; font-weight: 700; color: #FDBA74;">Спецификация</div>
+          <div style="font-size: 0.75rem; color: #CBD5E1;">проверенные позиции</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 1.35rem; font-weight: 700; color: #6EE7B7;">XML</div>
+          <div style="font-size: 0.75rem; color: #CBD5E1;">schema-first</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 1.35rem; font-weight: 700; color: #A78BFA;">Альта-ГТД</div>
+          <div style="font-size: 0.75rem; color: #CBD5E1;">импорт проекта</div>
+        </div>
+      </div>
+
+      <div style="font-size: 1rem; color: var(--color-doka-text-muted); line-height: 1.75;">
+        <h2 style="font-size: 1.35rem; color: var(--color-doka-primary); margin: 28px 0 12px;">Проблема</h2>
+        <p>
+          Даже когда позиции уже «в таблице», сборка XML-проекта декларации съедает часы: поля, связи, валидация схемы, повторные правки после отказа программы.
+        </p>
+
+        <h2 style="font-size: 1.35rem; color: var(--color-doka-primary); margin: 28px 0 12px;">Решение</h2>
+        <p>
+          ДОКА формирует XML-проект по проверенной спецификации. Ориентация — нативный импорт в Альта-ГТД (и совместимость с контуром Контур.Декларант в целевой схеме).
+          Декларант проверяет, правит при необходимости и подаёт — без переноса тысяч строк руками.
+        </p>
+
+        <figure style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #fff;">
+          <img src="/screens/doka-ai-analytics-fastpath.jpg" alt="Аналитика и ускоренный режим обработки позиций" style="width: 100%; height: auto; display: block;" loading="lazy" />
+          <figcaption style="padding: 12px; font-size: 0.8125rem; background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+            Простые позиции — fast-path; спорные — консилиум, затем общий экспорт.
+          </figcaption>
+        </figure>
+
+        <h2 style="font-size: 1.35rem; color: var(--color-doka-primary); margin: 28px 0 12px;">Граница ответственности</h2>
+        <p>
+          Система готовит <strong>проект</strong>. Юридическая и фактическая ответственность за декларацию — у декларанта / таможенного представителя.
+        </p>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <LeadForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:raw>
+  @media (max-width: 700px) {
+    .case-kpi-grid { grid-template-columns: 1fr !important; }
+  }
+</style>

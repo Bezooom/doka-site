@@ -1,0 +1,118 @@
+---
+// CaseArchitectureChart — архитектурная схема кейса
+interface Props {
+  title?: string;
+  steps?: Array<{ num: string; title: string; desc: string }>;
+  aiRole?: string;
+  processFlow?: string;
+}
+
+const { title = "Архитектура решения", steps, aiRole, processFlow } = Astro.props;
+---
+
+<aside class="arch-chart" aria-label={title}>
+  <h3 class="arch-chart__title">{title}</h3>
+
+  {processFlow && (
+    <div class="arch-chart__flow mono">
+      <span class="arch-chart__flow-label">Процесс:</span>
+      <span class="arch-chart__flow-text">{processFlow}</span>
+    </div>
+  )}
+
+  {aiRole && (
+    <div class="arch-chart__role mono">
+      <span class="arch-chart__flow-label">ИИ:</span>
+      <span class="arch-chart__flow-text">{aiRole}</span>
+    </div>
+  )}
+
+  {steps && steps.length > 0 && (
+    <ol class="arch-chart__steps" start={0}>
+      {steps.map((step, i) => (
+        <li class="arch-chart__step">
+          <strong class="arch-chart__step-num">{step.num}</strong>
+          <span class="arch-chart__step-title">{step.title}</span>
+          <span class="arch-chart__step-desc">{step.desc}</span>
+        </li>
+      ))}
+    </ol>
+  )}
+
+  <div class="arch-chart__meta">
+    <span class="badge">локальный контур</span>
+    <span class="badge">без облака</span>
+  </div>
+</aside>
+
+<style is:raw>
+.arch-chart {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  background: var(--bg-alt);
+  font-size: 14px;
+}
+.arch-chart__title {
+  font-size: 16px;
+  margin: 0 0 16px;
+  font-weight: 700;
+}
+.arch-chart__flow,
+.arch-chart__role {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.arch-chart__flow-label,
+.arch-chart__role .arch-chart__flow-label {
+  font-weight: 700;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.arch-chart__flow-text,
+.arch-chart__role .arch-chart__flow-text {
+  color: var(--muted);
+}
+.arch-chart__steps {
+  list-style: none;
+  counter-reset: step-counter;
+  padding: 0;
+  margin: 0 0 16px;
+}
+.arch-chart__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+}
+.arch-chart__step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.arch-chart__step-title {
+  font-weight: 600;
+  display: block;
+}
+.arch-chart__step-desc {
+  color: var(--muted);
+  font-size: 13px;
+}
+.arch-chart__meta {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+</style>

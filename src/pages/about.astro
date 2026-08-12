@@ -1,0 +1,108 @@
+---
+// О разработчиках — Аксёнов первым, Наумов кратко + ссылка
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AuthorSignatureBadge from "../components/AuthorSignatureBadge.astro";
+import {
+  AUTHOR,
+  CO_AUTHOR,
+  CERT_ID,
+  SITE_CANONICAL_BASE,
+  COMPANY,
+} from "../consts";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      name: CO_AUTHOR.name,
+      jobTitle: CO_AUTHOR.role,
+      description: CO_AUTHOR.bio,
+    },
+    {
+      "@type": "Person",
+      name: AUTHOR.name,
+      jobTitle: AUTHOR.role,
+      description: AUTHOR.bio,
+      url: AUTHOR.personalAbout,
+      sameAs: [AUTHOR.personalSite],
+      worksFor: { "@type": "Organization", name: COMPANY.name, url: COMPANY.url },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="О разработчиках — Аксёнов Ю.В., Наумов П.В. · Система ДОКА"
+  description="Авторы ДОКА: Аксёнов Юрий Васильевич, Наумов Павел Владимирович (aiprocesses.ru). Правообладатель ООО «ГК Фороней», Роспатент №2026681995."
+  canonical={`${SITE_CANONICAL_BASE}/about/`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header" style="max-width: 680px;">
+        <h1 class="section-title">Авторы и правообладатель ДОКА</h1>
+        <p class="section-subtitle">
+          Кто стоит за системой автоматизации ВЭД-логистики и таможенного декларирования.
+        </p>
+      </div>
+
+      <!-- Аксёнов — первым -->
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px;">
+        <h2 style="font-size: 1.25rem; color: var(--color-doka-primary); margin: 0 0 6px;">{CO_AUTHOR.name}</h2>
+        <p style="margin: 0 0 12px; font-size: 0.9375rem; color: var(--color-doka-accent); font-weight: 600;">{CO_AUTHOR.role}</p>
+        <p style="margin: 0; font-size: 0.9375rem; color: var(--color-doka-text-muted); line-height: 1.65;">
+          {CO_AUTHOR.bio}
+        </p>
+      </div>
+
+      <!-- Наумов — кратко + ссылка -->
+      <div class="doka-card" style="padding: 24px; margin-bottom: 28px;">
+        <h2 style="font-size: 1.25rem; color: var(--color-doka-primary); margin: 0 0 6px;">{AUTHOR.name}</h2>
+        <p style="margin: 0 0 12px; font-size: 0.9375rem; color: var(--color-doka-accent); font-weight: 600;">{AUTHOR.role}</p>
+        <p style="margin: 0 0 16px; font-size: 0.9375rem; color: var(--color-doka-text-muted); line-height: 1.65;">
+          {AUTHOR.bio}
+        </p>
+        <p style="margin: 0 0 16px; font-size: 0.8125rem; color: var(--color-doka-text-dim);">
+          Подробнее — на личном сайте.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+          <AuthorSignatureBadge
+            author={AUTHOR.name}
+            role={AUTHOR.roleShort}
+            site={AUTHOR.personalSite}
+          />
+          <a
+            href={AUTHOR.personalAbout}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="doka-btn doka-btn-navy"
+            style="padding: 10px 16px; font-size: 0.875rem;"
+          >
+            aiprocesses.ru/about →
+          </a>
+        </div>
+      </div>
+
+      <!-- Legal -->
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px;">
+        <h2 style="font-size: 1.15rem; color: var(--color-doka-primary); margin: 0 0 12px;">Правообладатель и регистрация</h2>
+        <div style="background: var(--color-doka-surface-muted); padding: 14px; border-radius: var(--radius-doka); font-family: var(--font-mono); font-size: 0.8125rem; margin-bottom: 16px; border: 1px solid var(--color-doka-border); line-height: 1.55;">
+          <div><strong>Свидетельство Роспатента:</strong> №{CERT_ID}</div>
+          <div><strong>Правообладатель:</strong> {COMPANY.name} (<a href={COMPANY.url} target="_blank" rel="noopener noreferrer" style="color: var(--color-doka-accent);">{COMPANY.url}</a>)</div>
+          <div><strong>Авторы:</strong> {CO_AUTHOR.name}, {AUTHOR.name}</div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <a href="/2026681995.eod.pdf" target="_blank" class="doka-btn doka-btn-navy" style="padding: 10px 14px; font-size: 0.875rem;">Свидетельство (PDF)</a>
+          <a href="/contact/" class="doka-btn doka-btn-outline" style="padding: 10px 14px; font-size: 0.875rem;">Контакты по ДОКА</a>
+          <a href={COMPANY.phoneHref} class="doka-btn doka-btn-outline" style="padding: 10px 14px; font-size: 0.875rem;">{COMPANY.phone}</a>
+        </div>
+      </div>
+
+      <p style="font-size: 0.8125rem; color: var(--color-doka-text-dim); line-height: 1.5;">
+        Заявки на продукт: {COMPANY.email}, {COMPANY.phone} ({COMPANY.name}).
+      </p>
+    </div>
+  </section>
+</BaseLayout>

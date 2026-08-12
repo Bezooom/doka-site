@@ -1,0 +1,267 @@
+---
+// AgentCouncilVisualizer — ИИ-Экспертиза ДОКА (TALL & WIDE Hero SaaS Interface Window)
+---
+
+<div class="doka-mac-window" style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 10px; box-shadow: var(--shadow-doka-md); overflow: hidden; position: relative; width: 100%;">
+  
+  <!-- macOS Top Control Bar -->
+  <div style="background: #F1F5F9; border-bottom: 1px solid #E2E8F0; padding: 12px 18px; display: flex; align-items: center; justify-content: space-between; font-family: var(--font-mono);">
+    <!-- Window Dots -->
+    <div style="display: flex; gap: 7px; align-items: center;">
+      <span style="width: 11px; height: 11px; border-radius: 50%; background: #FF5F56; display: inline-block;"></span>
+      <span style="width: 11px; height: 11px; border-radius: 50%; background: #FFBD2E; display: inline-block;"></span>
+      <span style="width: 11px; height: 11px; border-radius: 50%; background: #27C93F; display: inline-block;"></span>
+    </div>
+
+    <!-- URL Bar -->
+    <div style="background: #FFFFFF; border: 1px solid #CBD5E1; border-radius: 6px; padding: 4px 20px; font-size: 12px; color: #475569; display: flex; align-items: center; gap: 6px;">
+      <span style="color: #059669;">🔒</span>
+      <span style="font-weight: 500;">doka.local/v1/council-verify</span>
+    </div>
+
+    <!-- Badge -->
+    <span style="font-size: 11px; background: #E0E7FF; color: #3730A3; border: 1px solid #C7D2FE; padding: 2px 10px; border-radius: 4px; font-weight: 600;">
+      ОНЛАЙН
+    </span>
+  </div>
+
+  <!-- Document Tab Bar -->
+  <div style="background: #F8FAFC; border-bottom: 1px solid #E2E8F0; padding: 10px 16px; display: flex; gap: 10px; align-items: center;" id="doc-selector-buttons">
+    <button class="council-doc-btn active" data-doc="0">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span>Инвойс №6881 (Без кодов)</span>
+    </button>
+    <button class="council-doc-btn" data-doc="1">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span>Спецификация (23 поз)</span>
+    </button>
+    <button class="council-doc-btn" data-doc="2">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span>Мульти-инвойс (32 стр)</span>
+    </button>
+  </div>
+
+  <!-- Main Body Grid: Mini Document Scanner (Left) + Live AI Pipeline (Right) -->
+  <div style="display: grid; grid-template-columns: 180px 1fr; gap: 18px; padding: 20px;" class="mac-body-grid">
+    
+    <!-- Left: Mini Document Mockup with Laser Scanner -->
+    <div style="background: #F8FAFC; border: 1px solid #CBD5E1; border-radius: 8px; padding: 14px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; height: 300px;" class="mini-doc-preview">
+      <!-- Animated Scanning Line -->
+      <div class="scan-laser-line"></div>
+
+      <!-- Mockup Document Content -->
+      <div style="font-family: var(--font-mono); font-size: 11px; color: #334155; line-height: 1.4;">
+        <div style="font-weight: 700; font-size: 12px; color: #0F172A; border-bottom: 1px solid #CBD5E1; padding-bottom: 5px; margin-bottom: 10px;" id="mini-doc-title">
+          COMMERCIAL INVOICE
+        </div>
+        <div style="margin-bottom: 6px;"><strong>SELLER:</strong> EASTMAN BV</div>
+        <div style="margin-bottom: 6px;"><strong>DATE:</strong> 26.01.2022</div>
+        <div style="margin-bottom: 10px;"><strong>INCOTERMS:</strong> FCA GENT</div>
+        <div style="background: #FEF3C7; border: 1px solid #FDE68A; padding: 6px; border-radius: 4px; color: #92400E; font-size: 11px; line-height: 1.35;" id="mini-doc-highlight">
+          POS 1: CHOLINE CHLORIDE 75% DRY | QTY: 20 000 KG
+        </div>
+      </div>
+
+      <!-- Document Footer Status -->
+      <div style="border-top: 1px solid #CBD5E1; padding-top: 8px; font-size: 11px; font-family: var(--font-mono); color: #064E3B; display: flex; align-items: center; gap: 6px; font-weight: 600;">
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: #059669;"></span>
+        <span>OCR OK</span>
+      </div>
+    </div>
+
+    <!-- Right: 3 Expert Live Pipeline Cards -->
+    <div style="display: flex; flex-direction: column; gap: 12px; justify-content: space-between;" class="expert-pipeline">
+      <!-- Expert 1: Lawyer -->
+      <div class="pipeline-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="background: #F3E8FF; color: #7C3AED; padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 12px;">⚖️ Юрист</span>
+            <span style="font-size: 11px; color: #64748B; font-family: var(--font-mono);" id="lawyer-status">ЕЭК №54</span>
+          </div>
+          <span style="font-size: 11px; background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0; padding: 2px 8px; border-radius: 999px; font-weight: 600;">✓ Проверено</span>
+        </div>
+        <div style="font-size: 12.5px; color: #1E293B; line-height: 1.45;" id="lawyer-finding">
+          Поставщик не указал коды ТН ВЭД. Найдены риски неверной декларации материалоемких уплотнителей.
+        </div>
+      </div>
+
+      <!-- Expert 2: Inspector -->
+      <div class="pipeline-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="background: #FFF7ED; color: #DD6B20; padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 12px;">🔍 Инспектор</span>
+            <span style="font-size: 11px; color: #64748B; font-family: var(--font-mono);" id="inspector-status">База ФТС</span>
+          </div>
+          <span style="font-size: 11px; background: #FFFBEB; color: #D97706; border: 1px solid #FDE68A; padding: 2px 8px; border-radius: 999px; font-weight: 600;" id="inspector-badge">ТН ВЭД подобран</span>
+        </div>
+        <div style="font-size: 12.5px; color: #1E293B; line-height: 1.45;" id="inspector-finding">
+          Отклонено ложное совпадение 'бумага экструдированная'. Присвоен точный код ТН ВЭД: 4016 93 000 5.
+        </div>
+      </div>
+
+      <!-- Expert 3: Coordinator -->
+      <div class="pipeline-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="background: #ECFDF5; color: #059669; padding: 3px 8px; border-radius: 4px; font-weight: 700; font-size: 12px;">🛡️ Координатор</span>
+            <span style="font-size: 11px; color: #64748B; font-family: var(--font-mono);" id="coordinator-status">Оценка рисков</span>
+          </div>
+          <span style="font-size: 11px; background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0; padding: 2px 8px; border-radius: 999px; font-weight: 600;">✓ Риски: 0%</span>
+        </div>
+        <div style="font-size: 12.5px; color: #1E293B; line-height: 1.45;" id="coordinator-finding">
+          Эксперты единогласно утвердили код ТН ВЭД. Требуется подтверждение сертификата соответствия.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Dark Status Bar (Matching Real SaaS Terminal Output) -->
+  <div style="background: #0B132B; color: #FFFFFF; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; font-family: var(--font-mono); font-size: 12.5px;">
+    <div style="display: flex; align-items: center; gap: 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+      <span style="width: 8px; height: 8px; border-radius: 50%; background: #10B981; display: inline-block; flex-shrink: 0;" class="doka-pulse-dot is-live" title="Статус симуляции"></span>
+      <span id="verdict-code-label" style="color: #F1F5F9; font-weight: 600;">Код ТН ВЭД: 4016 93 000 5 (Шумоизоляция резины)</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
+      <span class="doka-badge doka-badge-risk-high" id="verdict-badge" style="font-size: 11px; padding: 4px 10px;">Риск КТС (0 ошибок)</span>
+      <a href="/method/" style="background: #DD6B20; color: #FFFFFF; text-decoration: none; padding: 6px 14px; border-radius: 6px; font-weight: 700; font-size: 11.5px;">
+        XML Альта-ГТД →
+      </a>
+    </div>
+  </div>
+</div>
+
+<style is:raw>
+  .council-doc-btn {
+    background: #FFFFFF;
+    border: 1px solid #CBD5E1;
+    color: #475569;
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+  }
+  .council-doc-btn:hover {
+    border-color: #DD6B20;
+    color: #0F172A;
+  }
+  .council-doc-btn.active {
+    background: #122A42;
+    border-color: #122A42;
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+
+  .pipeline-card {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+
+  /* Animated Laser Scan Line */
+  .scan-laser-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ED8936, transparent);
+    box-shadow: 0 0 8px #ED8936;
+    animation: laserScan 2.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes laserScan {
+    0% { top: 0%; }
+    100% { top: 92%; }
+  }
+
+  @media (max-width: 640px) {
+    .mac-body-grid { grid-template-columns: 1fr !important; }
+    .mini-doc-preview { display: none; }
+  }
+  @media (max-width: 480px) {
+    #doc-selector-buttons { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .council-doc-btn span { display: none; }
+    .council-doc-btn { padding: 6px 10px; }
+  }
+</style>
+
+<script is:inline>
+  const docsData = [
+    {
+      title: "COMMERCIAL INVOICE",
+      highlight: "POS 1: CHOLINE CHLORIDE 75% DRY | QTY: 20 000 KG",
+      lawyerStatus: "ЕЭК №54",
+      lawyerFinding: "Поставщик не указал коды ТН ВЭД. Найдены риски неверной декларации материалоемких уплотнителей.",
+      inspectorStatus: "База ФТС",
+      inspectorFinding: "Отклонено ложное совпадение 'бумага экструдированная'. Присвоен точный код ТН ВЭД: 4016 93 000 5.",
+      coordinatorStatus: "Оценка рисков",
+      coordinatorFinding: "Эксперты единогласно утвердили код ТН ВЭД. Требуется подтверждение сертификата соответствия.",
+      badgeText: "Риск КТС (0 ошибок)",
+      badgeClass: "doka-badge-risk-high",
+      codeLabel: "Код ТН ВЭД: 4016 93 000 5 (Шумоизоляция)"
+    },
+    {
+      title: "SPECIFICATION DELL EMC",
+      highlight: "POS 1..23: SWITCHES & RACK SERVERS | QTY: 23 UN",
+      lawyerStatus: "Структура таблицы",
+      lawyerFinding: "Сверхплотная многоколоночная таблица. Распознавание включено в визуальном режиме.",
+      inspectorStatus: "Визуальный анализ",
+      inspectorFinding: "Распознаны 23 позиции оборудования с чертежными артикулами без сдвигов строк.",
+      coordinatorStatus: "Пошлины ЕАЭС",
+      coordinatorFinding: "Все 23 позиции привязаны к ставкам пошлин. Сгенерирован готовый XML-проект.",
+      badgeText: "Средний Риск (23 поз)",
+      badgeClass: "doka-badge-risk-med",
+      codeLabel: "Код ТН ВЭД: 8481 80 739 9 (Арматура)"
+    },
+    {
+      title: "INVOICE 32 PAGES",
+      highlight: "MULTI-PAGE PACKING LIST | 32 PAGES TOTAL",
+      lawyerStatus: "Многостраничный контур",
+      lawyerFinding: "Обработаны 32 страницы инвойса за ~5–6 минут. Сопоставление пошлин и НДС 20% по позициям.",
+      inspectorStatus: "Спецификация",
+      inspectorFinding: "Обнаружено 3 расхождения в весах брутто/нетто. Автоматическая корректировка.",
+      coordinatorStatus: "Альта-ГТД экспорт",
+      coordinatorFinding: "Готово к экспортной загрузке в Альта-ГТД и 1С:ERP без участия человека.",
+      badgeText: "Авто-проверка OK",
+      badgeClass: "doka-badge-risk-low",
+      codeLabel: "Коды ТН ВЭД проверены (32 поз.)"
+    }
+  ];
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll("#doc-selector-buttons .council-doc-btn");
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        buttons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const idx = parseInt(btn.getAttribute("data-doc") || "0", 10);
+        const data = docsData[idx];
+
+        document.getElementById("mini-doc-title").innerText = data.title;
+        document.getElementById("mini-doc-highlight").innerText = data.highlight;
+
+        document.getElementById("lawyer-status").innerText = data.lawyerStatus;
+        document.getElementById("lawyer-finding").innerText = data.lawyerFinding;
+
+        document.getElementById("inspector-status").innerText = data.inspectorStatus;
+        document.getElementById("inspector-finding").innerText = data.inspectorFinding;
+
+        document.getElementById("coordinator-status").innerText = data.coordinatorStatus;
+        document.getElementById("coordinator-finding").innerText = data.coordinatorFinding;
+
+        const badge = document.getElementById("verdict-badge");
+        badge.innerText = data.badgeText;
+        badge.className = `doka-badge ${data.badgeClass}`;
+
+        document.getElementById("verdict-code-label").innerText = data.codeLabel;
+      });
+    });
+  });
+</script>
