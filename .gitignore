@@ -1,5 +1,5 @@
 node_modules/
-dist/
+# dist/ tracked for Timeweb App Platform (Caddy serves project root / dist)
 .astro/
 .env
 .env.*

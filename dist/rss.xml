@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+ <title>ДОКА — Интеллектуальная система автоматизации ВЭД-логистики и таможенного декларирования</title>
+ <description>ДОКА — автономная система автоматизации ВЭД-логистики. Автоматический разбор инвойсов, подбор кодов ТН ВЭД ЕАЭС трёхступенчатым ИИ-контролем (Юрист, Инспектор, Координатор), расчёт таможенных рисков и выгрузка готовых деклараций в Альта-ГТД и 1С:ERP. Работает на серверах компании без выноса данных (152-ФЗ). Правообладатель ООО «ГК Фороней».</description>
+ <link>https://demo.docka.crazedns.ru/</link>
+ <lastBuildDate>Sat, 15 Aug 2026 15:38:01 GMT</lastBuildDate>
+ <pubDate>Sat, 15 Aug 2026 15:38:01 GMT</pubDate>
+ <item>
+  <title>Бесплатный экспресс-разбор 5 инвойсов за 24 часа</title>
+  <description>Пришлите до 5 файлов. Экспертный разбор кодов ТН ВЭД, рисков КТС и потенциала автоматизации.</description>
+  <link>https://demo.docka.crazedns.ru/razbor/</link>
+ </item>
+ <item>
+  <title>Кейс: 32-страничные инвойсы — от PDF до XML в Альта-ГТД</title>
+  <description>Разбор плотных инвойсов, ИИ-консилиум, Графа 31 и экспорт XML для Альта-ГТД.</description>
+  <link>https://demo.docka.crazedns.ru/cases/doka/</link>
+ </item>
+ <item>
+  <title>ГК «ФОРОНЕЙ»: правообладатель ДОКА и локальный ИИ</title>
+  <description>ООО «ГК Фороней», Санкт-Петербург. Внедрение контура, роботизация, материалы foroney.ru.</description>
+  <link>https://demo.docka.crazedns.ru/foroney/</link>
+ </item>
+ <item>
+  <title>Локальный ИИ ГК «ФОРОНЕЙ»: GraphRAG и SGLang</title>
+  <description>Материал с foroney.ru: модели на GPU завода, 152-ФЗ, тот же контур, что стоит под ДОКА.</description>
+  <link>https://demo.docka.crazedns.ru/materials/local-ai/</link>
+ </item>
+</channel>
+</rss>

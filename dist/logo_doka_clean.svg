@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 950 350" width="950" height="350">
+  <defs>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#28557A" />
+      <stop offset="100%" stop-color="#122A42" />
+    </linearGradient>
+    <linearGradient id="orangeFlat" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ED8936" />
+      <stop offset="100%" stop-color="#DD6B20" />
+    </linearGradient>
+
+    <filter id="dropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.15" />
+    </filter>
+    <filter id="lightShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.1" />
+    </filter>
+  </defs>
+
+  <!-- LEFT ICON (Documents + Eye) -->
+  <g transform="translate(10, -10)">
+    <rect x="70" y="80" width="160" height="220" rx="6" fill="#E2E8F0" stroke="url(#blueGrad)" stroke-width="4" transform="rotate(-12, 150, 190)" />
+    <rect x="70" y="80" width="160" height="220" rx="6" fill="#F4F7F9" stroke="url(#blueGrad)" stroke-width="5" transform="rotate(-6, 150, 190)" />
+    <rect x="70" y="80" width="160" height="220" rx="6" fill="#FFFFFF" stroke="url(#blueGrad)" stroke-width="6" filter="url(#dropShadow)" />
+    
+    <rect x="90" y="105" width="80" height="6" rx="3" fill="#94A3B8" />
+    <rect x="90" y="120" width="110" height="6" rx="3" fill="#94A3B8" />
+    <rect x="90" y="135" width="60" height="6" rx="3" fill="#ED8936" />
+    
+    <text x="90" y="240" font-family="'Courier New', monospace" font-size="12" font-weight="bold" fill="#CBD5E1">1100101011</text>
+    <text x="90" y="255" font-family="'Courier New', monospace" font-size="12" font-weight="bold" fill="#CBD5E1">0011001100</text>
+    <text x="90" y="270" font-family="'Courier New', monospace" font-size="12" font-weight="bold" fill="#CBD5E1">1010111100</text>
+    
+    <!-- EYE SYMBOL -->
+    <g filter="url(#dropShadow)">
+      <path d="M 40,180 C 90,120 210,120 260,180 C 210,240 90,240 40,180 Z" fill="#FFFFFF" />
+      <path d="M 40,180 C 90,120 180,120 230,150" fill="none" stroke="url(#blueGrad)" stroke-width="12" stroke-linecap="round" />
+      <path d="M 40,180 C 90,240 180,240 230,210" fill="none" stroke="url(#blueGrad)" stroke-width="12" stroke-linecap="round" />
+      
+      <path d="M 200,135 L 270,180 L 200,225 Z" fill="url(#orangeFlat)" stroke="url(#orangeFlat)" stroke-width="4" stroke-linejoin="round" />
+      
+      <circle cx="150" cy="180" r="32" fill="url(#blueGrad)" />
+      <circle cx="150" cy="180" r="26" fill="none" stroke="#FFFFFF" stroke-dasharray="4 4" stroke-width="2" opacity="0.6" />
+      <circle cx="150" cy="180" r="14" fill="#0F172A" />
+      <circle cx="158" cy="170" r="6" fill="#FFFFFF" />
+      <circle cx="140" cy="190" r="3" fill="#FFFFFF" opacity="0.8" />
+    </g>
+    
+    <!-- CROSSHAIR -->
+    <g transform="translate(230, 80)" filter="url(#lightShadow)">
+      <circle cx="0" cy="0" r="24" fill="#FFFFFF" opacity="0.95" />
+      <circle cx="0" cy="0" r="30" fill="none" stroke="url(#orangeFlat)" stroke-width="2" stroke-dasharray="6 4" />
+      <circle cx="0" cy="0" r="18" fill="none" stroke="url(#blueGrad)" stroke-width="3" />
+      <line x1="-36" y1="0" x2="-10" y2="0" stroke="url(#orangeFlat)" stroke-width="3" stroke-linecap="round" />
+      <line x1="10" y1="0" x2="36" y2="0" stroke="url(#orangeFlat)" stroke-width="3" stroke-linecap="round" />
+      <line x1="0" y1="-36" x2="0" y2="-10" stroke="url(#orangeFlat)" stroke-width="3" stroke-linecap="round" />
+      <line x1="0" y1="10" x2="0" y2="36" stroke="url(#orangeFlat)" stroke-width="3" stroke-linecap="round" />
+      <circle cx="0" cy="0" r="4" fill="url(#orangeFlat)" />
+    </g>
+  </g>
+
+  <!-- RIGHT TEXT (ДОКА + SUBTITLE) -->
+  <g transform="translate(0, -10)">
+    <g filter="url(#dropShadow)">
+      <path d="M 370,110 L 440,110 L 440,200 L 460,200 L 460,230 L 435,230 L 435,215 L 375,215 L 375,230 L 350,230 L 350,200 L 370,200 Z M 393,133 L 417,133 L 417,200 L 393,200 Z" fill="url(#blueGrad)" fill-rule="evenodd" />
+      <path d="M 510,110 L 560,110 L 590,140 L 590,200 L 560,230 L 510,230 L 480,200 L 480,140 Z M 520,145 L 550,145 L 560,155 L 560,185 L 550,195 L 520,195 L 510,185 L 510,155 Z" fill="url(#blueGrad)" fill-rule="evenodd" />
+      <path d="M 610,110 L 640,110 L 640,155 L 695,110 L 730,110 L 670,170 L 730,230 L 690,230 L 640,180 L 640,230 L 610,230 Z" fill="url(#orangeFlat)" />
+      <path d="M 770,110 L 810,110 L 850,230 L 815,230 L 802,195 L 778,195 L 765,230 L 730,230 Z M 790,140 L 800,170 L 780,170 Z" fill="url(#blueGrad)" fill-rule="evenodd" />
+    </g>
+
+    <text x="350" y="275" font-family="'IBM Plex Sans', sans-serif" font-size="24" font-weight="700" letter-spacing="2" fill="#64748B">УМНЫЙ РАЗБОР ДОКУМЕНТОВ</text>
+  </g>
+</svg>

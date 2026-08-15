@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ДОКА">
+  <defs>
+    <linearGradient id="navy" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#28557A"/>
+      <stop offset="100%" stop-color="#122A42"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ED8936"/>
+      <stop offset="100%" stop-color="#DD6B20"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded tile -->
+  <rect width="64" height="64" rx="14" fill="url(#navy)"/>
+  <!-- Document stack hint -->
+  <rect x="14" y="16" width="28" height="36" rx="3" fill="#F8FAFC" opacity="0.18"/>
+  <rect x="18" y="14" width="28" height="36" rx="3" fill="#F8FAFC" opacity="0.28"/>
+  <rect x="22" y="12" width="28" height="36" rx="3" fill="#FFFFFF"/>
+  <!-- Text lines -->
+  <rect x="27" y="18" width="14" height="2.5" rx="1" fill="#94A3B8"/>
+  <rect x="27" y="23" width="18" height="2.5" rx="1" fill="#94A3B8"/>
+  <rect x="27" y="28" width="10" height="2.5" rx="1" fill="#ED8936"/>
+  <!-- Eye -->
+  <ellipse cx="36" cy="40" rx="14" ry="8" fill="none" stroke="url(#navy)" stroke-width="2.5"/>
+  <circle cx="36" cy="40" r="5" fill="url(#navy)"/>
+  <circle cx="37.5" cy="38.5" r="1.5" fill="#FFFFFF"/>
+  <!-- Orange play / attention mark -->
+  <path d="M48 34 L56 40 L48 46 Z" fill="url(#orange)"/>
+</svg>

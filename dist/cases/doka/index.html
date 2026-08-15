@@ -1,0 +1,228 @@
+<!DOCTYPE html><html lang="ru" dir="ltr" data-astro-cid-37fxchfa> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="geo.region" content="RU"><meta name="geo.placename" content="Россия"><meta name="geo.position" content="55.7558;37.6176"><meta name="ICBM" content="55.7558,37.6176"><meta name="robots" content="index,follow"><meta name="author" content="Аксёнов Юрий Васильевич, Наумов Павел Владимирович"><meta name="theme-color" content="#122A42"><meta name="keywords" content="ДОКА ВЭД, автоматизация ВЭД, таможенное декларирование, ТН ВЭД ЕАЭС, распознавание инвойсов, Альта-ГТД интеграция, 1С ERP ВЭД, проверка таможенных рисков, защита от КТС, XML декларация, автономная система ВЭД на предприятии"><title>Кейс: Внедрение ИИ-системы ДОКА для декларирования сложной номенклатуры</title><meta name="description" content="Подробный кейс автоматизации разбора 32-страничных инвойсов, классификации кодов ТН ВЭД и выгрузки XML-проектов в Альта-ГТД."><link rel="canonical" href="https://demo.docka.crazedns.ru/cases/doka/"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="sitemap" type="application/xml" href="/sitemap.xml"><link rel="alternate" type="application/rss+xml" title="ДОКА RSS Feed" href="/rss.xml"><link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt"><!-- OG Tags --><meta property="og:type" content="website"><meta property="og:title" content="Кейс: Внедрение ИИ-системы ДОКА для декларирования сложной номенклатуры"><meta property="og:description" content="Подробный кейс автоматизации разбора 32-страничных инвойсов, классификации кодов ТН ВЭД и выгрузки XML-проектов в Альта-ГТД."><meta property="og:url" content="https://demo.docka.crazedns.ru/cases/doka/"><meta property="og:locale" content="ru_RU"><meta property="og:site_name" content="ДОКА ВЭД"><meta property="og:image" content="https://demo.docka.crazedns.ru/screens/doka-split-view-council.jpg"><meta property="og:image:alt" content="Интерфейс ДОКА: разбор инвойса и ИИ-консилиум (Юрист, Инспектор, Координатор)"><meta property="og:image:type" content="image/jpeg"><!-- Twitter --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Кейс: Внедрение ИИ-системы ДОКА для декларирования сложной номенклатуры"><meta name="twitter:description" content="Подробный кейс автоматизации разбора 32-страничных инвойсов, классификации кодов ТН ВЭД и выгрузки XML-проектов в Альта-ГТД."><meta name="twitter:image" content="https://demo.docka.crazedns.ru/screens/doka-split-view-council.jpg"><meta name="twitter:image:alt" content="Интерфейс ДОКА: разбор инвойса и ИИ-консилиум (Юрист, Инспектор, Координатор)"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://demo.docka.crazedns.ru/#organization","name":"ООО «ГК Фороней»","url":"https://foroney.ru/","email":"foroney@foroney.ru","telephone":"+7 981 167-16-07","sameAs":["https://foroney.ru/","https://aiprocesses.ru/","https://demo.docka.crazedns.ru/foroney/"],"brand":{"@type":"Brand","name":"ДОКА"}},{"@type":"WebSite","@id":"https://demo.docka.crazedns.ru/#website","name":"ДОКА ВЭД","url":"https://demo.docka.crazedns.ru/","description":"ДОКА — автономная система автоматизации ВЭД-логистики. Автоматический разбор инвойсов, подбор кодов ТН ВЭД ЕАЭС трёхступенчатым ИИ-контролем (Юрист, Инспектор, Координатор), расчёт таможенных рисков и выгрузка готовых деклараций в Альта-ГТД и 1С:ERP. Работает на серверах компании без выноса данных (152-ФЗ). Правообладатель ООО «ГК Фороней».","publisher":{"@id":"https://demo.docka.crazedns.ru/#organization"},"inLanguage":"ru-RU"}]}</script><link rel="stylesheet" href="/_astro/about.DPiBP4wb.css">
+<style>@media(max-width:600px){.case-kpi-grid[data-astro-cid-jjdbvbgz]{grid-template-columns:1fr 1fr!important}}
+.lead-card[data-astro-cid-xyq5hly5]{padding:28px}.lead-intro[data-astro-cid-xyq5hly5]{margin-bottom:20px}.lead-intro-row[data-astro-cid-xyq5hly5]{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;flex-wrap:wrap;gap:8px}.lead-nda[data-astro-cid-xyq5hly5]{font-family:var(--font-mono);font-size:11px;color:var(--color-doka-accent);font-weight:600}.lead-title[data-astro-cid-xyq5hly5]{font-size:1.35rem;font-weight:700;color:var(--color-doka-primary);margin:0 0 6px}.lead-desc[data-astro-cid-xyq5hly5]{font-size:.875rem;color:var(--color-doka-text-muted);line-height:1.5;margin:0}.lead-form[data-astro-cid-xyq5hly5]{display:flex;flex-direction:column;gap:14px}.lead-form[data-astro-cid-xyq5hly5][hidden],.lead-success[data-astro-cid-xyq5hly5][hidden]{display:none!important}.lead-honey[data-astro-cid-xyq5hly5]{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}.form-contacts-row[data-astro-cid-xyq5hly5]{display:grid;grid-template-columns:1fr 1fr;gap:12px}.lead-drop[data-astro-cid-xyq5hly5]{border:2px dashed var(--color-doka-border-dark);border-radius:var(--radius-doka);padding:20px;text-align:center;background:var(--color-doka-surface-muted);cursor:pointer;transition:border-color .2s,background .2s}.lead-drop[data-astro-cid-xyq5hly5].is-drag{border-color:#c05621;background:#c056210f}.lead-drop-icon[data-astro-cid-xyq5hly5]{margin-bottom:6px;color:var(--color-doka-primary);display:flex;justify-content:center}.lead-drop-title[data-astro-cid-xyq5hly5]{font-size:.875rem;font-weight:600;color:var(--color-doka-primary)}.lead-drop-hint[data-astro-cid-xyq5hly5]{font-size:.75rem;color:var(--color-doka-text-dim);margin-top:4px;line-height:1.4}.lead-files[data-astro-cid-xyq5hly5]{margin-top:8px;font-family:var(--font-mono);font-size:12px;color:var(--color-doka-accent);line-height:1.45}.lead-files[data-astro-cid-xyq5hly5].is-error{color:var(--color-doka-danger)}.lead-submit[data-astro-cid-xyq5hly5]{width:100%;padding:14px;font-size:.9375rem}.lead-submit[data-astro-cid-xyq5hly5]:disabled{opacity:.65;cursor:wait}.lead-status[data-astro-cid-xyq5hly5]{margin:0;font-size:.8125rem;line-height:1.45;text-align:center;min-height:1.2em}.lead-status[data-astro-cid-xyq5hly5].is-error{color:var(--color-doka-danger)}.lead-legal[data-astro-cid-xyq5hly5]{font-size:.75rem;color:var(--color-doka-text-dim);text-align:center;line-height:1.4;margin:0}.lead-legal[data-astro-cid-xyq5hly5] a[data-astro-cid-xyq5hly5]{color:var(--color-doka-accent)}.lead-success[data-astro-cid-xyq5hly5]{padding:8px 0 4px}.lead-success-title[data-astro-cid-xyq5hly5]{font-size:1.15rem;font-weight:700;color:var(--color-doka-primary);margin:0 0 8px}.lead-success-body[data-astro-cid-xyq5hly5]{font-size:.9375rem;color:var(--color-doka-text-muted);line-height:1.5;margin:0}.lead-direct[data-astro-cid-xyq5hly5]{margin-top:20px;padding-top:16px;border-top:1px solid var(--color-doka-border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}.lead-direct[data-astro-cid-xyq5hly5]>span[data-astro-cid-xyq5hly5]{font-size:.8125rem;color:var(--color-doka-text-muted)}.lead-direct-btn[data-astro-cid-xyq5hly5]{padding:6px 12px;font-size:.8125rem}@media(max-width:600px){.form-contacts-row[data-astro-cid-xyq5hly5]{grid-template-columns:1fr}}
+</style></head> <body data-astro-cid-37fxchfa> <a class="skip-link" href="#main-content" data-astro-cid-37fxchfa>Перейти к контенту</a> <header id="site-header" role="banner" data-astro-cid-37fxchfa> <div class="container header-inner" data-astro-cid-37fxchfa> <!-- Official Vector Logo (Large Premium Size) --> <a href="/" class="brand" aria-label="ДОКА — На главную" data-astro-cid-37fxchfa> <img src="/logo_doka_clean.svg" alt="ДОКА — Умный разбор документов" class="brand-logo-img" width="174" height="64" data-astro-cid-37fxchfa> </a> <!-- Mobile Toggle Button --> <button class="nav-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="main-nav" data-astro-cid-37fxchfa>
+☰
+</button> <nav aria-label="Основная навигация" data-astro-cid-37fxchfa> <ul id="main-nav" data-astro-cid-37fxchfa> <li data-astro-cid-37fxchfa> <a href="/razbor/" data-astro-cid-37fxchfa>Разбор</a> </li><li data-astro-cid-37fxchfa> <a href="/services/" data-astro-cid-37fxchfa>Услуги</a> </li><li data-astro-cid-37fxchfa> <a href="/method/" data-astro-cid-37fxchfa>Метод</a> </li><li data-astro-cid-37fxchfa> <a href="/cases/" aria-current="page" data-astro-cid-37fxchfa>Кейсы</a> </li><li data-astro-cid-37fxchfa> <a href="/contact/" data-astro-cid-37fxchfa>Контакты</a> </li> </ul> </nav> <div class="header-cta-group" data-astro-cid-37fxchfa> <a href="tel:+79811671607" class="header-tg-link" data-astro-cid-37fxchfa> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-astro-cid-37fxchfa><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" data-astro-cid-37fxchfa></path></svg> <span data-astro-cid-37fxchfa>+7 981 167-16-07</span> </a> <a href="/razbor/" class="doka-btn doka-btn-primary header-cta-btn" data-astro-cid-37fxchfa>Разбор 0 ₽</a> </div> </div> </header> <main id="main-content" role="main" data-astro-cid-37fxchfa>  <section class="section" style="padding-top: 48px;" data-astro-cid-jjdbvbgz> <div class="container" style="max-width: 900px;" data-astro-cid-jjdbvbgz> <div style="margin-bottom: 32px;" data-astro-cid-jjdbvbgz> <span class="doka-badge doka-badge-orange" style="margin-bottom: 12px;" data-astro-cid-jjdbvbgz>Практический кейс</span> <h1 style="font-size: clamp(2rem, 3.8vw, 2.8rem); line-height: 1.2; color: var(--color-doka-primary); margin-bottom: 16px;" data-astro-cid-jjdbvbgz>
+Автоматизация разбора инвойсов и подбора кодов ТН ВЭД для дистрибьютора промышленного оборудования
+</h1> <div style="font-size: 1.0625rem; color: var(--color-doka-text-muted); line-height: 1.6;" data-astro-cid-jjdbvbgz>
+Как команда ИИ-экспертов ДОКА сократила время подготовки таможенной декларации с 4 часов до 3 минут на один инвойс.
+</div> </div> <!-- Case Key Stats Banner --> <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; background: var(--color-doka-primary); color: #FFFFFF; padding: 24px; border-radius: var(--radius-doka-lg); margin-bottom: 40px;" class="case-kpi-grid" data-astro-cid-jjdbvbgz> <div data-astro-cid-jjdbvbgz> <div style="font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700; color: #ED8936;" data-astro-cid-jjdbvbgz>4 часа → 3 мин</div> <div style="font-size: 0.75rem; color: #CBD5E1;" data-astro-cid-jjdbvbgz>Время обработки</div> </div> <div data-astro-cid-jjdbvbgz> <div style="font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700; color: #34D399;" data-astro-cid-jjdbvbgz>Графа 31</div> <div style="font-size: 0.75rem; color: #CBD5E1;" data-astro-cid-jjdbvbgz>+ обоснование кода</div> </div> <div data-astro-cid-jjdbvbgz> <div style="font-family: var(--font-mono); font-size: 1.6rem; font-weight: 700; color: #A78BFA;" data-astro-cid-jjdbvbgz>XML OK</div> <div style="font-size: 0.75rem; color: #CBD5E1;" data-astro-cid-jjdbvbgz>схема Альта-ГТД</div> </div> <div data-astro-cid-jjdbvbgz> <div style="font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: #FBBF24;" data-astro-cid-jjdbvbgz>Ваш сервер</div> <div style="font-size: 0.75rem; color: #CBD5E1;" data-astro-cid-jjdbvbgz>Безопасный контур</div> </div> </div> <figure style="margin: 0 0 32px; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #0F172A;" data-astro-cid-jjdbvbgz> <video controls playsinline preload="metadata" poster="/video/doka-demo-poster.jpg" style="width: 100%; height: auto; display: block;" data-astro-cid-jjdbvbgz> <source src="/video/doka-demo.mp4" type="video/mp4" data-astro-cid-jjdbvbgz> </video> <figcaption style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);" data-astro-cid-jjdbvbgz>
+Скринкаст прогона четырёх вымышленных инвойсов: Helionix, Aurelia Chemie, Nordvolt и Velaero (прекурсоры ПП-681). Контрагенты, ИНН и IBAN выдуманы.
+</figcaption> </figure> <div style="font-size: 1rem; color: var(--color-doka-text-muted); line-height: 1.8; margin-bottom: 40px;" data-astro-cid-jjdbvbgz> <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;" data-astro-cid-jjdbvbgz>1. Четыре разных оригинала, один контур</h2> <p data-astro-cid-jjdbvbgz>
+Для съёмки мы не используем чужие коммерческие PDF. Ниже — четыре вымышленных инвойса разной вёрстки: Gulf IT-трейдер, немецкая Handelsrechnung, голландская ERP-фактура и авиа-MRO с прекурсорами. Система должна узнать таблицу, а не «шаблон».
+</p> <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin: 20px 0;" class="case-kpi-grid" data-astro-cid-jjdbvbgz> <img src="/screens/doka-pdf-helionix.jpg" alt="Инвойс Helionix" style="width:100%; height:auto; border:1px solid var(--color-doka-border); border-radius:8px;" data-astro-cid-jjdbvbgz> <img src="/screens/doka-pdf-aurelia.jpg" alt="Инвойс Aurelia" style="width:100%; height:auto; border:1px solid var(--color-doka-border); border-radius:8px;" data-astro-cid-jjdbvbgz> <img src="/screens/doka-pdf-nordvolt.jpg" alt="Инвойс Nordvolt" style="width:100%; height:auto; border:1px solid var(--color-doka-border); border-radius:8px;" data-astro-cid-jjdbvbgz> <img src="/screens/doka-pdf-velaero.jpg" alt="Инвойс Velaero" style="width:100%; height:auto; border:1px solid var(--color-doka-border); border-radius:8px;" data-astro-cid-jjdbvbgz> </div> <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;" data-astro-cid-jjdbvbgz>2. Helionix: 2 позиции ИТ, коды без микросхем 8542</h2> <p data-astro-cid-jjdbvbgz>
+Коммутатор NX-S48 → 8517620002, сервер RX-2208 → 8471500000. Обе позиции назначены доменным правилом, не RAG top-1 (раньше такие описания уезжали в 8542). Консилиум ставит средний риск: в извлечённом заголовке нет контракта и Incoterms, хотя они есть на PDF.
+</p> <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;" data-astro-cid-jjdbvbgz> <img src="/screens/doka-helionix-switch.jpg" alt="Разбор инвойса Helionix в ДОКА" style="width: 100%; height: auto; display: block;" data-astro-cid-jjdbvbgz> <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);" data-astro-cid-jjdbvbgz> <strong data-astro-cid-jjdbvbgz>Рис 1.</strong> Helionix Trading FZE → ООО «Полярный Контур». 2/2 кодов назначено.
+</div> </div> <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;" data-astro-cid-jjdbvbgz> <img src="/screens/doka-crop-helionix-reject.jpg" alt="Почему отброшены альтернативные коды ТН ВЭД" style="width: 100%; height: auto; display: block;" data-astro-cid-jjdbvbgz> <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);" data-astro-cid-jjdbvbgz> <strong data-astro-cid-jjdbvbgz>Рис 2.</strong> Фрагмент карточки: «почему не соседний код» — материал для ответа инспектору.
+</div> </div> <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;" data-astro-cid-jjdbvbgz>3. Aurelia: Графа 31 и консилиум, который ловит ошибку</h2> <p data-astro-cid-jjdbvbgz>
+Две химические позиции и два разных решения: холинхлорид 75% на растительном носителе — 2309909601 (кормовой препарат), бетаин безводный 96% — 2923900000 (четвертичный аммоний). Консилиум: риск низкий, статус «Одобрено».
+</p> <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;" data-astro-cid-jjdbvbgz> <img src="/screens/doka-crop-aurelia-grafa31.jpg" alt="Графа 31 холинхлорида" style="width: 100%; height: auto; display: block;" data-astro-cid-jjdbvbgz> <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);" data-astro-cid-jjdbvbgz> <strong data-astro-cid-jjdbvbgz>Рис 3.</strong> Карточка позиции: Графа 31, код, пошлины, нетарифные меры (кормовая категория).
+</div> </div> <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;" data-astro-cid-jjdbvbgz> <img src="/screens/doka-crop-aurelia-council.jpg" alt="Консилиум: риск низкий по Aurelia" style="width: 100%; height: auto; display: block;" data-astro-cid-jjdbvbgz> <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);" data-astro-cid-jjdbvbgz> <strong data-astro-cid-jjdbvbgz>Рис 4.</strong> Консилиум подтверждает 2309 и 2923, несовпадений главы нет.
+</div> </div> <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;" data-astro-cid-jjdbvbgz>4. Nordvolt: 4 электропозиции из ERP-фактуры</h2> <p data-astro-cid-jjdbvbgz>
+Голландский складской бланк, 4 строки: сервопривод 8504409009, DIN-БП 8504409100, автомат 8536209007, трансформатор тока 8504318009. Все четыре извлечены и классифицированы, риск низкий.
+</p> <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;" data-astro-cid-jjdbvbgz> <img src="/screens/doka-nordvolt-list.jpg" alt="Разбор инвойса Nordvolt, 4 позиции" style="width: 100%; height: auto; display: block;" data-astro-cid-jjdbvbgz> <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);" data-astro-cid-jjdbvbgz> <strong data-astro-cid-jjdbvbgz>Рис 5.</strong> Nordvolt Components B.V. → ООО «Уралщит Электро». 4/4 назначено.
+</div> </div> <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;" data-astro-cid-jjdbvbgz>5. Velaero: прекурсоры — отдельный <a href="/cases/precursors-avia/" style="color: inherit;" data-astro-cid-jjdbvbgz>кейс ПП-681</a></h2> <p data-astro-cid-jjdbvbgz>
+Три чистых растворителя для MRO: МЭК (78-93-3), толуол (108-88-3), ацетон (67-64-1). Коды 2914.12 / 2902.30 / 2914.11. Это не «ещё одна химия»: табл. II ПП РФ № 681. Консилиум ставит <strong data-astro-cid-jjdbvbgz>высокий риск</strong>, требует лицензию на оборот и журнал учёта, не даёт статус «Одобрено».
+</p> <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;" data-astro-cid-jjdbvbgz> <img src="/screens/doka-velaero-council.jpg" alt="Консилиум по прекурсорам Velaero" style="width: 100%; height: auto; display: block;" data-astro-cid-jjdbvbgz> <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);" data-astro-cid-jjdbvbgz> <strong data-astro-cid-jjdbvbgz>Рис 6.</strong> Velaero Surface Chemie → ООО «Авиакон-Сервис». Прекурсоры табл. II, особый порядок.
+</div> </div> <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;" data-astro-cid-jjdbvbgz> <img src="/screens/doka-crop-velaero-precursor.jpg" alt="Карточка МЭК: предупреждение о прекурсоре ПП-681" style="width: 100%; height: auto; display: block;" data-astro-cid-jjdbvbgz> <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);" data-astro-cid-jjdbvbgz> <strong data-astro-cid-jjdbvbgz>Рис 7.</strong> Карточка позиции: предупреждение «Прекурсоры Пост. №681» и пакет документов.
+</div> </div> <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;" data-astro-cid-jjdbvbgz>6. Результат: XML в Альта-ГТД после сверки человеком</h2> <p data-astro-cid-jjdbvbgz>
+По кнопке XML система формирует проект декларации. Финальную проверку и подачу выполняет декларант. Экраны сняты с реального прогона, не из макета.
+</p> </div> <!-- Lead form block --> <div style="margin-top: 40px;" data-astro-cid-jjdbvbgz> <div class="doka-card lead-card" data-astro-cid-xyq5hly5> <div class="lead-intro" data-astro-cid-xyq5hly5> <div class="lead-intro-row" data-astro-cid-xyq5hly5> <span class="doka-badge doka-badge-orange" data-astro-cid-xyq5hly5>Бесплатный демо-разбор (0 ₽)</span> <span class="lead-nda" data-astro-cid-xyq5hly5>Конфиденциально · NDA</span> </div> <h3 class="lead-title" data-astro-cid-xyq5hly5>Получить экспресс-разбор 5 инвойсов за 24 часа</h3> <p class="lead-desc" data-astro-cid-xyq5hly5>
+Заявка и файлы уходят на foroney@foroney.ru. До 5 файлов (PDF, скан, XLSX), каждый до 8 МБ.
+</p> </div> <form id="doka-lead-form" class="lead-form" novalidate data-astro-cid-xyq5hly5> <input type="text" name="_honey" class="lead-honey" tabindex="-1" autocomplete="off" aria-hidden="true" data-astro-cid-xyq5hly5> <div data-astro-cid-xyq5hly5> <label class="doka-label" for="form-name" data-astro-cid-xyq5hly5>Ваше имя *</label> <input type="text" id="form-name" name="name" class="doka-input" placeholder="Иван Петров (Декларант / Руководитель ВЭД)" required data-astro-cid-xyq5hly5> </div> <div class="form-contacts-row" data-astro-cid-xyq5hly5> <div data-astro-cid-xyq5hly5> <label class="doka-label" for="form-contact" data-astro-cid-xyq5hly5>Телефон или Email *</label> <input type="text" id="form-contact" name="contact" class="doka-input" placeholder="+7 (812) 000-00-00 или email@company.ru" required data-astro-cid-xyq5hly5> </div> <div data-astro-cid-xyq5hly5> <label class="doka-label" for="form-company" data-astro-cid-xyq5hly5>Компания / Отрасль</label> <input type="text" id="form-company" name="company" class="doka-input" placeholder="ООО ИмпортПром, Машиностроение" data-astro-cid-xyq5hly5> </div> </div> <div data-astro-cid-xyq5hly5> <label class="doka-label" for="form-files" data-astro-cid-xyq5hly5>Файлы для разбора (до 5)</label> <div id="drop-zone" class="lead-drop" data-astro-cid-xyq5hly5> <div class="lead-drop-icon" aria-hidden="true" data-astro-cid-xyq5hly5> <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-cid-xyq5hly5><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" data-astro-cid-xyq5hly5></path></svg> </div> <div class="lead-drop-title" data-astro-cid-xyq5hly5>Перетащите или выберите файлы</div> <div class="lead-drop-hint" data-astro-cid-xyq5hly5>PDF, PNG, JPG, XLSX · до 5 шт. · до 8 МБ каждый</div> <input type="file" id="form-files" name="files" multiple accept=".pdf,.png,.jpg,.jpeg,.xlsx,.xls,.doc,.docx" hidden data-astro-cid-xyq5hly5> </div> <div id="file-list-preview" class="lead-files" aria-live="polite" data-astro-cid-xyq5hly5></div> </div> <div data-astro-cid-xyq5hly5> <label class="doka-label" for="form-note" data-astro-cid-xyq5hly5>Комментарий к задаче (опционально)</label> <textarea id="form-note" name="note" class="doka-input" rows="2" placeholder="Не читаются сканы, путаница с кодами ТН ВЭД, задержки на таможне..." data-astro-cid-xyq5hly5></textarea> </div> <button type="submit" id="lead-submit" class="doka-btn doka-btn-primary lead-submit" data-astro-cid-xyq5hly5> <span data-astro-cid-xyq5hly5>Отправить заявку</span> </button> <p id="lead-status" class="lead-status" role="status" aria-live="polite" data-astro-cid-xyq5hly5></p> <p class="lead-legal" data-astro-cid-xyq5hly5>
+Отправляя форму, вы соглашаетесь с <a href="/privacy/" data-astro-cid-xyq5hly5>политикой конфиденциальности</a>.
+</p> </form> <div id="lead-success" class="lead-success" hidden data-astro-cid-xyq5hly5> <p class="lead-success-title" data-astro-cid-xyq5hly5>Заявка отправлена</p> <p class="lead-success-body" data-astro-cid-xyq5hly5>
+Мы получили обращение. Ответ по разбору — в течение 24 часов на указанные контакты.
+</p> </div> <div class="lead-direct" data-astro-cid-xyq5hly5> <span data-astro-cid-xyq5hly5>Прямая связь:</span> <div class="doka-cluster" data-astro-cid-xyq5hly5> <a href="mailto:foroney@foroney.ru" class="doka-btn doka-btn-outline lead-direct-btn" data-astro-cid-xyq5hly5>foroney@foroney.ru</a> <a href="tel:+79811671607" class="doka-btn doka-btn-outline lead-direct-btn" data-astro-cid-xyq5hly5>+7 981 167-16-07</a> </div> </div> </div>  <script>(function(){const submitUrl = "https://formsubmit.co/ajax/foroney@foroney.ru";
+const maxFiles = 5;
+const maxFileMb = 8;
+
+  const form = document.getElementById("doka-lead-form");
+  const dropZone = document.getElementById("drop-zone");
+  const fileInput = document.getElementById("form-files");
+  const preview = document.getElementById("file-list-preview");
+  const statusEl = document.getElementById("lead-status");
+  const submitBtn = document.getElementById("lead-submit");
+  const successEl = document.getElementById("lead-success");
+  const maxBytes = maxFileMb * 1024 * 1024;
+
+  function setStatus(text, isError) {
+    if (!statusEl) return;
+    statusEl.textContent = text || "";
+    statusEl.classList.toggle("is-error", Boolean(isError));
+  }
+
+  function selectedFiles() {
+    if (!fileInput || !fileInput.files) return [];
+    return Array.from(fileInput.files).slice(0, maxFiles);
+  }
+
+  function renderFiles(errorText) {
+    if (!preview) return;
+    preview.classList.toggle("is-error", Boolean(errorText));
+    if (errorText) {
+      preview.textContent = errorText;
+      return;
+    }
+    const files = selectedFiles();
+    if (!files.length) {
+      preview.textContent = "";
+      return;
+    }
+    preview.textContent = "К отправке (" + files.length + "): " + files.map(function (f) { return f.name; }).join(", ");
+  }
+
+  function validateFiles() {
+    const all = fileInput && fileInput.files ? Array.from(fileInput.files) : [];
+    if (all.length > maxFiles) {
+      return "Можно приложить не больше " + maxFiles + " файлов.";
+    }
+    const tooBig = all.find(function (f) { return f.size > maxBytes; });
+    if (tooBig) {
+      return "«" + tooBig.name + "» больше " + maxFileMb + " МБ. Сожмите файл или уберите его.";
+    }
+    return "";
+  }
+
+  if (dropZone && fileInput) {
+    dropZone.addEventListener("click", function () { fileInput.click(); });
+    dropZone.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        fileInput.click();
+      }
+    });
+    dropZone.setAttribute("role", "button");
+    dropZone.setAttribute("tabindex", "0");
+    dropZone.setAttribute("aria-controls", "form-files");
+
+    dropZone.addEventListener("dragover", function (e) {
+      e.preventDefault();
+      dropZone.classList.add("is-drag");
+    });
+    dropZone.addEventListener("dragleave", function () {
+      dropZone.classList.remove("is-drag");
+    });
+    dropZone.addEventListener("drop", function (e) {
+      e.preventDefault();
+      dropZone.classList.remove("is-drag");
+      if (e.dataTransfer && e.dataTransfer.files.length > 0) {
+        fileInput.files = e.dataTransfer.files;
+        renderFiles(validateFiles());
+      }
+    });
+    fileInput.addEventListener("change", function () {
+      renderFiles(validateFiles());
+    });
+  }
+
+  if (form) {
+    form.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      setStatus("");
+
+      const honey = form.querySelector('input[name="_honey"]');
+      if (honey && honey.value) {
+        form.hidden = true;
+        if (successEl) successEl.hidden = false;
+        return;
+      }
+
+      const name = document.getElementById("form-name").value.trim();
+      const contact = document.getElementById("form-contact").value.trim();
+      const company = document.getElementById("form-company").value.trim();
+      const note = document.getElementById("form-note").value.trim();
+
+      if (!name || !contact) {
+        setStatus("Укажите имя и телефон или email.", true);
+        return;
+      }
+
+      const fileError = validateFiles();
+      if (fileError) {
+        renderFiles(fileError);
+        setStatus(fileError, true);
+        return;
+      }
+
+      const files = selectedFiles();
+      const body = new FormData();
+      body.append("_subject", "Заявка на экспресс-разбор 5 инвойсов (ДОКА)");
+      body.append("_template", "table");
+      body.append("_captcha", "false");
+      body.append("name", name);
+      body.append("contact", contact);
+      body.append("company", company || "—");
+      body.append("note", note || "—");
+      body.append("page", window.location.href);
+      files.forEach(function (file, i) {
+        body.append("attachment" + (i + 1), file, file.name);
+      });
+      if (!files.length) {
+        body.append("files", "(файлы не приложены)");
+      }
+
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.querySelector("span").textContent = "Отправляем…";
+      }
+      setStatus("Отправляем заявку…");
+
+      try {
+        const res = await fetch(submitUrl, {
+          method: "POST",
+          body: body,
+          headers: { Accept: "application/json" },
+        });
+        const data = await res.json().catch(function () { return {}; });
+        if (!res.ok) {
+          throw new Error(data.message || "Не удалось отправить заявку.");
+        }
+        form.hidden = true;
+        if (successEl) successEl.hidden = false;
+        setStatus("");
+      } catch (err) {
+        setStatus(
+          "Не отправилось автоматически. Напишите на почту в блоке «Прямая связь» или позвоните — заявку примем так же.",
+          true
+        );
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.querySelector("span").textContent = "Отправить заявку";
+        }
+      }
+    });
+  }
+})();</script> </div> </div> </section>  </main> <!-- Mobile sticky CTA (P1) --> <div class="mobile-sticky-cta" role="region" aria-label="Быстрые действия" data-astro-cid-37fxchfa> <a href="/razbor/" class="doka-btn doka-btn-primary mobile-sticky-primary" data-astro-cid-37fxchfa>Разбор 5 файлов · 0 ₽</a> <a href="tel:+79811671607" class="doka-btn doka-btn-outline mobile-sticky-phone" data-astro-cid-37fxchfa>+7 981 167-16-07</a> </div> <footer role="contentinfo" data-astro-cid-37fxchfa> <div class="container" data-astro-cid-37fxchfa> <div class="footer-grid" data-astro-cid-37fxchfa> <div class="footer-col" data-astro-cid-37fxchfa> <p class="footer-heading" style="display:flex;align-items:center;gap:8px;" data-astro-cid-37fxchfa> <span class="font-display" style="font-size:18px;color:#ED8936;" data-astro-cid-37fxchfa>ДОКА</span> <span style="font-weight:600;text-transform:none;letter-spacing:0;" data-astro-cid-37fxchfa>— ВЭД</span> </p> <p style="margin-bottom:12px;line-height:1.6;" data-astro-cid-37fxchfa>
+Интеллектуальная система автоматизации ВЭД-логистики и таможенного декларирования.
+              Трёхступенчатая ИИ-проверка, распознавание сложных инвойсов и формирование проектов деклараций.
+</p> <p style="font-size:12px;color:#94A3B8;" data-astro-cid-37fxchfa>
+Правообладатель: <a href="https://foroney.ru/" target="_blank" rel="noopener noreferrer" style="color:#CBD5E1;" data-astro-cid-37fxchfa>ООО «ГК Фороней»</a><br data-astro-cid-37fxchfa>
+Свидетельство Роспатента №2026681995 </p> </div> <div class="footer-col" data-astro-cid-37fxchfa> <p class="footer-heading" data-astro-cid-37fxchfa>Продукт и Метод</p> <ul data-astro-cid-37fxchfa> <li data-astro-cid-37fxchfa><a href="/services/" data-astro-cid-37fxchfa>Услуги и Прайс</a></li> <li data-astro-cid-37fxchfa><a href="/razbor/" data-astro-cid-37fxchfa>Разбор 5 файлов (0 ₽)</a></li> <li data-astro-cid-37fxchfa><a href="/method/" data-astro-cid-37fxchfa>Архитектура и Метод</a></li> <li data-astro-cid-37fxchfa><a href="/cases/" data-astro-cid-37fxchfa>Практические Кейсы</a></li> </ul> </div> <div class="footer-col" data-astro-cid-37fxchfa> <p class="footer-heading" data-astro-cid-37fxchfa>Поддержка & База знаний</p> <ul data-astro-cid-37fxchfa> <li data-astro-cid-37fxchfa><a href="/faq/" data-astro-cid-37fxchfa>База знаний / FAQ</a></li> <li data-astro-cid-37fxchfa><a href="/about/" data-astro-cid-37fxchfa>О разработчиках</a></li> <li data-astro-cid-37fxchfa><a href="/foroney/" data-astro-cid-37fxchfa>ГК «ФОРОНЕЙ»</a></li> <li data-astro-cid-37fxchfa><a href="/materials/local-ai/" data-astro-cid-37fxchfa>Локальный ИИ ФОРОНЕЯ</a></li> <li data-astro-cid-37fxchfa><a href="/contact/" data-astro-cid-37fxchfa>Связаться</a></li> </ul> </div> <div class="footer-col" data-astro-cid-37fxchfa> <p class="footer-heading" data-astro-cid-37fxchfa>Правовая база</p> <ul data-astro-cid-37fxchfa> <li data-astro-cid-37fxchfa><a href="/privacy/" data-astro-cid-37fxchfa>Конфиденциальность</a></li> <li data-astro-cid-37fxchfa><a href="/terms/" data-astro-cid-37fxchfa>Условия использования</a></li> <li data-astro-cid-37fxchfa><a href="/2026681995.eod.pdf" target="_blank" data-astro-cid-37fxchfa>Свидетельство №2026681995</a></li> </ul> </div> </div> <div class="footer-bottom" data-astro-cid-37fxchfa> <div data-astro-cid-37fxchfa>
+© 2026 ДОКА. ООО «ГК Фороней». Все права защищены.
+</div> <div style="display:flex;gap:16px;flex-wrap:wrap;" data-astro-cid-37fxchfa> <a href="https://foroney.ru/" target="_blank" rel="noopener noreferrer" style="color:#94A3B8;" data-astro-cid-37fxchfa>foroney.ru</a> <span style="color:#475569;" data-astro-cid-37fxchfa>|</span> <span style="color:#94A3B8;" data-astro-cid-37fxchfa>On-Premises · 152-ФЗ</span> </div> </div> </div> </footer> <script>
+      (function () {
+        const toggle = document.querySelector(".nav-toggle");
+        const nav = document.getElementById("main-nav");
+        if (!toggle || !nav) return;
+
+        function setOpen(open) {
+          nav.classList.toggle("open", open);
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+          toggle.setAttribute("aria-label", open ? "Закрыть меню" : "Открыть меню");
+          toggle.textContent = open ? "✕" : "☰";
+        }
+
+        toggle.addEventListener("click", function () {
+          setOpen(!nav.classList.contains("open"));
+        });
+        nav.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () { setOpen(false); });
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") setOpen(false);
+        });
+      })();
+    </script> </body> </html> 
