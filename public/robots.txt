@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://demo.docka.crazedns.ru/sitemap.xml
+Sitemap: https://дока.рус/sitemap.xml

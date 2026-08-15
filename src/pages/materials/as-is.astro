@@ -1,0 +1,132 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RelatedReading from "../../components/RelatedReading.astro";
+import {
+  AUTHOR,
+  COMPANY,
+  SITE_CANONICAL_BASE,
+  RELATED_BY_PAGE,
+} from "../../consts";
+
+const original = "https://aiprocesses.ru/insights/as-is-checklist/";
+const reprint = "https://foroney.ru/insights/as-is-checklist/";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Чеклист as-is до пилота ДОКА",
+  description:
+    "Семь блоков вопросов Наумова до выбора модели. Оригинал на aiprocesses.ru, перепечатка на foroney.ru.",
+  inLanguage: "ru-RU",
+  author: {
+    "@type": "Person",
+    name: AUTHOR.name,
+    jobTitle: AUTHOR.role,
+    url: AUTHOR.personalAbout,
+  },
+  publisher: { "@type": "Organization", name: COMPANY.name, url: COMPANY.url },
+  isBasedOn: original,
+  citation: [original, reprint],
+  mainEntityOfPage: `${SITE_CANONICAL_BASE}/materials/as-is/`,
+};
+
+const blocks = [
+  {
+    title: "Границы процесса",
+    body: "Где начинается и чем заканчивается поток. Кто пользуется выходом. Что считается браком. Если границы — «весь завод», пилот не собрать.",
+  },
+  {
+    title: "Люди и роли",
+    body: "Кто делает шаг руками, кто подписывает, кто подменяет. Где решение «по жизни» принимает не тот, кто в регламенте.",
+  },
+  {
+    title: "Системы и теневые контуры",
+    body: "ERP / СЭД / PLM / MES против Excel, почты и мессенджера. Где правда, если система и человек расходятся.",
+  },
+  {
+    title: "Данные",
+    body: "Скан, строка в БД, устный запрос. Живые и мёртвые справочники. Что нельзя выносить из контура — для ДОКА это инвойс с ценами.",
+  },
+  {
+    title: "Время и качество",
+    body: "Норматив vs факт. Где самые длинные ожидания. Какие ошибки повторяются. Без грубой метрики пилот нельзя закрыть.",
+  },
+  {
+    title: "Исключения",
+    body: "20% случаев, которые ломают «счастливый путь». Сезонность, особые заказчики, обходы, которые все знают.",
+  },
+  {
+    title: "Готовность к пилоту",
+    body: "Есть ли хозяин процесса. Дадут ли доступ к примерам в контуре. Что будет успехом через 4–8 недель.",
+  },
+];
+---
+
+<BaseLayout
+  title="Чеклист as-is до пилота — материал архитектора · ДОКА"
+  description="Пересказ чеклиста Наумова с aiprocesses.ru: семь вопросов до выбора модели. Для пилота ДОКА на номенклатуре."
+  canonical={`${SITE_CANONICAL_BASE}/materials/as-is/`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header" style="max-width: 680px;">
+        <p class="section-kicker" style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-doka-accent); margin: 0 0 10px;">
+          Материал архитектора · aiprocesses.ru
+        </p>
+        <h1 class="section-title">Чеклист as-is до пилота</h1>
+        <p class="section-subtitle">
+          Оригинал: <a href={original} target="_blank" rel="noopener noreferrer">{AUTHOR.siteLabel}/insights/as-is-checklist/</a>.
+          Перепечатка: <a href={reprint} target="_blank" rel="noopener noreferrer">foroney.ru</a>.
+          Ниже — та же последовательность, сжатая под контур ДОКА.
+        </p>
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+        <p style="margin: 0;">
+          {AUTHOR.name} формулирует так: без as-is пилот ИИ превращается в театр.
+          Вопросы задают <strong>до</strong> выбора модели и закупки GPU.
+          Для ДОКА это значит: сначала понять, как декларант сейчас тащит инвойс в Альта-ГТД,
+          и только потом калибровать Юриста, Инспектора и Координатора.
+        </p>
+      </div>
+
+      <div style="display: grid; gap: 12px; margin-bottom: 24px;">
+        {blocks.map((block, i) => (
+          <div class="doka-card" style="padding: 18px 20px;">
+            <h2 style="font-size: 1.05rem; margin: 0 0 6px; color: var(--color-doka-primary);">
+              <span style="font-family: var(--font-mono); color: var(--color-doka-accent);">{String(i + 1).padStart(2, "0")}.</span>
+              {block.title}
+            </h2>
+            <p style="margin: 0; font-size: 0.9rem; line-height: 1.6; color: var(--color-doka-text-muted);">{block.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px;">
+        <h2 style="font-size: 1.15rem; color: var(--color-doka-primary); margin: 0 0 12px;">Как это стыкуется с ДОКА</h2>
+        <p style="margin: 0; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          Экспресс-разбор 5 файлов — это не замена чеклиста. Это быстрая проверка входа.
+          Пилот на номенклатуре уже требует хозяина процесса, метрику и доступ к примерам в контуре.
+          Метод четырьмя шагами: <a href="/method/">на этом сайте</a>,
+          разбор ФОРОНЕЯ: <a href="https://foroney.ru/insights/doka-invoice-xml/" target="_blank" rel="noopener noreferrer">как готовится XML</a>.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <a href={original} target="_blank" rel="noopener noreferrer" class="doka-btn doka-btn-navy" style="padding: 10px 16px; font-size: 0.875rem;">
+          Оригинал на aiprocesses.ru →
+        </a>
+        <a href="/aiprocesses/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          Об архитекторе
+        </a>
+        <a href="/materials/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          Все материалы
+        </a>
+      </div>
+
+      <RelatedReading heading="Тот же метод у архитектора и у ФОРОНЕЯ" items={RELATED_BY_PAGE.materials} />
+    </div>
+  </section>
+</BaseLayout>

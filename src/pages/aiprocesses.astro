@@ -1,0 +1,144 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import RelatedReading from "../components/RelatedReading.astro";
+import AuthorSignatureBadge from "../components/AuthorSignatureBadge.astro";
+import {
+  AUTHOR,
+  CO_AUTHOR,
+  COMPANY,
+  SITE_CANONICAL_BASE,
+  RELATED_BY_PAGE,
+} from "../consts";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      name: "Архитектор ДОКА — Наумов Павел Владимирович",
+      description:
+        "Наумов Павел Владимирович, архитектор системы ДОКА. Метод as-is, локальный ИИ, сайт aiprocesses.ru. Связка с ГК «ФОРОНЕЙ».",
+      url: `${SITE_CANONICAL_BASE}/aiprocesses/`,
+      mainEntity: {
+        "@type": "Person",
+        name: AUTHOR.name,
+        jobTitle: AUTHOR.role,
+        url: AUTHOR.personalAbout,
+        sameAs: [AUTHOR.personalSite, AUTHOR.personalAbout],
+        worksFor: { "@type": "Organization", name: COMPANY.name, url: COMPANY.url },
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Наумов П.В. — архитектор ДОКА · aiprocesses.ru"
+  description="Архитектор ДОКА разбирает as-is на aiprocesses.ru. Метод: факт процесса → модель → to-be → пилот в контуре. Связь с foroney.ru."
+  canonical={`${SITE_CANONICAL_BASE}/aiprocesses/`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header" style="max-width: 680px;">
+        <p class="section-kicker" style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-doka-accent); margin: 0 0 10px;">
+          Сеть сайтов · архитектор
+        </p>
+        <h1 class="section-title">Архитектор ДОКА</h1>
+        <p class="section-subtitle">
+          {AUTHOR.name} разбирает процесс as-is, затем ставит точечный локальный ИИ.
+          Канон практики — на <a href={AUTHOR.personalSite} target="_blank" rel="noopener noreferrer">aiprocesses.ru</a>.
+        </p>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <AuthorSignatureBadge person={AUTHOR} />
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px;">
+        <h2 style="font-size: 1.2rem; color: var(--color-doka-primary); margin: 0 0 12px;">Что это за сайт</h2>
+        <p style="margin: 0 0 14px; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          <a href={AUTHOR.personalSite} target="_blank" rel="noopener noreferrer">{AUTHOR.siteLabel}</a>
+          — личная практика архитектора. Здесь, на дока.рус, живёт продукт ВЭД.
+          На <a href="/foroney/">странице ГК</a> — внедрение и правообладатель.
+          Три домена пишут друг о друге, канон каждого текста остаётся у автора.
+        </p>
+        <div style="background: var(--color-doka-surface-muted); padding: 14px; border-radius: var(--radius-doka); font-family: var(--font-mono); font-size: 0.8125rem; border: 1px solid var(--color-doka-border); line-height: 1.55;">
+          <div><strong>Роль в ДОКА:</strong> {AUTHOR.role}</div>
+          <div><strong>Сайт:</strong> <a href={AUTHOR.personalSite} target="_blank" rel="noopener noreferrer" style="color: var(--color-doka-accent);">{AUTHOR.siteLabel}</a></div>
+          <div><strong>О практике:</strong> <a href={AUTHOR.personalAbout} target="_blank" rel="noopener noreferrer" style="color: var(--color-doka-accent);">{AUTHOR.personalAbout}</a></div>
+          <div><strong>Автор продукта:</strong> {CO_AUTHOR.name} · <a href="https://foroney.ru/" target="_blank" rel="noopener noreferrer">foroney.ru</a></div>
+        </div>
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px;">
+        <h2 style="font-size: 1.2rem; color: var(--color-doka-primary); margin: 0 0 12px;">Метод, из которого собрана ДОКА</h2>
+        <p style="margin: 0 0 12px; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          Сначала факт процесса, потом модель, потом узкий ИИ в контуре.
+          Для декларанта это тот же порядок: не «загрузить инвойс в чат», а извлечение → три роли → КТС → XML.
+        </p>
+        <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          <li>
+            <a href="https://aiprocesses.ru/insights/what-is-apre/" target="_blank" rel="noopener noreferrer">Что такое реконструкция процессов</a>
+            — определение метода
+          </li>
+          <li>
+            <a href="https://aiprocesses.ru/insights/as-is-checklist/" target="_blank" rel="noopener noreferrer">Чеклист as-is</a>
+            — семь блоков до выбора модели. Пересказ: <a href="/materials/as-is/">/materials/as-is/</a>
+          </li>
+          <li>
+            <a href="https://aiprocesses.ru/insights/why-ai-on-paper-fails/" target="_blank" rel="noopener noreferrer">Почему ИИ на регламенте не взлетает</a>
+            и <a href="/materials/process/">сначала процесс</a>
+          </li>
+          <li>
+            <a href="https://aiprocesses.ru/insights/local-ai-when-needed/" target="_blank" rel="noopener noreferrer">Когда локальный ИИ нужен</a>
+            — та же рамка, что в <a href="/cases/onprem-152/">кейсе 152-ФЗ</a>
+          </li>
+          <li>
+            <a href="https://aiprocesses.ru/insights/doka-ved/" target="_blank" rel="noopener noreferrer">ДОКА глазами архитектора</a>
+            и <a href="https://aiprocesses.ru/insights/gk-foroney/" target="_blank" rel="noopener noreferrer">кто есть ФОРОНЕЙ</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px;">
+        <h2 style="font-size: 1.2rem; color: var(--color-doka-primary); margin: 0 0 12px;">Смежные кейсы на aiprocesses.ru</h2>
+        <p style="margin: 0 0 12px; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          Это не сценарии ВЭД. Та же дисциплина: факт → модель → подпись остаётся у человека.
+        </p>
+        <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          <li>
+            <a href="https://aiprocesses.ru/cases/aist/" target="_blank" rel="noopener noreferrer">КТПП</a>:
+            чертёж → аналоги → черновик техмаршрута в 1С
+          </li>
+          <li>
+            <a href="https://aiprocesses.ru/cases/planner/" target="_blank" rel="noopener noreferrer">Планирование цеха</a>:
+            сценарии «что если» при сбое станка
+          </li>
+          <li>
+            <a href="https://aiprocesses.ru/cases/axis/" target="_blank" rel="noopener noreferrer">Закупки</a>:
+            пакет на комиссию, не автоприговор модели
+          </li>
+        </ul>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <a href={AUTHOR.personalSite} target="_blank" rel="noopener noreferrer" class="doka-btn doka-btn-navy" style="padding: 10px 16px; font-size: 0.875rem;">
+          aiprocesses.ru →
+        </a>
+        <a href={AUTHOR.personalAbout} target="_blank" rel="noopener noreferrer" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          О практике
+        </a>
+        <a href="/foroney/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          ГК «ФОРОНЕЙ»
+        </a>
+        <a href="/materials/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          Материалы сети
+        </a>
+      </div>
+
+      <RelatedReading heading="Инсайты архитектора и автор продукта" items={RELATED_BY_PAGE.architect} />
+    </div>
+  </section>
+</BaseLayout>

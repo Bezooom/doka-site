@@ -11,7 +11,8 @@ import { COMPANY, LEAD_FORM } from "../consts";
     </div>
     <h3 class="lead-title">Получить экспресс-разбор 5 инвойсов за 24 часа</h3>
     <p class="lead-desc">
-      Заявка и файлы уходят на {COMPANY.email}. До {LEAD_FORM.maxFiles} файлов (PDF, скан, XLSX), каждый до {LEAD_FORM.maxFileMb} МБ.
+      Заявка уходит на {COMPANY.email}. До {LEAD_FORM.maxFiles} файлов (PDF, скан, XLSX), каждый до {LEAD_FORM.maxFileMb} МБ.
+      Если автоотправка ещё не активирована — откроется черновик письма.
     </p>
   </div>
 
@@ -74,6 +75,7 @@ import { COMPANY, LEAD_FORM } from "../consts";
     <span>Прямая связь:</span>
     <div class="doka-cluster">
       <a href={`mailto:${COMPANY.email}`} class="doka-btn doka-btn-outline lead-direct-btn">{COMPANY.email}</a>
+      <a href={LEAD_FORM.telegram} target="_blank" rel="noopener noreferrer" class="doka-btn doka-btn-outline lead-direct-btn">Telegram</a>
       <a href={COMPANY.phoneHref} class="doka-btn doka-btn-outline lead-direct-btn">{COMPANY.phone}</a>
     </div>
   </div>
@@ -218,7 +220,14 @@ import { COMPANY, LEAD_FORM } from "../consts";
   }
 </style>
 
-<script define:vars={{ submitUrl: LEAD_FORM.endpoint, maxFiles: LEAD_FORM.maxFiles, maxFileMb: LEAD_FORM.maxFileMb }}>
+<script define:vars={{
+  submitUrl: LEAD_FORM.endpoint,
+  mailtoHref: LEAD_FORM.mailto,
+  telegramHref: LEAD_FORM.telegram,
+  inbox: COMPANY.email,
+  maxFiles: LEAD_FORM.maxFiles,
+  maxFileMb: LEAD_FORM.maxFileMb,
+}}>
   const form = document.getElementById("doka-lead-form");
   const dropZone = document.getElementById("drop-zone");
   const fileInput = document.getElementById("form-files");
@@ -350,6 +359,26 @@ import { COMPANY, LEAD_FORM } from "../consts";
       }
       setStatus("Отправляем заявку…");
 
+      function openMailtoFallback() {
+        const fileNames = files.map(function (f) { return f.name; }).join(", ") || "без файлов";
+        const text = [
+          "Заявка на экспресс-разбор 5 инвойсов (ДОКА)",
+          "",
+          "Имя: " + name,
+          "Контакт: " + contact,
+          "Компания: " + (company || "—"),
+          "Страница: " + window.location.href,
+          "Файлы: " + fileNames,
+          "",
+          note || "—",
+          "",
+          "Файлы приложите к этому письму вручную — через ссылку они не уходят.",
+        ].join("\n");
+        window.location.href = mailtoHref +
+          "?subject=" + encodeURIComponent("Заявка на разбор инвойсов (ДОКА)") +
+          "&body=" + encodeURIComponent(text);
+      }
+
       try {
         const res = await fetch(submitUrl, {
           method: "POST",
@@ -357,17 +386,30 @@ import { COMPANY, LEAD_FORM } from "../consts";
           headers: { Accept: "application/json" },
         });
         const data = await res.json().catch(function () { return {}; });
-        if (!res.ok) {
-          throw new Error(data.message || "Не удалось отправить заявку.");
+        const msg = String(data.message || data.error || "");
+        const needsActivate = /activat|confirm|verify|подтверд/i.test(msg);
+
+        if (needsActivate) {
+          setStatus(
+            "На " + inbox + " ушло письмо активации FormSubmit. Откройте его и нажмите Confirm — после этого заявка с сайта начнёт доходить. Сейчас открою черновик письма, чтобы заявка не потерялась.",
+            true
+          );
+          openMailtoFallback();
+          return;
+        }
+        if (!res.ok || data.success === false || data.success === "false") {
+          throw new Error(msg || "Не удалось отправить заявку.");
         }
         form.hidden = true;
         if (successEl) successEl.hidden = false;
         setStatus("");
       } catch (err) {
         setStatus(
-          "Не отправилось автоматически. Напишите на почту в блоке «Прямая связь» или позвоните — заявку примем так же.",
+          "Автоотправка не прошла. Откроется черновик письма на " + inbox +
+          " — приложите файлы вручную. Или напишите в Telegram / позвоните.",
           true
         );
+        openMailtoFallback();
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;

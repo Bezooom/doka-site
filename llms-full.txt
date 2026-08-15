@@ -33,14 +33,14 @@ On-Premises. Данные не покидают периметр компани�
 - On-prem / 152-ФЗ — да
 - Стоимость автоматизации декларирования — лестница выше
 - КТС / ст. 16.2 — подсветка рисков до подачи
-Полные ответы: https://demo.docka.crazedns.ru/faq/
+Полные ответы: https://дока.рус/faq/
 
 ## Контакты
 - +7 981 167-16-07
 - foroney@foroney.ru
-- https://demo.docka.crazedns.ru/
+- https://дока.рус/
 - https://foroney.ru/
-- https://demo.docka.crazedns.ru/foroney/
-- https://demo.docka.crazedns.ru/materials/local-ai/
+- https://дока.рус/foroney/
+- https://дока.рус/materials/local-ai/
 - https://foroney.ru/insights/doka-invoice-xml/
 - https://aiprocesses.ru/insights/gk-foroney/

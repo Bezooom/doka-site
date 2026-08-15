@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RelatedReading from "../../components/RelatedReading.astro";
+import {
+  SITE_CANONICAL_BASE,
+  LOCAL_MATERIALS,
+  RELATED_BY_PAGE,
+  pickNetwork,
+} from "../../consts";
+
+const partnerCases = pickNetwork("foroney-doka", "foroney-machine", "foroney-konakri", "aip-aist");
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Материалы сети: ФОРОНЕЙ и архитектор",
+  url: `${SITE_CANONICAL_BASE}/materials/`,
+  description:
+    "Пересказы кейсов и инсайтов foroney.ru и aiprocesses.ru для контура ДОКА. Канон остаётся у автора.",
+};
+---
+
+<BaseLayout
+  title="Материалы сети — ФОРОНЕЙ и архитектор · ДОКА"
+  description="Инсайты и кейсы foroney.ru и aiprocesses.ru, пересказанные для контура ДОКА. Чеклист as-is, локальный ИИ, метод процесса."
+  canonical={`${SITE_CANONICAL_BASE}/materials/`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 880px;">
+      <div class="section-header" style="max-width: 720px;">
+        <p class="section-kicker" style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-doka-accent); margin: 0 0 10px;">
+          Три сайта · один контур
+        </p>
+        <h1 class="section-title">Материалы сети</h1>
+        <p class="section-subtitle">
+          Здесь — пересказ для декларанта и директора по ВЭД. Полный текст и схемы живут у автора:
+          <a href="https://foroney.ru/insights/" target="_blank" rel="noopener noreferrer">foroney.ru/insights</a>
+          и
+          <a href="https://aiprocesses.ru/insights/" target="_blank" rel="noopener noreferrer">aiprocesses.ru/insights</a>.
+        </p>
+      </div>
+
+      <div class="grid-2" style="gap: 16px; margin-bottom: 32px;">
+        {LOCAL_MATERIALS.map((item) => (
+          <a href={`/materials/${item.slug}/`} style="text-decoration: none; color: inherit;">
+            <article class="doka-card" style="height: 100%;">
+              <p style="margin: 0 0 8px; font-family: var(--font-mono); font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-doka-accent);">
+                {item.kicker}
+              </p>
+              <h2 style="font-size: 1.15rem; margin: 0 0 8px; color: var(--color-doka-primary);">{item.title}</h2>
+              <p style="margin: 0 0 14px; font-size: 0.9rem; line-height: 1.55; color: var(--color-doka-text-muted);">
+                {item.description}
+              </p>
+              <p style="margin: 0; font-size: 0.8125rem; color: var(--color-doka-accent); font-weight: 600;">
+                Читать пересказ →
+              </p>
+            </article>
+          </a>
+        ))}
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 24px;">
+        <h2 style="font-size: 1.15rem; color: var(--color-doka-primary); margin: 0 0 12px;">Кейсы на соседних сайтах</h2>
+        <p style="margin: 0 0 14px; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          Сценарии ВЭД лежат в <a href="/cases/">/cases/</a>. Ниже — то, что ФОРОНЕЙ и архитектор публикуют у себя.
+        </p>
+        <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          {partnerCases.map((item) => (
+            <li>
+              <a href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a>
+              <span style="color: var(--color-doka-text-dim);"> · {item.kicker}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <a href="/foroney/" class="doka-btn doka-btn-navy" style="padding: 10px 16px; font-size: 0.875rem;">
+          ГК «ФОРОНЕЙ»
+        </a>
+        <a href="/aiprocesses/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          Архитектор
+        </a>
+        <a href="/method/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          Метод ДОКА
+        </a>
+      </div>
+
+      <RelatedReading heading="Оригиналы на foroney.ru и aiprocesses.ru" items={RELATED_BY_PAGE.materials} />
+    </div>
+  </section>
+</BaseLayout>

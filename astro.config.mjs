@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://demo.docka.crazedns.ru",
+  site: "https://дока.рус",
   server: {
     host: "0.0.0.0",
     port: 4321,

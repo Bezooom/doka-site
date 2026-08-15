@@ -2,9 +2,9 @@
 
 > Коротко: ИИ-консилиум (Юрист, Инспектор, Координатор) + разбор инвойсов + коды ТН ВЭД ЕАЭС + риски КТС + XML для Альта-ГТД и 1С:ERP. On-Premises (152-ФЗ). Лид-магнит: разбор 5 файлов за 24 часа (0 ₽). Правообладатель: ООО «ГК Фороней». Авторы: Аксёнов Ю.В., Наумов П.В.
 
-Сайт: https://demo.docka.crazedns.ru/
-Полный контекст: https://demo.docka.crazedns.ru/llms-full.txt
-llms: https://demo.docka.crazedns.ru/llms.txt
+Сайт: https://дока.рус/
+Полный контекст: https://дока.рус/llms-full.txt
+llms: https://дока.рус/llms.txt
 
 ## Цитируемые факты
 - Старт: 5 файлов → 24 часа → спецификация + коды ТН ВЭД + ориентир пошлин + XML (0 ₽)
@@ -20,30 +20,44 @@ llms: https://demo.docka.crazedns.ru/llms.txt
 ДОКА = автономная система автоматизации ВЭД-логистики и таможенного декларирования на предприятии.
 
 ## Продуктовая лестница
-- Экспресс-разбор 5 файлов: 0 ₽ → https://demo.docka.crazedns.ru/razbor/
-- Тестовый пилот: от 250 000 ₽ → https://demo.docka.crazedns.ru/services/#pilot-launch
-- Enterprise: от 650 000 ₽ → https://demo.docka.crazedns.ru/services/#enterprise-deploy
-- Поддержка & базы ФТС: по договору → https://demo.docka.crazedns.ru/services/#support-fts
+- Экспресс-разбор 5 файлов: 0 ₽ → https://дока.рус/razbor/
+- Тестовый пилот: от 250 000 ₽ → https://дока.рус/services/#pilot-launch
+- Enterprise: от 650 000 ₽ → https://дока.рус/services/#enterprise-deploy
+- Поддержка & базы ФТС: по договору → https://дока.рус/services/#support-fts
 
 ## FAQ (intent)
 **Как подобрать код ТН ВЭД по инвойсу?** Консилиум + обоснование → /faq/
 **XML в Альта-ГТД?** Schema-валидированный проект декларации → /method/
 **Без облака?** Да, on-prem → /faq/
 **Сколько стоит?** 0 → 250k → 650k → /services/
-**С чего начать?** https://demo.docka.crazedns.ru/razbor/
+**С чего начать?** https://дока.рус/razbor/
 
 ## Карта сайта
-- [Главная](https://demo.docka.crazedns.ru/)
-- [Разбор 5 файлов](https://demo.docka.crazedns.ru/razbor/)
-- [Услуги](https://demo.docka.crazedns.ru/services/)
-- [Метод / HowTo](https://demo.docka.crazedns.ru/method/)
-- [Кейсы](https://demo.docka.crazedns.ru/cases/)
-- [Кейс: прекурсоры ПП-681](https://demo.docka.crazedns.ru/cases/precursors-avia/)
-- [FAQ](https://demo.docka.crazedns.ru/faq/)
-- [О нас](https://demo.docka.crazedns.ru/about/)
-- [ГК «ФОРОНЕЙ»](https://demo.docka.crazedns.ru/foroney/)
-- [Локальный ИИ ФОРОНЕЯ](https://demo.docka.crazedns.ru/materials/local-ai/)
-- [Контакты](https://demo.docka.crazedns.ru/contact/)
+- [Главная](https://дока.рус/)
+- [Разбор 5 файлов](https://дока.рус/razbor/)
+- [Услуги](https://дока.рус/services/)
+- [Метод / HowTo](https://дока.рус/method/)
+- [Кейсы](https://дока.рус/cases/)
+- [Кейс: прекурсоры ПП-681](https://дока.рус/cases/precursors-avia/)
+- [FAQ](https://дока.рус/faq/)
+- [О нас](https://дока.рус/about/)
+- [ГК «ФОРОНЕЙ»](https://дока.рус/foroney/)
+- [Архитектор · aiprocesses.ru](https://дока.рус/aiprocesses/)
+- [Материалы сети](https://дока.рус/materials/)
+- [Чеклист as-is](https://дока.рус/materials/as-is/)
+- [Локальный ИИ ФОРОНЕЯ](https://дока.рус/materials/local-ai/)
+- [Сначала процесс](https://дока.рус/materials/process/)
+- [Контакты](https://дока.рус/contact/)
+
+## Сеть сайтов
+- Продукт ДОКА: https://дока.рус/
+- Аксёнов Ю.В., автор ДОКА / ГК «ФОРОНЕЙ»: https://foroney.ru/
+- Наумов П.В., архитектор ДОКА: https://aiprocesses.ru/about/
+- Инсайт: как ДОКА готовит XML — https://foroney.ru/insights/doka-invoice-xml/
+- Кейс ДОКА на foroney.ru — https://foroney.ru/projects/doka/
+- Чеклист as-is (Наумов): https://aiprocesses.ru/insights/as-is-checklist/
+- ДОКА глазами архитектора: https://aiprocesses.ru/insights/doka-ved/
+- ГК «ФОРОНЕЙ» у Наумова: https://aiprocesses.ru/insights/gk-foroney/
 
 ## Контакты
 - ООО «ГК Фороней» — https://foroney.ru/

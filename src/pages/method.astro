@@ -2,9 +2,11 @@
 // Архитектура и Метод работы системы ДОКА
 import BaseLayout from "../layouts/BaseLayout.astro";
 import AgentCouncilVisualizer from "../components/AgentCouncilVisualizer.astro";
+import RelatedReading from "../components/RelatedReading.astro";
 import {
   METHOD_STEPS,
   SITE_CANONICAL_BASE,
+  RELATED_BY_PAGE,
   buildHowToJsonLd,
   buildSoftwareJsonLd,
 } from "../consts";
@@ -39,6 +41,9 @@ const jsonLd = {
           Мы отказались от публичных нейросетей с выносом данных. В основе ДОКА — перекрёстная проверка тремя ролями и валидация структуры XML перед экспортом в Альта-ГТД.
           Тот же разбор на сайте правообладателя:
           <a href="https://foroney.ru/insights/doka-invoice-xml/">Как ДОКА готовит XML</a>.
+          Зачем сначала as-is — у архитектора:
+          <a href="https://aiprocesses.ru/insights/as-is-checklist/">чеклист</a>
+          и <a href="/materials/process/">пересказ метода</a>.
         </p>
       </div>
 
@@ -102,6 +107,8 @@ const jsonLd = {
           ))}
         </div>
       </div>
+
+      <RelatedReading heading="Тот же метод на foroney.ru и у архитектора" items={RELATED_BY_PAGE.method} />
     </div>
   </section>
 </BaseLayout>

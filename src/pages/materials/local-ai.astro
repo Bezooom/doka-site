@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { COMPANY, SITE_CANONICAL_BASE, AUTHOR, CO_AUTHOR } from "../../consts";
+import RelatedReading from "../../components/RelatedReading.astro";
+import { COMPANY, SITE_CANONICAL_BASE, AUTHOR, CO_AUTHOR, RELATED_BY_PAGE } from "../../consts";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -107,10 +108,15 @@ const jsonLd = {
         <a href="/foroney/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
           О ГК «ФОРОНЕЙ»
         </a>
+        <a href="/materials/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          Все материалы
+        </a>
         <a href="/razbor/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
           Разбор 5 файлов
         </a>
       </div>
+
+      <RelatedReading heading="Тот же контур у архитектора и у ФОРОНЕЯ" items={RELATED_BY_PAGE.materials} />
     </div>
   </section>
 </BaseLayout>

@@ -11,7 +11,7 @@
     "start": "npx --yes serve@14 dist -l tcp://0.0.0.0:8080",
     "build": "astro build && node scripts/sync-dist-to-site-root.mjs",
     "sync:static": "node scripts/sync-dist-to-site-root.mjs",
-    "preview": "astro preview --host 0.0.0.0 --port 4321 --allowed-hosts crazedns.ru,demo.docka.crazedns.ru,localhost",
+    "preview": "astro preview --host 0.0.0.0 --port 4321 --allowed-hosts crazedns.ru,demo.docka.crazedns.ru,дока.рус,xn--80aald7a.xn--p1acf,localhost",
     "check": "astro check",
     "detect": "npx --yes impeccable detect src/",
     "detect:html": "npx --yes impeccable detect dist/index.html",

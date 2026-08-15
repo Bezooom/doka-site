@@ -557,3 +557,15 @@ h1, h2, h3, h4, h5, h6 {
     padding: 3px 8px;
   }
 }
+
+.dev-pair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 900px) {
+  .dev-pair {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+}

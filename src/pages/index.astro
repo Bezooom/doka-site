@@ -9,9 +9,12 @@ import {
   SERVICES_STAIRCASE,
   CERT_ID,
   COMPANY,
+  AUTHOR,
+  CO_AUTHOR,
   SITE_CANONICAL_BASE,
   PAIN_POINTS,
   AUDIENCES,
+  RELATED_BY_PAGE,
   buildSoftwareJsonLd,
   buildHowToJsonLd,
   buildFaqJsonLd,
@@ -20,6 +23,8 @@ import InvoiceParserDemo from "../components/InvoiceParserDemo.astro";
 import RoiCalculator from "../components/RoiCalculator.astro";
 import LeadForm from "../components/LeadForm.astro";
 import SecurityNoDemoBanner from "../components/SecurityNoDemoBanner.astro";
+import AuthorSignatureBadge from "../components/AuthorSignatureBadge.astro";
+import RelatedReading from "../components/RelatedReading.astro";
 
 const SCREENSHOTS = [
   {
@@ -319,6 +324,11 @@ const jsonLd = {
           <a href="/about/" class="doka-btn doka-btn-outline">О разработчиках</a>
         </div>
       </div>
+      <div class="dev-pair" style="margin-top: 28px;">
+        <AuthorSignatureBadge person={CO_AUTHOR} />
+        <AuthorSignatureBadge person={AUTHOR} />
+      </div>
+      <RelatedReading heading="Инсайты и кейсы на foroney.ru · архитектор на aiprocesses.ru" items={RELATED_BY_PAGE.home} />
     </div>
   </section>
 

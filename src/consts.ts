@@ -21,7 +21,207 @@ export const SITE_KEYWORDS = [
 ];
 
 /** Единый канонический origin (без trailing slash). Синхрон с astro.config site. */
-export const SITE_CANONICAL_BASE = "https://demo.docka.crazedns.ru";
+export const SITE_CANONICAL_BASE = "https://дока.рус";
+
+/** Сеть сайтов: продукт · правообладатель (Аксёнов) · архитектор (Наумов) */
+export const NETWORK = {
+  product: { label: "дока.рус", href: "https://дока.рус/", kicker: "Продукт ДОКА" },
+  company: { label: "foroney.ru", href: "https://foroney.ru/", kicker: "Аксёнов · ГК «ФОРОНЕЙ»" },
+  architect: { label: "aiprocesses.ru", href: "https://aiprocesses.ru/", kicker: "Наумов · архитектор" },
+} as const;
+
+export type RelatedKind = "insight" | "case" | "developer" | "method";
+
+export type RelatedLink = {
+  kind: RelatedKind;
+  kicker: string;
+  title: string;
+  href: string;
+};
+
+/** Каталог перекрёстных ссылок: продукт · ГК · архитектор */
+export const NETWORK_LINKS = {
+  "foroney-xml": {
+    kind: "insight" as const,
+    kicker: "Инсайт · foroney.ru",
+    title: "Как ДОКА готовит XML из инвойса",
+    href: "https://foroney.ru/insights/doka-invoice-xml/",
+  },
+  "foroney-doka": {
+    kind: "case" as const,
+    kicker: "Кейс · foroney.ru",
+    title: "ДОКА: инвойс → XML Альта-ГТД",
+    href: "https://foroney.ru/projects/doka/",
+  },
+  "foroney-dpi": {
+    kind: "insight" as const,
+    kicker: "Инсайт · foroney.ru",
+    title: "Скан ниже 300 DPI: OCR не спасёт",
+    href: "https://foroney.ru/insights/doc-preparation/",
+  },
+  "foroney-asis": {
+    kind: "insight" as const,
+    kicker: "Инсайт · foroney.ru",
+    title: "Чеклист as-is (перепечатка Наумова)",
+    href: "https://foroney.ru/insights/as-is-checklist/",
+  },
+  "foroney-bpmn": {
+    kind: "insight" as const,
+    kicker: "Инсайт · foroney.ru",
+    title: "Сначала BPMN, потом робот или ИИ",
+    href: "https://foroney.ru/insights/bpmn-formal-chaos/",
+  },
+  "foroney-machine": {
+    kind: "case" as const,
+    kicker: "Кейс · foroney.ru",
+    title: "Цифровая трансформация машиностроения",
+    href: "https://foroney.ru/projects/digital-transformation-machine-building/",
+  },
+  "foroney-konakri": {
+    kind: "case" as const,
+    kicker: "Кейс · foroney.ru",
+    title: "Мониторинг перегрузки в Конакри",
+    href: "https://foroney.ru/projects/remote-monitoring-konakri/",
+  },
+  "foroney-local": {
+    kind: "method" as const,
+    kicker: "Услуга · foroney.ru",
+    title: "Локальный ИИ на GPU завода",
+    href: "https://foroney.ru/services/local-ai/",
+  },
+  "foroney-home": {
+    kind: "developer" as const,
+    kicker: "Разработчик · foroney.ru",
+    title: "Аксёнов Юрий Васильевич — автор ДОКА",
+    href: "https://foroney.ru/",
+  },
+  "foroney-naumov": {
+    kind: "insight" as const,
+    kicker: "Инсайт · foroney.ru",
+    title: "Наумов: сначала as-is, потом модель",
+    href: "https://foroney.ru/insights/what-is-apre/",
+  },
+  "aip-doka-case": {
+    kind: "case" as const,
+    kicker: "Кейс · aiprocesses.ru",
+    title: "ДОКА: инвойс → XML в Альта-ГТД",
+    href: "https://aiprocesses.ru/cases/doka-ved/",
+  },
+  "aip-about": {
+    kind: "developer" as const,
+    kicker: "Архитектор · aiprocesses.ru",
+    title: "Наумов Павел Владимирович — архитектор ДОКА",
+    href: "https://aiprocesses.ru/about/",
+  },
+  "aip-asis": {
+    kind: "insight" as const,
+    kicker: "Инсайт · aiprocesses.ru",
+    title: "Чеклист as-is: что спросить до ИИ",
+    href: "https://aiprocesses.ru/insights/as-is-checklist/",
+  },
+  "aip-local": {
+    kind: "insight" as const,
+    kicker: "Инсайт · aiprocesses.ru",
+    title: "Локальный ИИ: когда нужен, а когда мода",
+    href: "https://aiprocesses.ru/insights/local-ai-when-needed/",
+  },
+  "aip-apre": {
+    kind: "insight" as const,
+    kicker: "Инсайт · aiprocesses.ru",
+    title: "Что такое реконструкция процессов с ИИ",
+    href: "https://aiprocesses.ru/insights/what-is-apre/",
+  },
+  "aip-paper": {
+    kind: "insight" as const,
+    kicker: "Инсайт · aiprocesses.ru",
+    title: "Почему ИИ на регламенте не взлетает",
+    href: "https://aiprocesses.ru/insights/why-ai-on-paper-fails/",
+  },
+  "aip-audit": {
+    kind: "insight" as const,
+    kicker: "Инсайт · aiprocesses.ru",
+    title: "Как устроен AI-аудит предприятия",
+    href: "https://aiprocesses.ru/insights/enterprise-ai-audit/",
+  },
+  "aip-foroney": {
+    kind: "insight" as const,
+    kicker: "Инсайт · aiprocesses.ru",
+    title: "ГК «ФОРОНЕЙ» и продукт ДОКА",
+    href: "https://aiprocesses.ru/insights/gk-foroney/",
+  },
+  "aip-doka": {
+    kind: "insight" as const,
+    kicker: "Инсайт · aiprocesses.ru",
+    title: "ДОКА: как устроен контур ВЭД",
+    href: "https://aiprocesses.ru/insights/doka-ved/",
+  },
+  "aip-aist": {
+    kind: "case" as const,
+    kicker: "Кейс · aiprocesses.ru",
+    title: "КТПП: чертёж → техмаршрут в 1С",
+    href: "https://aiprocesses.ru/cases/aist/",
+  },
+} as const;
+
+export type NetworkLinkId = keyof typeof NETWORK_LINKS;
+
+export function pickNetwork(...ids: NetworkLinkId[]): RelatedLink[] {
+  return ids.map((id) => NETWORK_LINKS[id]);
+}
+
+/** Дефолтный блок «читать на других сайтах» */
+export const RELATED_READING: RelatedLink[] = pickNetwork(
+  "foroney-xml",
+  "foroney-doka",
+  "foroney-dpi",
+  "aip-asis",
+  "aip-doka",
+  "aip-doka-case",
+  "foroney-home",
+  "aip-about",
+);
+
+/** Контекстные подборки: не один и тот же список на всех страницах */
+export const RELATED_BY_PAGE = {
+  home: pickNetwork("foroney-xml", "foroney-doka", "aip-asis", "aip-doka", "foroney-home", "aip-about"),
+  method: pickNetwork("foroney-xml", "aip-asis", "aip-paper", "foroney-dpi", "aip-doka"),
+  cases: pickNetwork("foroney-doka", "foroney-dpi", "aip-doka", "aip-aist", "foroney-machine"),
+  about: pickNetwork("foroney-home", "aip-about", "aip-asis", "aip-foroney", "foroney-naumov"),
+  foroney: pickNetwork("foroney-xml", "foroney-doka", "foroney-local", "aip-foroney", "aip-about"),
+  architect: pickNetwork("aip-asis", "aip-local", "aip-apre", "aip-doka", "aip-doka-case", "foroney-home", "foroney-naumov"),
+  materials: pickNetwork("aip-asis", "aip-local", "foroney-xml", "foroney-local", "aip-doka", "aip-doka-case"),
+} as const;
+
+/** Пересказы чужих материалов на этом домене (канон остаётся у автора) */
+export const LOCAL_MATERIALS = [
+  {
+    slug: "local-ai",
+    source: "foroney" as const,
+    kicker: "Материал ГК «ФОРОНЕЙ»",
+    title: "Локальный ИИ на предприятии",
+    description: "GraphRAG, SGLang, Qwen на GPU завода. Тот же контур, что стоит под ДОКА.",
+    original: "https://foroney.ru/services/local-ai/",
+    originalLabel: "foroney.ru/services/local-ai/",
+  },
+  {
+    slug: "as-is",
+    source: "aiprocesses" as const,
+    kicker: "Материал архитектора",
+    title: "Чеклист as-is до пилота",
+    description: "Семь блоков вопросов Наумова: границы, роли, теневые контуры, данные.",
+    original: "https://aiprocesses.ru/insights/as-is-checklist/",
+    originalLabel: "aiprocesses.ru/insights/as-is-checklist/",
+  },
+  {
+    slug: "process",
+    source: "aiprocesses" as const,
+    kicker: "Материал архитектора",
+    title: "Сначала процесс, потом модель",
+    description: "Реконструкция as-is и почему чат поверх регламента не взлетает.",
+    original: "https://aiprocesses.ru/insights/what-is-apre/",
+    originalLabel: "aiprocesses.ru/insights/what-is-apre/",
+  },
+] as const;
 
 /** OG / Twitter preview (absolute URL) — реальный UI, не abstract gradient */
 export const SITE_OG_IMAGE = `${SITE_CANONICAL_BASE}/screens/doka-split-view-council.jpg`;
@@ -115,9 +315,16 @@ export const COMPANY = {
   telegramHandle: "@foroney_ru",
 };
 
-/** Заявка: FormSubmit AJAX → COMPANY.email. Первый раз — письмо активации на этот ящик. */
+/**
+ * Заявка: FormSubmit AJAX → COMPANY.email.
+ * Первый POST с нового домена шлёт на ящик письмо «Confirm your email» —
+ * пока его не подтвердить, заявки не приходят.
+ * Если FormSubmit молчит — форма открывает mailto с текстом заявки.
+ */
 export const LEAD_FORM = {
   endpoint: `https://formsubmit.co/ajax/${COMPANY.email}`,
+  mailto: `mailto:${COMPANY.email}`,
+  telegram: "https://t.me/foroney_ru",
   maxFiles: 5,
   maxFileMb: 8,
 };
@@ -126,25 +333,47 @@ export const LEAD_FORM = {
 export const AUTHOR = {
   name: "Наумов Павел Владимирович",
   shortName: "Павел Наумов",
+  eyebrow: "Разработчик",
   role: "Архитектор системы ДОКА",
   roleShort: "архитектор ДОКА",
+  tag: "С 2009 в системах",
   personalSite: "https://aiprocesses.ru/",
   personalAbout: "https://aiprocesses.ru/about/",
+  siteLabel: "aiprocesses.ru",
+  aboutLabel: "aiprocesses.ru/about →",
+  photo: "/images/authors/naumov.webp",
   phone: COMPANY.phone,
   phoneHref: COMPANY.phoneHref,
   email: COMPANY.email,
   bio:
     "Больше семнадцати лет в системах и процессах: ФНС, Водоканал Санкт-Петербурга, ЦТСС, завод «Буревестник». Разбираю, как предприятие работает на деле, и помогаю поставить ИИ туда, где есть данные, хозяин процесса и понятный смысл.",
+  career: [
+    { years: "2009–2011", org: "ФНС РФ", active: false },
+    { years: "2011–2012", org: "Водоканал", active: false },
+    { years: "2013–2021", org: "ЦТСС", active: false },
+    { years: "2021+", org: "Буревестник CDTO", active: true },
+  ],
 };
 
 export const CO_AUTHOR = {
   name: "Аксёнов Юрий Васильевич",
   shortName: "Юрий Аксёнов",
-  role: "Автор системы ДОКА",
+  eyebrow: "Разработчик",
+  role: "Автор системы ДОКА · руководитель ГК «ФОРОНЕЙ»",
   roleShort: "автор ДОКА",
+  tag: "15 лет в производстве",
+  personalSite: "https://foroney.ru/",
+  personalAbout: "https://foroney.ru/insights/",
+  siteLabel: "foroney.ru",
+  aboutLabel: "foroney.ru/insights →",
+  photo: "/images/authors/aksenov.webp",
   bio:
     "Имеет 15-летний стаж в управлении производством, автоматизации и цифровой трансформации. Занимал руководящие должности на предприятиях машиностроения, обладает глубоким пониманием бизнеса — от формирования себестоимости единицы продукции до разработки стратегии развития. Специализируется на внедрении автоматизированных решений.",
+  career: [] as { years: string; org: string; active: boolean }[],
 };
+
+/** Порядок на сайте: Аксёнов (foroney.ru), затем Наумов (aiprocesses.ru). */
+export const DEVELOPERS = [CO_AUTHOR, AUTHOR] as const;
 
 export const COPYRIGHT_HOLDER = {
   name: "ООО «ГК Фороней»",
@@ -419,7 +648,7 @@ export function buildOrganizationJsonLd() {
     url: "https://foroney.ru/",
     email: COMPANY.email,
     telephone: COMPANY.phone,
-    sameAs: ["https://foroney.ru/", "https://aiprocesses.ru/", `${SITE_CANONICAL_BASE}/foroney/`],
+    sameAs: [NETWORK.company.href, NETWORK.architect.href, `${SITE_CANONICAL_BASE}/foroney/`],
     brand: {
       "@type": "Brand",
       name: "ДОКА",

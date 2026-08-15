@@ -1,82 +1,167 @@
 ---
-// AuthorSignatureBadge — подпись автора/разработчика
+import { AUTHOR, CO_AUTHOR } from "../consts";
+
+type Person = typeof AUTHOR | typeof CO_AUTHOR;
+
 interface Props {
-  author?: string;
-  coAuthor?: string;
-  role?: string;
-  site?: string;
+  person?: Person;
+  compact?: boolean;
 }
 
-const { author, coAuthor, role, site } = Astro.props;
-const siteHref = site
-  ? site.startsWith("http")
-    ? site
-    : `https://${site}`
-  : undefined;
-const siteLabel = site
-  ? site.replace(/^https?:\/\//, "").replace(/\/$/, "")
-  : undefined;
+const { person = AUTHOR, compact = false } = Astro.props;
+const career = person.career ?? [];
 ---
 
-<div class="author-badge" role="contentinfo" aria-label="Подпись автора">
-  <div class="author-badge__inner">
-    <div class="author-badge__avatar">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="8" r="4" fill="currentColor" opacity="0.3"/>
-        <path d="M4 20c0-4 4-7 8-7s8 3 8 7" fill="currentColor" opacity="0.3"/>
-      </svg>
+<article class:list={["dev-card", compact && "dev-card--compact"]} aria-label={`${person.eyebrow}: ${person.name}`}>
+  <div class="dev-card__header">
+    <div class="dev-card__identity">
+      <img
+        src={person.photo}
+        alt={person.name}
+        width="128"
+        height="128"
+        class="dev-card__photo"
+        loading={compact ? "lazy" : "eager"}
+        decoding="async"
+      />
+      <div>
+        <p class="dev-card__eyebrow">{person.eyebrow}</p>
+        <h3 class="dev-card__name">{person.name}</h3>
+        <p class="dev-card__role">{person.role}</p>
+      </div>
     </div>
-    <div class="author-badge__text">
-      {author && <span class="author-badge__name">{author}</span>}
-      {role && <span class="author-badge__role">{role}</span>}
-      {coAuthor && <span class="author-badge__co">автор: {coAuthor}</span>}
-      {siteHref && siteLabel && (
-        <span class="author-badge__site"><a href={siteHref} target="_blank" rel="noopener noreferrer">{siteLabel}</a></span>
-      )}
-    </div>
+    <span class="dev-card__tag">{person.tag}</span>
   </div>
-</div>
 
-<style is:raw>
-.author-badge {
-  display: inline-block;
-  margin: 12px 0;
-}
-.author-badge__inner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--bg-alt);
-}
-.author-badge__avatar {
-  color: var(--accent);
-  flex-shrink: 0;
-}
-.author-badge__name {
-  display: block;
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--text);
-}
-.author-badge__role {
-  display: block;
-  font-size: 12px;
-  color: var(--muted);
-}
-.author-badge__co {
-  display: block;
-  font-size: 12px;
-  color: var(--muted);
-  margin-top: 2px;
-}
-.author-badge__site {
-  display: block;
-  font-size: 12px;
-  color: var(--accent);
-  margin-top: 2px;
-}
-.author-badge__site a { color: var(--accent); }
+  <p class="dev-card__bio">{person.bio}</p>
+
+  {career.length > 0 && (
+    <div class="dev-card__strip" aria-label="Карьера">
+      {career.map((node, i) => (
+        <>
+          {i > 0 && <span class="dev-card__sep" aria-hidden="true">→</span>}
+          <div class:list={["dev-card__node", node.active && "is-active"]}>
+            <span class="dev-card__year">{node.years}</span>
+            <span class="dev-card__org">{node.org}</span>
+          </div>
+        </>
+      ))}
+    </div>
+  )}
+
+  <div class="dev-card__actions">
+    <a class="doka-btn doka-btn-navy" href={person.personalAbout} target="_blank" rel="noopener noreferrer">
+      {person.aboutLabel}
+    </a>
+    <a class="doka-btn doka-btn-outline" href={person.personalSite} target="_blank" rel="noopener noreferrer">
+      {person.siteLabel}
+    </a>
+  </div>
+</article>
+
+<style>
+  .dev-card {
+    background: var(--color-doka-surface);
+    border: 1px solid var(--color-doka-border);
+    border-radius: var(--radius-doka-lg);
+    padding: clamp(1.15rem, 3vw, 1.7rem);
+    box-shadow: var(--shadow-doka-sm);
+    height: 100%;
+  }
+  .dev-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .dev-card__identity {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+  }
+  .dev-card__photo {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-doka-accent);
+    flex-shrink: 0;
+  }
+  .dev-card__eyebrow {
+    margin: 0 0 2px;
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-doka-accent);
+  }
+  .dev-card__name {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--color-doka-primary);
+  }
+  .dev-card__role {
+    margin: 0.15rem 0 0;
+    font-size: 0.85rem;
+    color: var(--color-doka-text-muted);
+    font-family: var(--font-mono);
+  }
+  .dev-card__tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-doka-primary);
+    background: var(--color-doka-surface-muted);
+    border: 1px solid var(--color-doka-border);
+    border-radius: 999px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+  .dev-card__bio {
+    font-size: 0.9375rem;
+    color: var(--color-doka-text-muted);
+    line-height: 1.6;
+    margin: 0 0 1.15rem;
+  }
+  .dev-card__strip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    background: var(--color-doka-surface-muted);
+    padding: 0.6rem 0.85rem;
+    border-radius: var(--radius-doka);
+    border: 1px solid var(--color-doka-border);
+    margin-bottom: 1.15rem;
+  }
+  .dev-card__node {
+    display: flex;
+    flex-direction: column;
+  }
+  .dev-card__year {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--color-doka-text-dim);
+  }
+  .dev-card__org {
+    font-size: 0.82rem;
+    color: var(--color-doka-text-muted);
+  }
+  .dev-card__node.is-active .dev-card__org {
+    color: var(--color-doka-accent);
+    font-weight: 700;
+  }
+  .dev-card__sep {
+    color: var(--color-doka-border-dark);
+    font-size: 0.8rem;
+  }
+  .dev-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+  }
+  .dev-card--compact .dev-card__bio { display: none; }
 </style>

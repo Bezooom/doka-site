@@ -1,7 +1,10 @@
 ---
 // Каталог кейсов и сценариев применения ДОКА
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { SITE_CANONICAL_BASE, CASE_STUDIES } from "../../consts";
+import RelatedReading from "../../components/RelatedReading.astro";
+import { SITE_CANONICAL_BASE, CASE_STUDIES, RELATED_BY_PAGE, pickNetwork } from "../../consts";
+
+const partnerCases = pickNetwork("foroney-doka", "foroney-machine", "foroney-konakri", "aip-aist");
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -55,10 +58,27 @@ const jsonLd = {
         ))}
       </div>
 
+      <div class="doka-card" style="padding: 24px; margin: 32px 0 8px;">
+        <h2 style="font-size: 1.15rem; color: var(--color-doka-primary); margin: 0 0 10px;">На соседних сайтах</h2>
+        <p style="margin: 0 0 14px; font-size: 0.9rem; line-height: 1.6; color: var(--color-doka-text-muted);">
+          Сценарии выше — про контур ДОКА. ФОРОНЕЙ и архитектор публикуют свои кейсы у себя; канон остаётся там.
+        </p>
+        <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          {partnerCases.map((item) => (
+            <li>
+              <a href={item.href} target="_blank" rel="noopener noreferrer">{item.title}</a>
+              <span style="color: var(--color-doka-text-dim);"> · {item.kicker}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <p style="margin-top: 28px; font-size: 0.875rem; color: var(--color-doka-text-dim); max-width: 60ch; line-height: 1.5;">
         Нужен разбор на ваших файлах — это следующий шаг после сценариев:
         <a href="/razbor/" style="color: var(--color-doka-accent); font-weight: 600;">экспресс-разбор 5 инвойсов (0 ₽)</a>.
       </p>
+
+      <RelatedReading heading="Смежные кейсы и инсайты сети" items={RELATED_BY_PAGE.cases} />
     </div>
   </section>
 </BaseLayout>

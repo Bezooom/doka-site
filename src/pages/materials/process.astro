@@ -1,0 +1,120 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RelatedReading from "../../components/RelatedReading.astro";
+import {
+  AUTHOR,
+  COMPANY,
+  SITE_CANONICAL_BASE,
+  RELATED_BY_PAGE,
+} from "../../consts";
+
+const apre = "https://aiprocesses.ru/insights/what-is-apre/";
+const paper = "https://aiprocesses.ru/insights/why-ai-on-paper-fails/";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Сначала процесс, потом модель: зачем ДОКА as-is",
+  description:
+    "Пересказ метода Наумова с aiprocesses.ru: реконструкция процесса и почему чат поверх регламента не взлетает.",
+  inLanguage: "ru-RU",
+  author: {
+    "@type": "Person",
+    name: AUTHOR.name,
+    jobTitle: AUTHOR.role,
+    url: AUTHOR.personalAbout,
+  },
+  publisher: { "@type": "Organization", name: COMPANY.name, url: COMPANY.url },
+  isBasedOn: apre,
+  citation: [apre, paper],
+  mainEntityOfPage: `${SITE_CANONICAL_BASE}/materials/process/`,
+};
+---
+
+<BaseLayout
+  title="Сначала процесс, потом модель — материал архитектора · ДОКА"
+  description="Пересказ aiprocesses.ru: реконструкция as-is и почему ИИ на регламенте не взлетает. Как это собрано в конвейере ДОКА."
+  canonical={`${SITE_CANONICAL_BASE}/materials/process/`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header" style="max-width: 680px;">
+        <p class="section-kicker" style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-doka-accent); margin: 0 0 10px;">
+          Материал архитектора · aiprocesses.ru
+        </p>
+        <h1 class="section-title">Сначала процесс, потом модель</h1>
+        <p class="section-subtitle">
+          Два текста {AUTHOR.shortName}а:
+          <a href={apre} target="_blank" rel="noopener noreferrer">что такое реконструкция процессов</a>
+          и
+          <a href={paper} target="_blank" rel="noopener noreferrer">почему ИИ на регламенте не взлетает</a>.
+        </p>
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+        <p style="margin: 0 0 14px;">
+          Большинство «ИИ на завод» ломаются не на выборе модели. В чат кладут регламент, которым никто не пользуется.
+          Обходят Excel и почту. Ждут, что нейросеть сама поймёт участок.
+        </p>
+        <p style="margin: 0;">
+          Метод короткий: факт (as-is) → модель → to-be → пилот в контуре. ИИ — инструмент на схеме, не награда за проект.
+        </p>
+      </div>
+
+      <div class="grid-2" style="margin-bottom: 24px;">
+        <div class="doka-card">
+          <h3 style="font-size: 1.1rem; margin: 0 0 8px;">1. Как есть</h3>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--color-doka-text-muted); line-height: 1.6;">
+            След работы: системы, документы, исключения. Для ВЭД это плотный PDF, чужой HS-код и ручной перенос в Альту.
+          </p>
+        </div>
+        <div class="doka-card">
+          <h3 style="font-size: 1.1rem; margin: 0 0 8px;">2. Модель</h3>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--color-doka-text-muted); line-height: 1.6;">
+            Роли, входы, правила, развилки. В ДОКА это три независимых контура: Юрист, Инспектор, Координатор.
+          </p>
+        </div>
+        <div class="doka-card">
+          <h3 style="font-size: 1.1rem; margin: 0 0 8px;">3. Как должно стать</h3>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--color-doka-text-muted); line-height: 1.6;">
+            Что убрать, где хватит правила, где нужна модель, где подпись только у человека. Подачу декларации модель не подписывает.
+          </p>
+        </div>
+        <div class="doka-card">
+          <h3 style="font-size: 1.1rem; margin: 0 0 8px;">4. Пилот в контуре</h3>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--color-doka-text-muted); line-height: 1.6;">
+            Один поток, свои серверы, метрика. Честное no-go тоже результат. Лестница ДОКА: разбор → пилот → enterprise.
+          </p>
+        </div>
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px;">
+        <h2 style="font-size: 1.15rem; color: var(--color-doka-primary); margin: 0 0 12px;">Регламент врёт не со зла</h2>
+        <p style="margin: 0 0 12px; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          В инструкции нет обходных путей, реальных сроков ожидания и «у кого ключ от решения».
+          ИИ, выученный на этом, становится экзаменатором по бумаге. Декларант продолжает жить в скане и Альте.
+        </p>
+        <p style="margin: 0; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          Поэтому ДОКА читает документ, а не «положение о ВЭД». И поэтому
+          <a href="/materials/as-is/">чеклист as-is</a> идёт раньше закупки GPU.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <a href={apre} target="_blank" rel="noopener noreferrer" class="doka-btn doka-btn-navy" style="padding: 10px 16px; font-size: 0.875rem;">
+          Оригинал: что такое APRE →
+        </a>
+        <a href={paper} target="_blank" rel="noopener noreferrer" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          Почему на бумаге не взлетает
+        </a>
+        <a href="/method/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          Метод ДОКА
+        </a>
+      </div>
+
+      <RelatedReading heading="Тот же разговор на соседних сайтах" items={RELATED_BY_PAGE.method} />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,7 +1,8 @@
 ---
 // Подробный кейс системы ДОКА с реальными скриншотами интерфейса
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { AUTHOR, CO_AUTHOR, CERT_ID, SITE_CANONICAL_BASE } from "../../consts";
+import RelatedReading from "../../components/RelatedReading.astro";
+import { AUTHOR, CO_AUTHOR, CERT_ID, SITE_CANONICAL_BASE, RELATED_BY_PAGE } from "../../consts";
 import LeadForm from "../../components/LeadForm.astro";
 ---
 
@@ -136,6 +137,8 @@ import LeadForm from "../../components/LeadForm.astro";
           По кнопке XML система формирует проект декларации. Финальную проверку и подачу выполняет декларант. Экраны сняты с реального прогона, не из макета.
         </p>
       </div>
+
+      <RelatedReading heading="Тот же кейс у ФОРОНЕЯ и у архитектора" items={RELATED_BY_PAGE.cases} />
 
       <!-- Lead form block -->
       <div style="margin-top: 40px;">

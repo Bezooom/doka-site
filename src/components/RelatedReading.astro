@@ -1,0 +1,88 @@
+---
+import { RELATED_READING, type RelatedLink } from "../consts";
+
+interface Props {
+  items?: RelatedLink[];
+  heading?: string;
+}
+
+const { items = RELATED_READING, heading = "Читать на других сайтах" } = Astro.props;
+---
+
+{
+  items.length > 0 && (
+    <nav class="related-reading" aria-label={heading}>
+      <p class="related-reading__kicker">{heading}</p>
+      <div class="related-reading__grid">
+        {items.map((item) => (
+          <a
+            href={item.href}
+            class="related-reading__card"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <p class="related-reading__kind">{item.kicker}</p>
+            <p class="related-reading__title">{item.title}</p>
+          </a>
+        ))}
+      </div>
+    </nav>
+  )
+}
+
+<style>
+  .related-reading {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--color-doka-border);
+  }
+  .related-reading__kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-doka-accent);
+    margin: 0 0 16px;
+  }
+  .related-reading__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  @media (max-width: 720px) {
+    .related-reading__grid { grid-template-columns: 1fr; }
+  }
+  .related-reading__card {
+    display: block;
+    background: var(--color-doka-surface);
+    border: 1px solid var(--color-doka-border);
+    border-radius: var(--radius-doka-lg);
+    padding: 16px 18px;
+    text-decoration: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .related-reading__card:hover {
+    border-color: rgba(221, 107, 32, 0.45);
+    box-shadow: var(--shadow-doka-sm);
+    text-decoration: none;
+  }
+  .related-reading__kind {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-doka-accent);
+    margin: 0 0 8px;
+  }
+  .related-reading__title {
+    margin: 0;
+    font-size: 0.9375rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--color-doka-primary);
+  }
+  .related-reading__card:hover .related-reading__title {
+    color: var(--color-doka-accent);
+  }
+</style>

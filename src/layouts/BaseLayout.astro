@@ -12,6 +12,7 @@ import {
   NAV,
   CERT_ID,
   COMPANY,
+  NETWORK,
   buildOrganizationJsonLd,
   buildWebSiteJsonLd,
 } from "../consts";
@@ -457,7 +458,12 @@ const baseJsonLd = {
               <li><a href="/faq/">База знаний / FAQ</a></li>
               <li><a href="/about/">О разработчиках</a></li>
               <li><a href="/foroney/">ГК «ФОРОНЕЙ»</a></li>
+              <li><a href="/aiprocesses/">Архитектор · aiprocesses.ru</a></li>
+              <li><a href="/materials/">Материалы сети</a></li>
+              <li><a href="/materials/as-is/">Чеклист as-is</a></li>
               <li><a href="/materials/local-ai/">Локальный ИИ ФОРОНЕЯ</a></li>
+              <li><a href={NETWORK.company.href} target="_blank" rel="noopener noreferrer">{NETWORK.company.kicker}</a></li>
+              <li><a href={NETWORK.architect.href} target="_blank" rel="noopener noreferrer">{NETWORK.architect.kicker}</a></li>
               <li><a href="/contact/">Связаться</a></li>
             </ul>
           </div>
@@ -476,7 +482,11 @@ const baseJsonLd = {
             © {new Date().getFullYear()} ДОКА. ООО «ГК Фороней». Все права защищены.
           </div>
           <div style="display:flex;gap:16px;flex-wrap:wrap;">
-            <a href={COMPANY.url} target="_blank" rel="noopener noreferrer" style="color:#94A3B8;">foroney.ru</a>
+            <a href={NETWORK.product.href} style="color:#94A3B8;">{NETWORK.product.label}</a>
+            <span style="color:#475569;">·</span>
+            <a href={NETWORK.company.href} target="_blank" rel="noopener noreferrer" style="color:#94A3B8;">{NETWORK.company.label}</a>
+            <span style="color:#475569;">·</span>
+            <a href={NETWORK.architect.href} target="_blank" rel="noopener noreferrer" style="color:#94A3B8;">{NETWORK.architect.label}</a>
             <span style="color:#475569;">|</span>
             <span style="color:#94A3B8;">On-Premises · 152-ФЗ</span>
           </div>
