@@ -42,7 +42,11 @@ llms: https://дока.рус/llms.txt
 - [FAQ](https://дока.рус/faq/)
 - [О нас](https://дока.рус/about/)
 - [ГК «ФОРОНЕЙ»](https://дока.рус/foroney/)
+- [Архитектор · aiprocesses.ru](https://дока.рус/aiprocesses/)
+- [Материалы сети](https://дока.рус/materials/)
+- [Чеклист as-is](https://дока.рус/materials/as-is/)
 - [Локальный ИИ ФОРОНЕЯ](https://дока.рус/materials/local-ai/)
+- [Сначала процесс](https://дока.рус/materials/process/)
 - [Контакты](https://дока.рус/contact/)
 
 ## Сеть сайтов
@@ -51,6 +55,9 @@ llms: https://дока.рус/llms.txt
 - Наумов П.В., архитектор ДОКА: https://aiprocesses.ru/about/
 - Инсайт: как ДОКА готовит XML — https://foroney.ru/insights/doka-invoice-xml/
 - Кейс ДОКА на foroney.ru — https://foroney.ru/projects/doka/
+- Чеклист as-is (Наумов): https://aiprocesses.ru/insights/as-is-checklist/
+- ДОКА глазами архитектора: https://aiprocesses.ru/insights/doka-ved/
+- ГК «ФОРОНЕЙ» у Наумова: https://aiprocesses.ru/insights/gk-foroney/
 
 ## Контакты
 - ООО «ГК Фороней» — https://foroney.ru/
