@@ -1,0 +1,159 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import {
+  COMPANY,
+  CERT_ID,
+  SITE_CANONICAL_BASE,
+  AUTHOR,
+  CO_AUTHOR,
+} from "../consts";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      headline: "ГК «ФОРОНЕЙ»: правообладатель ДОКА и локальный ИИ на заводе",
+      description:
+        "ООО «ГК Фороней» внедряет локальный ИИ, роботизацию и продукт ДОКА. Санкт-Петербург. Связь с aiprocesses.ru и сайтом ДОКА.",
+      inLanguage: "ru-RU",
+      author: [
+        { "@type": "Person", name: CO_AUTHOR.name, jobTitle: CO_AUTHOR.role },
+        {
+          "@type": "Person",
+          name: AUTHOR.name,
+          jobTitle: AUTHOR.role,
+          url: AUTHOR.personalAbout,
+          sameAs: [AUTHOR.personalSite],
+        },
+      ],
+      publisher: {
+        "@type": "Organization",
+        name: COMPANY.name,
+        url: COMPANY.url,
+      },
+      mainEntityOfPage: `${SITE_CANONICAL_BASE}/foroney/`,
+      about: { "@type": "Organization", name: COMPANY.name, url: COMPANY.url },
+    },
+    {
+      "@type": "Organization",
+      name: "ООО «ГК Фороней»",
+      url: "https://foroney.ru/",
+      email: COMPANY.email,
+      telephone: COMPANY.phone,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "ул. Промышленная, д. 7",
+        addressLocality: "Санкт-Петербург",
+        postalCode: "198095",
+        addressCountry: "RU",
+      },
+      sameAs: ["https://foroney.ru/", SITE_CANONICAL_BASE + "/", AUTHOR.personalSite],
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="ГК «ФОРОНЕЙ» — правообладатель ДОКА и локальный ИИ"
+  description="ООО «ГК Фороней», Санкт-Петербург: локальный ИИ, роботизация, ДОКА. Материалы foroney.ru, архитектор Наумов на aiprocesses.ru."
+  canonical={`${SITE_CANONICAL_BASE}/foroney/`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header" style="max-width: 680px;">
+        <h1 class="section-title">ГК «ФОРОНЕЙ»</h1>
+        <p class="section-subtitle">
+          Правообладатель ДОКА. Ставит локальный ИИ и автоматизацию на производствах.
+        </p>
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px;">
+        <p style="margin: 0 0 14px; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          <a href="https://foroney.ru/" target="_blank" rel="noopener noreferrer">foroney.ru</a>
+          это сайт группы. ДОКА на этом домене только продукт ВЭД. Внедрение, железо, роботизация
+          и остальные контуры живут у ФОРОНЕЯ.
+        </p>
+        <div style="background: var(--color-doka-surface-muted); padding: 14px; border-radius: var(--radius-doka); font-family: var(--font-mono); font-size: 0.8125rem; border: 1px solid var(--color-doka-border); line-height: 1.55;">
+          <div><strong>Юрлицо:</strong> {COMPANY.name}</div>
+          <div><strong>Адрес:</strong> 198095, Санкт-Петербург, ул. Промышленная, д. 7</div>
+          <div><strong>Почта / телефон:</strong> {COMPANY.email} · {COMPANY.phone}</div>
+          <div><strong>Сайт:</strong> <a href={COMPANY.url} target="_blank" rel="noopener noreferrer" style="color: var(--color-doka-accent);">{COMPANY.url}</a></div>
+          <div><strong>Роспатент ДОКА:</strong> №{CERT_ID}</div>
+        </div>
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px;">
+        <h2 style="font-size: 1.2rem; color: var(--color-doka-primary); margin: 0 0 12px;">Что делают кроме ДОКА</h2>
+        <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          <li>
+            <a href="https://foroney.ru/services/local-ai/" target="_blank" rel="noopener noreferrer">Локальный ИИ</a>:
+            GraphRAG, SGLang, Qwen на GPU завода. Документы не уходят в облако.
+          </li>
+          <li>
+            <a href="https://foroney.ru/robotics/" target="_blank" rel="noopener noreferrer">Роботизация</a>:
+            ячейку считают до заказа манипулятора.
+          </li>
+          <li>
+            <a href="https://foroney.ru/automation/" target="_blank" rel="noopener noreferrer">Автоматизация</a>
+            и <a href="https://foroney.ru/asutp/" target="_blank" rel="noopener noreferrer">АСУ ТП</a>: модель линии, MES, шкаф, ПЛК.
+          </li>
+          <li>
+            Кейсы:
+            <a href="https://foroney.ru/projects/digital-transformation-machine-building/" target="_blank" rel="noopener noreferrer">машиностроение</a>,
+            <a href="https://foroney.ru/projects/remote-monitoring-konakri/" target="_blank" rel="noopener noreferrer">Конакри</a>,
+            <a href="https://foroney.ru/projects/doka/" target="_blank" rel="noopener noreferrer">ДОКА на foroney.ru</a>.
+          </li>
+        </ul>
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px;">
+        <h2 style="font-size: 1.2rem; color: var(--color-doka-primary); margin: 0 0 12px;">Материалы ФОРОНЕЯ про этот продукт</h2>
+        <p style="margin: 0 0 12px; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          На корпоративном сайте лежит разбор метода, который здесь разобран на странице
+          <a href="/method/">Метод</a>. Тот же конвейер: PDF → три роли → КТС → XML Альта-ГТД.
+        </p>
+        <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          <li>
+            <a href="https://foroney.ru/insights/doka-invoice-xml/" target="_blank" rel="noopener noreferrer">Как ДОКА готовит XML из инвойса</a>
+          </li>
+          <li>
+            <a href="https://foroney.ru/insights/doc-preparation/" target="_blank" rel="noopener noreferrer">Скан ниже 300 DPI: OCR не спасёт</a>
+          </li>
+          <li>
+            <a href="https://foroney.ru/insights/as-is-checklist/" target="_blank" rel="noopener noreferrer">Чеклист as-is</a>
+            (автор {AUTHOR.name}, оригинал на
+            <a href={`${AUTHOR.personalSite}insights/as-is-checklist/`} target="_blank" rel="noopener noreferrer">aiprocesses.ru</a>)
+          </li>
+        </ul>
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px;">
+        <h2 style="font-size: 1.2rem; color: var(--color-doka-primary); margin: 0 0 12px;">Люди</h2>
+        <p style="margin: 0 0 10px; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          <strong>{CO_AUTHOR.name}</strong> ({CO_AUTHOR.roleShort}): руководитель ГК, автор ДОКА.
+          Пишет на <a href="https://foroney.ru/insights/" target="_blank" rel="noopener noreferrer">foroney.ru/insights/</a>.
+        </p>
+        <p style="margin: 0; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          <strong>{AUTHOR.name}</strong> ({AUTHOR.roleShort}): разбор процессов as-is и архитектура локального ИИ.
+          Сайт: <a href={AUTHOR.personalSite} target="_blank" rel="noopener noreferrer">aiprocesses.ru</a>,
+          о практике: <a href={AUTHOR.personalAbout} target="_blank" rel="noopener noreferrer">/about</a>.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <a href="https://foroney.ru/" target="_blank" rel="noopener noreferrer" class="doka-btn doka-btn-navy" style="padding: 10px 16px; font-size: 0.875rem;">
+          foroney.ru →
+        </a>
+        <a href="https://foroney.ru/contact/" target="_blank" rel="noopener noreferrer" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          Контакты ГК
+        </a>
+        <a href="/materials/local-ai/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          Локальный ИИ ФОРОНЕЯ
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

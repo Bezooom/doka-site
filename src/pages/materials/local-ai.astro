@@ -1,0 +1,116 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { COMPANY, SITE_CANONICAL_BASE, AUTHOR, CO_AUTHOR } from "../../consts";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Локальный ИИ ГК «ФОРОНЕЙ»: GraphRAG и SGLang на GPU завода",
+  description:
+    "Как правообладатель ДОКА ставит on-prem ИИ: Qwen, vLLM, GraphRAG, 152-ФЗ. Материал с foroney.ru.",
+  inLanguage: "ru-RU",
+  author: { "@type": "Person", name: CO_AUTHOR.name, jobTitle: CO_AUTHOR.role },
+  publisher: { "@type": "Organization", name: COMPANY.name, url: COMPANY.url },
+  isBasedOn: "https://foroney.ru/services/local-ai/",
+  citation: [
+    "https://foroney.ru/services/local-ai/",
+    "https://foroney.ru/development/",
+    "https://foroney.ru/insights/doka-invoice-xml/",
+  ],
+  mainEntityOfPage: `${SITE_CANONICAL_BASE}/materials/local-ai/`,
+};
+---
+
+<BaseLayout
+  title="Локальный ИИ ГК «ФОРОНЕЙ» — GraphRAG и SGLang"
+  description="Материал с foroney.ru: модели на GPU завода, GraphRAG, 152-ФЗ. Как тот же контур стоит под ДОКА."
+  canonical={`${SITE_CANONICAL_BASE}/materials/local-ai/`}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header" style="max-width: 680px;">
+        <p class="section-kicker" style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-doka-accent); margin: 0 0 10px;">
+          Материал ГК «ФОРОНЕЙ»
+        </p>
+        <h1 class="section-title">Локальный ИИ на предприятии</h1>
+        <p class="section-subtitle">
+          Пересказ страницы
+          <a href="https://foroney.ru/services/local-ai/" target="_blank" rel="noopener noreferrer">foroney.ru/services/local-ai/</a>
+          для контура ДОКА: те же GPU, тот же периметр.
+        </p>
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+        <p style="margin: 0 0 14px;">
+          {CO_AUTHOR.name} на корпоративном сайте формулирует так: модель живёт на GPU завода.
+          Документы не уходят к OpenAI и не едут за периметр. Для ДОКА это не слоган, а условие:
+          инвойс с ценами и контрагентами нельзя отдать в публичный чат.
+        </p>
+        <p style="margin: 0;">
+          Полный текст и схемы: <a href="https://foroney.ru/services/local-ai/" target="_blank" rel="noopener noreferrer">Локальный ИИ</a>,
+          <a href="https://foroney.ru/services/sovereign-ai/" target="_blank" rel="noopener noreferrer">суверенный ИИ</a>,
+          <a href="https://foroney.ru/development/" target="_blank" rel="noopener noreferrer">разработка ПО</a>.
+        </p>
+      </div>
+
+      <div class="grid-2" style="margin-bottom: 24px;">
+        <div class="doka-card">
+          <h3 style="font-size: 1.1rem; margin: 0 0 8px;">Инференс vLLM / SGLang</h3>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--color-doka-text-muted); line-height: 1.6;">
+            Скорость генерации на NVIDIA CUDA или AMD ROCm. Модель на вашем GPU. ДОКА в этом же контуре
+            гоняет vision и текстовые роли Юриста, Инспектора и Координатора.
+          </p>
+        </div>
+        <div class="doka-card">
+          <h3 style="font-size: 1.1rem; margin: 0 0 8px;">GraphRAG</h3>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--color-doka-text-muted); line-height: 1.6;">
+            Документы завода связывают в граф. Поиск по смыслу, не по ключевому слову. Для ВЭД это решения ФТС,
+            ЕЭК и ваши прецеденты по номенклатуре.
+          </p>
+        </div>
+        <div class="doka-card">
+          <h3 style="font-size: 1.1rem; margin: 0 0 8px;">Модели Qwen</h3>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--color-doka-text-muted); line-height: 1.6;">
+            Открытые веса, квантование под регламент. На сайте ФОРОНЕЯ отдельно названы Qwen 2.5 и Qwen-VL,
+            которые читают плотные таблицы инвойса.
+          </p>
+        </div>
+        <div class="doka-card">
+          <h3 style="font-size: 1.1rem; margin: 0 0 8px;">Векторы в периметре</h3>
+          <p style="margin: 0; font-size: 0.9rem; color: var(--color-doka-text-muted); line-height: 1.6;">
+            Qdrant или pgvector остаются у заказчика. Сопоставление смыслов без исходящего канала.
+            Это же ограничение стоит в <a href="/cases/onprem-152/">кейсе on-prem / 152-ФЗ</a>.
+          </p>
+        </div>
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px;">
+        <h2 style="font-size: 1.15rem; color: var(--color-doka-primary); margin: 0 0 12px;">Как это стыкуется с as-is</h2>
+        <p style="margin: 0 0 12px; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          {AUTHOR.name} на <a href={AUTHOR.personalSite} target="_blank" rel="noopener noreferrer">aiprocesses.ru</a>
+          отдельно пишет: локальный стек без разобранного процесса даёт безопасный бред. Чеклист до пилота:
+          <a href={`${AUTHOR.personalSite}insights/as-is-checklist/`} target="_blank" rel="noopener noreferrer">оригинал</a>,
+          <a href="https://foroney.ru/insights/as-is-checklist/" target="_blank" rel="noopener noreferrer">перепечатка на foroney.ru</a>.
+        </p>
+        <p style="margin: 0; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          Разбор самого конвейера ДОКА: <a href="/method/">метод на этом сайте</a> и
+          <a href="https://foroney.ru/insights/doka-invoice-xml/" target="_blank" rel="noopener noreferrer">статья ФОРОНЕЯ</a>.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <a href="https://foroney.ru/services/local-ai/" target="_blank" rel="noopener noreferrer" class="doka-btn doka-btn-navy" style="padding: 10px 16px; font-size: 0.875rem;">
+          Оригинал на foroney.ru →
+        </a>
+        <a href="/foroney/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          О ГК «ФОРОНЕЙ»
+        </a>
+        <a href="/razbor/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          Разбор 5 файлов
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

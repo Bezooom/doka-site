@@ -249,6 +249,16 @@ export const CASE_STUDIES = [
     kpi: "Данные у вас",
     industry: "Enterprise / compliance",
   },
+  {
+    slug: "precursors-avia",
+    title: "Прекурсоры авиахимии: особый порядок ПП-681",
+    description:
+      "МЭК, толуол и ацетон в инвойсе MRO. Система не выпускает их как обычную химию: табл. II, лицензия, журнал учёта, высокий риск.",
+    tag: "Комплаенс / прекурсоры",
+    tags: ["ПП-681", "авиахимия", "лицензия"],
+    kpi: "Не «обычный растворитель»",
+    industry: "Авиационный MRO",
+  },
 ];
 
 export const PILLARS = [
@@ -409,7 +419,7 @@ export function buildOrganizationJsonLd() {
     url: "https://foroney.ru/",
     email: COMPANY.email,
     telephone: COMPANY.phone,
-    sameAs: ["https://foroney.ru/"],
+    sameAs: ["https://foroney.ru/", "https://aiprocesses.ru/", `${SITE_CANONICAL_BASE}/foroney/`],
     brand: {
       "@type": "Brand",
       name: "ДОКА",

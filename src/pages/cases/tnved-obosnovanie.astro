@@ -8,7 +8,7 @@ import LeadForm from "../../components/LeadForm.astro";
   title="Кейс: Графа 31 и отказ от ложных кодов ТН ВЭД — ДОКА"
   description="Сценарий классификации ИТ-номенклатуры: обоснование кода ТН ВЭД, пошлины, отказ от альтернативных субпозиций."
   canonical={`${SITE_CANONICAL_BASE}/cases/tnved-obosnovanie/`}
-  ogImage={`${SITE_CANONICAL_BASE}/screens/doka-server-hs-code-8471300000.jpg`}
+  ogImage={`${SITE_CANONICAL_BASE}/screens/doka-server-hs-code.jpg`}
 >
   <section class="section" style="padding-top: 48px;">
     <div class="container" style="max-width: 900px;">
@@ -18,7 +18,7 @@ import LeadForm from "../../components/LeadForm.astro";
 
       <span class="doka-badge doka-badge-orange" style="margin-bottom: 12px;">Классификация ТН ВЭД</span>
       <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); line-height: 1.2; color: var(--color-doka-primary); margin-bottom: 14px;">
-        Графа 31 и отказ от ложных кодов: сервер Dell и коммутатор
+        Графа 31 и отказ от ложных кодов: сервер и коммутатор
       </h1>
       <p style="font-size: 1.05rem; color: var(--color-doka-text-muted); line-height: 1.6; margin-bottom: 28px;">
         Не «угадать код», а выдать декларанту формулировку и аргументы: почему этот код верный и почему соседние субпозиции отброшены.
@@ -48,21 +48,28 @@ import LeadForm from "../../components/LeadForm.astro";
 
         <h2 style="font-size: 1.35rem; color: var(--color-doka-primary); margin: 28px 0 12px;">Что сделала ДОКА</h2>
         <p>
-          На позиции коммутатора Dell EMC система собрала Графу 31, предложила код с уровнем уверенности, рассчитала пошлину/НДС и проверила нетарифные меры.
-          На сервере PowerEdge — явно указала, почему отброшены альтернативы (блоки без процессора, дисплеи и т.п.).
+          На холинхлориде (Aurelia) собрана Графа 31 и код 2309909601. Бетаин идёт в 2923900000, не в муку 1101 и не в шерсть 5101.
+          На коммутаторе Helionix — 8517620002, на сервере — 8471500000: не микросхемы 8542.
         </p>
 
         <figure style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #fff;">
-          <img src="/screens/doka-items-grafa31-hs-code.jpg" alt="Карточка позиции: Графа 31 и код ТН ВЭД" style="width: 100%; height: auto; display: block;" loading="lazy" />
+          <img src="/screens/doka-crop-aurelia-grafa31.jpg" alt="Карточка позиции: Графа 31 и код ТН ВЭД 2309909601" style="width: 100%; height: auto; display: block;" loading="lazy" />
           <figcaption style="padding: 12px; font-size: 0.8125rem; background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
-            Спецификация позиции: Графа 31, код, пошлины, нетарифные меры.
+            Холинхлорид: Графа 31, код 2309909601, глубокий разбор.
           </figcaption>
         </figure>
 
         <figure style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #fff;">
-          <img src="/screens/doka-server-hs-code-8471300000.jpg" alt="Обоснование кода ТН ВЭД для сервера" style="width: 100%; height: auto; display: block;" loading="lazy" />
+          <img src="/screens/doka-crop-helionix-reject.jpg" alt="Отказ от ложных кодов ТН ВЭД на коммутаторе" style="width: 100%; height: auto; display: block;" loading="lazy" />
           <figcaption style="padding: 12px; font-size: 0.8125rem; background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
-            Отказ от ложных субпозиций — аргумент «почему не соседний код».
+            Коммутатор Helionix: почему не 8537 и не соседний 8536.
+          </figcaption>
+        </figure>
+
+        <figure style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #fff;">
+          <img src="/screens/doka-crop-aurelia-council.jpg" alt="Консилиум: риск низкий, коды 2309 и 2923" style="width: 100%; height: auto; display: block;" loading="lazy" />
+          <figcaption style="padding: 12px; font-size: 0.8125rem; background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+            Aurelia: консилиум подтверждает 2309 (корм) и 2923 (химикат).
           </figcaption>
         </figure>
 

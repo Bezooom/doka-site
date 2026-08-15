@@ -1,0 +1,94 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { SITE_CANONICAL_BASE } from "../../consts";
+import LeadForm from "../../components/LeadForm.astro";
+---
+
+<BaseLayout
+  title="Кейс: прекурсоры авиахимии и особый порядок ПП-681 — ДОКА"
+  description="МЭК, толуол и ацетон в инвойсе авиа-MRO. ДОКА не выпускает их как обычную химию: табл. II ПП РФ № 681, лицензия, журнал учёта."
+  canonical={`${SITE_CANONICAL_BASE}/cases/precursors-avia/`}
+  ogImage={`${SITE_CANONICAL_BASE}/screens/doka-velaero-council.jpg`}
+>
+  <section class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 900px;">
+      <nav aria-label="Хлебные крошки" style="font-size: 14px; color: var(--color-doka-text-dim); margin-bottom: 20px;">
+        <a href="/">Главная</a> / <a href="/cases/">Кейсы</a> / Прекурсоры ПП-681
+      </nav>
+
+      <span class="doka-badge doka-badge-orange" style="margin-bottom: 12px;">Комплаенс / прекурсоры</span>
+      <h1 style="font-size: clamp(1.75rem, 3.5vw, 2.5rem); line-height: 1.2; color: var(--color-doka-primary); margin-bottom: 14px;">
+        Прекурсоры авиахимии: особый порядок, не «ещё один растворитель»
+      </h1>
+      <p style="font-size: 1.05rem; color: var(--color-doka-text-muted); line-height: 1.6; margin-bottom: 28px;">
+        Четвёртый демо-инвойс в общем прогоне. Три чистых вещества из табл. II постановления Правительства РФ № 681.
+        Система классифицирует их и отдельно поднимает комплаенс: лицензия на оборот, журнал учёта, нельзя выпускать как обычную химию.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; background: var(--color-doka-primary); color: #fff; padding: 20px; border-radius: var(--radius-doka-lg); margin-bottom: 32px;" class="case-kpi-grid">
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 1.35rem; font-weight: 700; color: #FCA5A5;">Риск высокий</div>
+          <div style="font-size: 0.75rem; color: #CBD5E1;">не «Одобрено»</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 1.35rem; font-weight: 700; color: #FDBA74;">ПП-681 табл. II</div>
+          <div style="font-size: 0.75rem; color: #CBD5E1;">МЭК, толуол, ацетон</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-mono); font-size: 1.35rem; font-weight: 700; color: #6EE7B7;">3/3 кода</div>
+          <div style="font-size: 0.75rem; color: #CBD5E1;">2914 / 2902 / 2914</div>
+        </div>
+      </div>
+
+      <div style="font-size: 1rem; color: var(--color-doka-text-muted); line-height: 1.75;">
+        <h2 style="font-size: 1.35rem; color: var(--color-doka-primary); margin: 28px 0 12px;">Проблема</h2>
+        <p>
+          В авиационном MRO те же названия, что у бытовых растворителей. Если пропустить МЭК или толуол как «разбавитель 3814»,
+          декларант остаётся без лицензии и журнала. Это не ошибка главы ТН ВЭД — это другой режим оборота.
+        </p>
+
+        <h2 style="font-size: 1.35rem; color: var(--color-doka-primary); margin: 28px 0 12px;">Документ</h2>
+        <p>
+          Вымышленный инвойс VL-INV-260411: Velaero Surface Chemie GmbH (Гамбург) → ООО «Авиакон-Сервис» (Жуковский).
+          Три строки с CAS: 78-93-3, 108-88-3, 67-64-1.
+        </p>
+        <figure style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #fff;">
+          <img src="/screens/doka-pdf-velaero.jpg" alt="Инвойс Velaero с прекурсорами" style="width: 100%; height: auto; display: block;" loading="lazy" />
+          <figcaption style="padding: 12px; font-size: 0.8125rem; background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+            Оригинал: пометка Table II / PP RF 681 на бланке. Контрагенты выдуманы.
+          </figcaption>
+        </figure>
+
+        <h2 style="font-size: 1.35rem; color: var(--color-doka-primary); margin: 28px 0 12px;">Что сделала ДОКА</h2>
+        <ul style="padding-left: 1.2rem;">
+          <li>МЭК → 2914120000, толуол → 2902300000, ацетон → 2914110000</li>
+          <li>Бейдж «Прекурсоры 3», очередь декларанта, риск высокий</li>
+          <li>Юрист и координатор требуют лицензию и журнал учёта, статус не «Одобрено»</li>
+        </ul>
+
+        <figure style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #fff;">
+          <img src="/screens/doka-velaero-items.jpg" alt="Три позиции прекурсоров с кодами ТН ВЭД" style="width: 100%; height: auto; display: block;" loading="lazy" />
+          <figcaption style="padding: 12px; font-size: 0.8125rem; background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+            3/3 кода назначены, фильтр «Прекурсоры 3».
+          </figcaption>
+        </figure>
+
+        <figure style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #fff;">
+          <img src="/screens/doka-velaero-council.jpg" alt="Консилиум: особый порядок ПП-681" style="width: 100%; height: auto; display: block;" loading="lazy" />
+          <figcaption style="padding: 12px; font-size: 0.8125rem; background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+            Консилиум: высокий риск, лицензия, журнал, нельзя выпускать как обычную химию.
+          </figcaption>
+        </figure>
+
+        <h2 style="font-size: 1.35rem; color: var(--color-doka-primary); margin: 28px 0 12px;">Результат для декларанта</h2>
+        <p>
+          Код есть, но выпуск заблокирован вердиктом до пакета по 681. Это четвёртый инвойс в <a href="/cases/doka/">общем скринкасте</a> рядом с ИТ, кормовой химией и электрокомплектующими.
+        </p>
+      </div>
+
+      <div style="margin-top: 40px;">
+        <LeadForm />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

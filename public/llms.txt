@@ -38,8 +38,11 @@ llms: https://demo.docka.crazedns.ru/llms.txt
 - [Услуги](https://demo.docka.crazedns.ru/services/)
 - [Метод / HowTo](https://demo.docka.crazedns.ru/method/)
 - [Кейсы](https://demo.docka.crazedns.ru/cases/)
+- [Кейс: прекурсоры ПП-681](https://demo.docka.crazedns.ru/cases/precursors-avia/)
 - [FAQ](https://demo.docka.crazedns.ru/faq/)
 - [О нас](https://demo.docka.crazedns.ru/about/)
+- [ГК «ФОРОНЕЙ»](https://demo.docka.crazedns.ru/foroney/)
+- [Локальный ИИ ФОРОНЕЯ](https://demo.docka.crazedns.ru/materials/local-ai/)
 - [Контакты](https://demo.docka.crazedns.ru/contact/)
 
 ## Контакты

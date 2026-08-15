@@ -23,23 +23,42 @@ import SecurityNoDemoBanner from "../components/SecurityNoDemoBanner.astro";
 
 const SCREENSHOTS = [
   {
-    src: "/screens/doka-split-view-council.jpg",
-    alt: "Split-View: PDF инвойса и выводы ИИ-экспертов",
-    title: "PDF + консилиум в одном окне",
-    caption: "Подсветка данных в инвойсе и выводы Юриста, Инспектора и Координатора.",
+    src: "/screens/doka-helionix-switch.jpg",
+    alt: "Разбор инвойса Helionix: коммутатор NX-S48 и отказ от соседних кодов",
+    title: "Helionix — ИТ, 2 позиции",
+    caption: "Коммутатор NX-S48: 8517620002. Сервер RX-2208: 8471500000. Риск средний — в карточке нет контракта/Incoterms.",
   },
   {
-    src: "/screens/doka-items-grafa31-hs-code.jpg",
-    alt: "Графа 31 и код ТН ВЭД 8517620002",
-    title: "Графа 31 и пошлины",
-    caption: "Обоснование кода, пошлина, НДС и нетарифные меры по позиции.",
+    src: "/screens/doka-crop-aurelia-grafa31.jpg",
+    alt: "Графа 31 и код 2309909601 для холинхлорида",
+    title: "Aurelia — Графа 31",
+    caption: "Хлорид холина 75% на носителе: 2309909601. Бетаин безводный: 2923900000.",
   },
   {
-    src: "/screens/doka-server-hs-code-8471300000.jpg",
-    alt: "Обоснование кода ТН ВЭД для сервера Dell",
-    title: "Почему не другие коды",
-    caption: "Явный отказ от ложных субпозиций — аргумент для таможни.",
+    src: "/screens/doka-crop-aurelia-council.jpg",
+    alt: "Консилиум: риск низкий, коды 2309 и 2923 подтверждены",
+    title: "Консилиум: риск низкий",
+    caption: "Юрист и координатор: глава с описанием совпадает, документ одобрен.",
   },
+  {
+    src: "/screens/doka-crop-nordvolt-items.jpg",
+    alt: "Четыре позиции электрокомплектующих Nordvolt",
+    title: "Nordvolt — 4 позиции из ERP",
+    caption: "Сервопривод, БП, автомат, трансформатор тока — 4/4 кода, риск низкий.",
+  },
+  {
+    src: "/screens/doka-crop-velaero-council.jpg",
+    alt: "Консилиум: особый порядок по прекурсорам ПП-681",
+    title: "Velaero — прекурсоры табл. II",
+    caption: "МЭК, толуол, ацетон: риск высокий, лицензия и журнал учёта, не обычная химия.",
+  },
+];
+
+const INVOICE_PDFS = [
+  { src: "/screens/doka-pdf-helionix.jpg", alt: "Вымышленный инвойс Helionix Trading FZE", label: "Helionix · Dubai" },
+  { src: "/screens/doka-pdf-aurelia.jpg", alt: "Вымышленный инвойс Aurelia Chemie GmbH", label: "Aurelia · Mannheim" },
+  { src: "/screens/doka-pdf-nordvolt.jpg", alt: "Вымышленный инвойс Nordvolt Components", label: "Nordvolt · Rotterdam" },
+  { src: "/screens/doka-pdf-velaero.jpg", alt: "Вымышленный инвойс Velaero: прекурсоры ПП-681", label: "Velaero · Hamburg" },
 ];
 
 const jsonLd = {
@@ -167,22 +186,50 @@ const jsonLd = {
       <div class="section-header section-header-wide">
         <h2 id="proof-title" class="section-title">Как это выглядит у декларанта</h2>
         <p class="section-subtitle">
-          Реальные экраны и
-          <a href="/cases/">4 сценария</a>:
-          многостраничный инвойс, Графа 31, XML в Альта, on-prem 152-ФЗ.
+          Экраны и скринкаст с боевого контура на <strong>вымышленных</strong> инвойсах
+          (Helionix, Aurelia, Nordvolt, Velaero) — без чужих коммерческих документов.
+          <a href="/cases/">5 сценариев</a>: инвойс, Графа 31, XML в Альта, on-prem 152-ФЗ, прекурсоры ПП-681.
         </p>
       </div>
 
-      <div class="proof-grid">
+      <figure class="screencast-card">
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          poster="/video/doka-demo-poster.jpg"
+          width="1680"
+          height="980"
+        >
+          <source src="/video/doka-demo.mp4" type="video/mp4" />
+          Скринкаст недоступен в этом браузере. Смотрите кадры ниже.
+        </video>
+        <figcaption>
+          <strong>Прогон системы</strong>
+          <span>Четыре инвойса подряд: Helionix (ИТ) → Aurelia (корм/химия) → Nordvolt (электро) → Velaero (прекурсоры ПП-681). Ускорено ~2×.</span>
+        </figcaption>
+      </figure>
+
+      <div class="proof-grid proof-grid-2">
         {SCREENSHOTS.map((s) => (
           <figure class="proof-card">
             <div class="proof-img-wrap">
-              <img src={s.src} alt={s.alt} loading="lazy" decoding="async" width="800" height="500" />
+              <img src={s.src} alt={s.alt} loading="lazy" decoding="async" width="900" height="620" />
             </div>
             <figcaption>
               <strong>{s.title}</strong>
               <span>{s.caption}</span>
             </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      <p class="proof-pdf-lead">Четыре вымышленных оригинала — разная вёрстка, чтобы OCR не «узнавал шаблон»:</p>
+      <div class="proof-pdf-row">
+        {INVOICE_PDFS.map((p) => (
+          <figure class="proof-pdf">
+            <img src={p.src} alt={p.alt} loading="lazy" decoding="async" width="400" height="560" />
+            <figcaption>{p.label}</figcaption>
           </figure>
         ))}
       </div>
@@ -303,7 +350,10 @@ const jsonLd = {
     <div class="container">
       <div class="section-header">
         <h2 id="demo-title" class="section-title">Интерфейс в работе</h2>
-        <p class="section-subtitle">Симулятор для знакомства с логикой. Боевой контур — только on-prem.</p>
+        <p class="section-subtitle">
+          Те же четыре вымышленных инвойса, что в скринкасте. Переключайте документ и вкладку — цифры совпадают с кейсами.
+          Боевой контур — только on-prem.
+        </p>
       </div>
       <InvoiceParserDemo />
     </div>
@@ -607,11 +657,72 @@ const jsonLd = {
     border-top: 1px solid var(--color-doka-border);
   }
 
+  .screencast-card {
+    margin: 0 0 24px;
+    background: #fff;
+    border: 1px solid var(--color-doka-border);
+    border-radius: var(--radius-doka-lg);
+    overflow: hidden;
+  }
+  .screencast-card video {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #0F172A;
+  }
+  .screencast-card figcaption {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .screencast-card figcaption strong {
+    font-size: 0.9375rem;
+    color: var(--color-doka-primary);
+  }
+  .screencast-card figcaption span {
+    font-size: 0.8125rem;
+    color: var(--color-doka-text-muted);
+    line-height: 1.45;
+  }
+
   /* Proof screenshots */
   .proof-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+  }
+  .proof-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .proof-pdf-lead {
+    margin: 28px 0 12px;
+    font-size: 0.9rem;
+    color: var(--color-doka-text-muted);
+  }
+  .proof-pdf-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .proof-pdf {
+    margin: 0;
+    background: #fff;
+    border: 1px solid var(--color-doka-border);
+    border-radius: var(--radius-doka-lg);
+    overflow: hidden;
+  }
+  .proof-pdf img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .proof-pdf figcaption {
+    padding: 8px 12px 10px;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--color-doka-text-dim);
   }
   .proof-card {
     margin: 0;
@@ -832,7 +943,9 @@ const jsonLd = {
     .hero-main-grid { grid-template-columns: 1fr; }
     .hero-offer { position: static; }
     .audience-grid { grid-template-columns: 1fr; }
-    .proof-grid { grid-template-columns: 1fr; }
+    .proof-grid,
+    .proof-grid-2,
+    .proof-pdf-row { grid-template-columns: 1fr; }
     .offer-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 700px) {

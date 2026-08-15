@@ -40,3 +40,7 @@ On-Premises. Данные не покидают периметр компани�
 - foroney@foroney.ru
 - https://demo.docka.crazedns.ru/
 - https://foroney.ru/
+- https://demo.docka.crazedns.ru/foroney/
+- https://demo.docka.crazedns.ru/materials/local-ai/
+- https://foroney.ru/insights/doka-invoice-xml/
+- https://aiprocesses.ru/insights/gk-foroney/

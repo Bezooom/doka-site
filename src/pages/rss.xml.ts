@@ -21,6 +21,16 @@ export const GET: APIRoute = async () => {
   <description>Разбор плотных инвойсов, ИИ-консилиум, Графа 31 и экспорт XML для Альта-ГТД.</description>
   <link>${base}/cases/doka/</link>
  </item>
+ <item>
+  <title>ГК «ФОРОНЕЙ»: правообладатель ДОКА и локальный ИИ</title>
+  <description>ООО «ГК Фороней», Санкт-Петербург. Внедрение контура, роботизация, материалы foroney.ru.</description>
+  <link>${base}/foroney/</link>
+ </item>
+ <item>
+  <title>Локальный ИИ ГК «ФОРОНЕЙ»: GraphRAG и SGLang</title>
+  <description>Материал с foroney.ru: модели на GPU завода, 152-ФЗ, тот же контур, что стоит под ДОКА.</description>
+  <link>${base}/materials/local-ai/</link>
+ </item>
 </channel>
 </rss>`;
 

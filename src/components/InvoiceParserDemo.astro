@@ -1,988 +1,366 @@
 ---
-// InvoiceParserDemo — Интерактивная реплика интерфейса ДОКА с рабочими вкладками
+// Интерактив: реальные кадры контура, одни и те же 4 вымышленных инвойса.
+const DOCS = [
+  {
+    id: "helionix",
+    short: "Helionix",
+    label: "ИТ · 2 позиции",
+    risk: "Средний",
+    riskTone: "warn",
+    caseHref: "/cases/tnved-obosnovanie/",
+    caseLabel: "Кейс: обоснование кодов",
+    views: [
+      {
+        id: "switch",
+        label: "Коммутатор",
+        src: "/screens/doka-helionix-switch.jpg",
+        alt: "ДОКА: инвойс Helionix, позиция коммутатора NX-S48, код 8517620002",
+        caption: "Коммутатор NX-S48 → 8517620002. Отказ от 8537 и соседнего 8536.",
+      },
+      {
+        id: "server",
+        label: "Сервер",
+        src: "/screens/doka-helionix-server.jpg",
+        alt: "ДОКА: сервер Helionix RX-2208, код 8471500000",
+        caption: "Сервер RX-2208 → 8471500000, не микросхемы 8542 и не мониторы 84716.",
+      },
+      {
+        id: "analytics",
+        label: "Консилиум",
+        src: "/screens/doka-helionix-analytics.jpg",
+        alt: "ДОКА: консилиум по Helionix, риск средний",
+        caption: "Риск средний: в карточке нет контракта и Incoterms, хотя они есть на PDF.",
+      },
+    ],
+  },
+  {
+    id: "aurelia",
+    short: "Aurelia",
+    label: "Корм / химия · 2 позиции",
+    risk: "Низкий",
+    riskTone: "ok",
+    caseHref: "/cases/doka/",
+    caseLabel: "Кейс: разбор инвойса",
+    views: [
+      {
+        id: "item",
+        label: "Графа 31",
+        src: "/screens/doka-aurelia-item.jpg",
+        alt: "ДОКА: холинхлорид Aurelia, Графа 31 и код 2309909601",
+        caption: "Холинхлорид 75% на носителе → 2309909601. Бетаин → 2923900000.",
+      },
+      {
+        id: "council",
+        label: "Консилиум",
+        src: "/screens/doka-aurelia-council.jpg",
+        alt: "ДОКА: консилиум Aurelia, риск низкий, статус Одобрено",
+        caption: "Юрист и координатор: глава совпадает с описанием, документ одобрен. Попросить весовые документы.",
+      },
+    ],
+  },
+  {
+    id: "nordvolt",
+    short: "Nordvolt",
+    label: "Электро · 4 позиции",
+    risk: "Низкий",
+    riskTone: "ok",
+    caseHref: "/cases/alta-xml/",
+    caseLabel: "Кейс: XML в Альта",
+    views: [
+      {
+        id: "list",
+        label: "4 позиции",
+        src: "/screens/doka-nordvolt-list.jpg",
+        alt: "ДОКА: четыре позиции Nordvolt с кодами ТН ВЭД",
+        caption: "Сервопривод, БП, автомат, трансформатор тока — 4/4 кода, риск низкий.",
+      },
+      {
+        id: "item",
+        label: "Карточка",
+        src: "/screens/doka-nordvolt-item.jpg",
+        alt: "ДОКА: карточка позиции Nordvolt с Графой 31",
+        caption: "Готовая спецификация: можно сверять и выгружать XML-проект в Альта-ГТД.",
+      },
+      {
+        id: "analytics",
+        label: "Консилиум",
+        src: "/screens/doka-nordvolt-analytics.jpg",
+        alt: "ДОКА: консилиум Nordvolt, риск низкий",
+        caption: "Консилиум подтверждает коды. Документ готов к проверке декларантом.",
+      },
+    ],
+  },
+  {
+    id: "velaero",
+    short: "Velaero",
+    label: "Прекурсоры · 3 позиции",
+    risk: "Высокий",
+    riskTone: "bad",
+    caseHref: "/cases/precursors-avia/",
+    caseLabel: "Кейс: ПП-681",
+    views: [
+      {
+        id: "items",
+        label: "Позиции",
+        src: "/screens/doka-velaero-items.jpg",
+        alt: "ДОКА: три позиции прекурсоров Velaero, фильтр ПП-681",
+        caption: "МЭК 2914120000, толуол 2902300000, ацетон 2914110000. Бейдж «Прекурсоры 3».",
+      },
+      {
+        id: "council",
+        label: "Консилиум",
+        src: "/screens/doka-velaero-council.jpg",
+        alt: "ДОКА: консилиум Velaero, высокий риск, особый порядок ПП-681",
+        caption: "Не «обычный растворитель»: лицензия, журнал учёта, статус не «Одобрено».",
+      },
+    ],
+  },
+];
+
+const first = DOCS[0];
+const firstView = first.views[0];
 ---
 
-<div class="doka-app-window">
-  <!-- Top App Navbar Header -->
-  <div class="demo-header">
-    <div class="demo-header-left">
-      <a href="/" class="demo-logo-link">
-        <img src="/logo_doka_clean.svg" alt="ДОКА" class="demo-logo-img" />
-      </a>
-      <span class="demo-status-badge">
-        <span class="demo-status-dot"></span>
-        ДОКА онлайн
+<div class="ipd" id="invoice-parser-demo" data-docs={JSON.stringify(DOCS)}>
+  <div class="ipd-bar">
+    <div class="ipd-docs" role="tablist" aria-label="Демо-инвойс">
+      {DOCS.map((doc, i) => (
+        <button
+          type="button"
+          class:list={["ipd-doc", { "is-on": i === 0 }]}
+          role="tab"
+          aria-selected={i === 0 ? "true" : "false"}
+          data-doc={doc.id}
+        >
+          <span class="ipd-doc-name">{doc.short}</span>
+          <span class="ipd-doc-meta">{doc.label}</span>
+        </button>
+      ))}
+    </div>
+    <div class="ipd-views" role="tablist" aria-label="Вкладка разбора">
+      {first.views.map((view, i) => (
+        <button
+          type="button"
+          class:list={["ipd-view", { "is-on": i === 0 }]}
+          role="tab"
+          aria-selected={i === 0 ? "true" : "false"}
+          data-view={view.id}
+        >
+          {view.label}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <figure class="ipd-stage">
+    <img
+      id="ipd-shot"
+      src={firstView.src}
+      alt={firstView.alt}
+      width="1680"
+      height="980"
+      decoding="async"
+      fetchpriority="high"
+    />
+    <figcaption class="ipd-cap">
+      <span class:list={["ipd-risk", `ipd-risk-${first.riskTone}`]} id="ipd-risk">
+        Риск: {first.risk}
       </span>
-    </div>
-    <div class="demo-header-actions">
-      <button class="doka-top-btn demo-btn-light" onclick="alert('Проверка схемы выполнения...')">Проверить</button>
-      <button class="doka-top-btn demo-btn-light" onclick="alert('Выгрузка спецификации DOCX...')">📄 DOCX</button>
-      <button class="doka-top-btn demo-btn-orange" onclick="alert('Выгрузка таблицы XLSX...')">📊 XLSX</button>
-      <button class="doka-top-btn demo-btn-primary" onclick="alert('Сформирована XML-декларация Альта-ГТД!')">📥 XML</button>
-    </div>
-  </div>
-
-  <!-- Workspace Grid -->
-  <div class="doka-workspace-grid">
-    <!-- Left Sidebar -->
-    <div class="doka-sidebar">
-      <div>
-        <button class="sidebar-btn-new">+ НОВЫЙ ДОКУМЕНТ</button>
-        <button class="sidebar-btn-msds">📥 Загрузить MSDS</button>
-        <div class="sidebar-history-label">ИСТОРИЯ</div>
-        <div class="sidebar-file active">
-          инвойс_eastman.pdf
-          <div class="sidebar-file-meta">16:59 · 2 страницы</div>
-        </div>
-        <div class="sidebar-file">
-          dell_emc_spec.pdf
-          <div class="sidebar-file-meta">15:31 · 23 позиции</div>
-        </div>
-      </div>
-      <div class="sidebar-footer">ДОКА · УМНЫЙ РАЗБОР ДОКУМЕНТОВ</div>
-    </div>
-
-    <!-- Center: PDF Document Viewer -->
-    <div class="doka-pdf-viewer">
-      <div class="pdf-toolbar">
-        <span>инвойс_eastman.pdf</span>
-        <span>2 страницы · готово</span>
-      </div>
-      <div class="pdf-canvas">
-        <div class="pdf-ocr-box">
-          <span class="pdf-ocr-label">OCR DETECTED: EASTMAN INVOICE NO 68815247</span>
-        </div>
-        <div class="pdf-content">
-          <div class="pdf-company-name">EASTMAN CHEMICAL COMPANY</div>
-          <div class="pdf-details-row">
-            <div>
-              <strong>SELLER:</strong> TAMINCO BV<br />
-              PANTSERSCHIPSTRAAT 207, GENT<br />
-              VAT: BE0859910443
-            </div>
-            <div>
-              <strong>INVOICE NO:</strong> 68815247<br />
-              <strong>DATE:</strong> 26.01.2022<br />
-              <strong>TOTAL:</strong> 26 107.20 EUR
-            </div>
-          </div>
-          <div>
-            <strong>SHIP TO:</strong> MEGAMIX RF<br />
-            <strong>INCOTERMS:</strong> FCA GENT TRUCK
-          </div>
-          <div class="pdf-item-highlight">
-            <strong>ITEM 1:</strong> CHOLINE CHLORIDE 75% DRY | 20 000 KG | EUR
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right Panel: Data Workspace -->
-    <div class="doka-data-panel">
-      <!-- Tabs -->
-      <div class="demo-tabs">
-        <button class="doka-tab-btn" onclick="switchDemoTab('header')" id="dtab-header">📋 Заголовок</button>
-        <button class="doka-tab-btn active" onclick="switchDemoTab('items')" id="dtab-items">📦 Товары (2)</button>
-        <button class="doka-tab-btn" onclick="switchDemoTab('ai')" id="dtab-ai">✧ AI Аналитика</button>
-      </div>
-
-      <!-- TAB: Заголовок -->
-      <div id="dcontent-header" class="demo-tab-content" style="display: none;">
-        <div class="header-info-grid">
-          <div class="header-info-row">
-            <span class="info-label">Номер инвойса</span>
-            <span class="info-value">68815247</span>
-          </div>
-          <div class="header-info-row">
-            <span class="info-label">Дата инвойса</span>
-            <span class="info-value">26.01.2022</span>
-          </div>
-          <div class="header-info-row">
-            <span class="info-label">Поставщик (Seller)</span>
-            <span class="info-value">TAMINCO BV (Eastman Chemical)</span>
-          </div>
-          <div class="header-info-row">
-            <span class="info-label">Покупатель (Buyer)</span>
-            <span class="info-value">MEGAMIX, Российская Федерация</span>
-          </div>
-          <div class="header-info-row">
-            <span class="info-label">Валюта</span>
-            <span class="info-value mono">EUR</span>
-          </div>
-          <div class="header-info-row">
-            <span class="info-label">Итого по инвойсу</span>
-            <span class="info-value mono accent">26 107.20 EUR</span>
-          </div>
-          <div class="header-info-row">
-            <span class="info-label">Incoterms 2020</span>
-            <span class="info-value">FCA FREE CARRIER, GENT (Truck)</span>
-          </div>
-          <div class="header-info-row">
-            <span class="info-label">VAT ID продавца</span>
-            <span class="info-value mono">BE0859910443</span>
-          </div>
-          <div class="header-info-row">
-            <span class="info-label">Страна отправления</span>
-            <span class="info-value">🇧🇪 Бельгия</span>
-          </div>
-          <div class="header-info-row">
-            <span class="info-label">Число позиций</span>
-            <span class="info-value mono">2</span>
-          </div>
-        </div>
-        <div class="header-status-bar">
-          <span class="status-dot green"></span>
-          Заголовок распознан полностью · Уверенность OCR: 99.2%
-        </div>
-      </div>
-
-      <!-- TAB: Товары -->
-      <div id="dcontent-items" class="demo-tab-content">
-        <div class="items-toolbar">
-          <input type="text" class="doka-input items-search" placeholder="Поиск по наименованию..." />
-          <span class="items-filter-badge green">Низкая уверенность: 0</span>
-          <button class="items-add-btn">+ ПОЗИЦИЯ</button>
-        </div>
-        <div class="items-selector">
-          <button class="item-sel-btn active" data-pos="0" onclick="loadItemData(0)">
-            1. Dell Switch S4112F-ON
-          </button>
-          <button class="item-sel-btn" data-pos="1" onclick="loadItemData(1)">
-            2. Dell PowerEdge R7525
-          </button>
-        </div>
-
-        <!-- Position Detail Card -->
-        <div class="item-detail-card">
-          <div class="item-detail-top">
-            <div class="item-title-wrap">
-              <div class="item-title" id="item-title">S4112F-ON (E24W) - Dell EMC Switch S4112F-ON, 12 × 10GBaseT, 3 × 100GbE QSFP28</div>
-              <div class="item-meta" id="item-meta">Количество: 4 шт | Цена: 12 336.54 AED | Вес: — / —</div>
-            </div>
-            <span class="item-code-badge" id="item-code">8517620002</span>
-          </div>
-
-          <!-- Графа 31 -->
-          <div class="grafa31-box">
-            <div class="grafa31-header">
-              <span>ГРАФА 31 (ОПИСАНИЕ ТОВАРА)</span>
-              <span class="grafa31-copy" onclick="navigator.clipboard.writeText(document.getElementById('item-grafa31').innerText)">📋 Копировать</span>
-            </div>
-            <div class="grafa31-text" id="item-grafa31">S4112F-ON (E24W) - Dell EMC Switch S4112F-ON (E24W), 12 x 10GBaseT, 3 x 100GbE QSFP28, FAN to IO, 2 x AC PSU, OS10</div>
-          </div>
-
-          <!-- Bottom Grid: HS Code + Risks -->
-          <div class="item-bottom-grid">
-            <div class="hs-code-box">
-              <div class="hs-code-header">
-                <span>ОБОСНОВАНИЕ ТН ВЭД</span>
-                <span class="hs-conf" id="item-conf">95%</span>
-              </div>
-              <div class="hs-code-value" id="item-code-large">8517620002</div>
-              <div class="hs-rationale" id="item-rationale">Коммутатор Dell EMC S4112F-ON с 12 портами 10GBaseT, 3 портами 100GbE. Группа: 8517 — телекоммуникационное оборудование.</div>
-              <button class="hs-recheck-btn" onclick="alert('Запрос перепроверки когнитивным Консилиумом...')">💬 Повторно запросить консилиум</button>
-            </div>
-            <div class="risks-column">
-              <div class="risk-badge green">
-                <span>Ценовой риск:</span>
-                <span id="item-risk-label">Норма</span>
-              </div>
-              <div class="nontariff-box">
-                <strong>Нетарифные меры:</strong> <span id="item-measures">ТР ТС 004, 020 (Низковольтное, ЭМС). Экспортный контроль.</span>
-              </div>
-              <div class="duties-box">
-                <strong>ЕТТ ЕАЭС:</strong>
-                <div class="duties-grid">
-                  <span>Импорт: <strong id="item-import-duty">0.0%</strong></span>
-                  <span>НДС: <strong>20%</strong></span>
-                  <span>Экспорт: <strong>—</strong></span>
-                  <span>Акциз: <strong>—</strong></span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- TAB: AI Аналитика -->
-      <div id="dcontent-ai" class="demo-tab-content" style="display: none;">
-        <div class="ai-summary-card">
-          <div class="ai-section-title">
-            <span class="ai-icon">🤖</span>
-            Сводка ИИ-экспертизы документа
-          </div>
-          <div class="ai-metric-row">
-            <div class="ai-metric">
-              <div class="ai-metric-value green">2 / 2</div>
-              <div class="ai-metric-label">Позиции классифицированы</div>
-            </div>
-            <div class="ai-metric">
-              <div class="ai-metric-value accent">0</div>
-              <div class="ai-metric-label">Предупреждения</div>
-            </div>
-            <div class="ai-metric">
-              <div class="ai-metric-value purple">99.2%</div>
-              <div class="ai-metric-label">OCR Уверенность</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="ai-agents-list">
-          <div class="ai-agent-card">
-            <div class="ai-agent-header">
-              <span class="ai-agent-badge lawyer">⚖️ Юрист</span>
-              <span class="ai-agent-status green">✓ Проверено</span>
-            </div>
-            <div class="ai-agent-finding">Нетарифные ограничения проверены по базе ЕЭК. Для позиции 1 (коммутатор) требуется сертификат ТР ТС 004/020. Позиция 2 (сервер) — экспортный контроль двойного назначения.</div>
-          </div>
-          <div class="ai-agent-card">
-            <div class="ai-agent-header">
-              <span class="ai-agent-badge inspector">🔍 Инспектор</span>
-              <span class="ai-agent-status orange">ТН ВЭД подобран</span>
-            </div>
-            <div class="ai-agent-finding">Отклонено ложное совпадение '84716 — мониторы' для сервера Dell PowerEdge. Присвоен код 8471300000 (вычислительные машины). Коммутатор: 8517620002.</div>
-          </div>
-          <div class="ai-agent-card">
-            <div class="ai-agent-header">
-              <span class="ai-agent-badge coordinator">🛡️ Координатор</span>
-              <span class="ai-agent-status green">✓ Риски: 0%</span>
-            </div>
-            <div class="ai-agent-finding">Все позиции прошли перекрёстную верификацию. Итоговые коды утверждены консилиумом единогласно. XML-проект готов к экспорту в Альта-ГТД.</div>
-          </div>
-        </div>
-
-        <div class="ai-timeline">
-          <div class="ai-timeline-title">Лог обработки:</div>
-          <div class="ai-log-entry"><span class="log-time">16:59:01</span> Загружен файл инвойс_eastman.pdf (2 стр)</div>
-          <div class="ai-log-entry"><span class="log-time">16:59:03</span> OCR завершён: 99.2% уверенность, 2 позиции</div>
-          <div class="ai-log-entry"><span class="log-time">16:59:08</span> Юрист: Проверка ЕЭК №54 — ОК</div>
-          <div class="ai-log-entry"><span class="log-time">16:59:12</span> Инспектор: Подбор ТН ВЭД по базе ФТС — ОК</div>
-          <div class="ai-log-entry"><span class="log-time">16:59:15</span> Координатор: Консилиум — единогласно</div>
-          <div class="ai-log-entry success"><span class="log-time">16:59:16</span> ✓ XML-декларация сформирована (Альта-ГТД)</div>
-        </div>
-      </div>
-    </div>
-  </div>
+      <span id="ipd-caption">{firstView.caption}</span>
+      <a id="ipd-case" href={first.caseHref}>{first.caseLabel} →</a>
+    </figcaption>
+  </figure>
 </div>
 
-<style is:raw>
-  .doka-app-window {
-    background: #F8FAFC;
+<style>
+  .ipd {
+    background: var(--color-doka-surface);
     border: 1px solid var(--color-doka-border-dark);
     border-radius: var(--radius-doka-lg);
-    box-shadow: var(--shadow-doka-lg);
+    box-shadow: var(--shadow-doka-md);
     overflow: hidden;
   }
-
-  /* === HEADER === */
-  .demo-header {
-    background: #FFFFFF;
-    border-bottom: 1px solid #E2E8F0;
-    padding: 8px 16px;
+  .ipd-bar {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 8px;
+    padding: 12px 14px 10px;
+    background: var(--color-doka-surface);
+    border-bottom: 1px solid var(--color-doka-border);
   }
-  .demo-header-left {
+  .ipd-docs,
+  .ipd-views {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 6px;
   }
-  .demo-logo-link {
+  .ipd-doc,
+  .ipd-view {
+    appearance: none;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    border-radius: 6px;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+  .ipd-doc {
     display: flex;
-    align-items: center;
-    text-decoration: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1px;
+    padding: 7px 10px;
+    background: var(--color-doka-surface-muted);
+    border: 1px solid var(--color-doka-border);
+    color: var(--color-doka-text-muted);
+    text-align: left;
+    min-width: 0;
   }
-  .demo-logo-img {
-    height: 32px;
-    width: auto;
-    display: block;
+  .ipd-doc-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-doka-primary);
   }
-  .demo-status-badge {
+  .ipd-doc-meta {
     font-size: 11px;
-    background: #ECFDF5;
-    color: #059669;
-    border: 1px solid #A7F3D0;
+    color: var(--color-doka-text-dim);
+  }
+  .ipd-doc:hover { border-color: var(--color-doka-border-dark); }
+  .ipd-doc.is-on {
+    background: var(--color-doka-primary);
+    border-color: var(--color-doka-primary);
+  }
+  .ipd-doc.is-on .ipd-doc-name,
+  .ipd-doc.is-on .ipd-doc-meta { color: #fff; }
+  .ipd-view {
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--color-doka-text-dim);
+  }
+  .ipd-view:hover { color: var(--color-doka-text-main); }
+  .ipd-view.is-on {
+    color: var(--color-doka-accent);
+    border-color: #FBD38D;
+    background: #FFFBEB;
+  }
+  .ipd-stage { margin: 0; background: var(--color-doka-surface-muted); }
+  .ipd-stage img {
+    display: block;
+    width: 100%;
+    height: auto;
+    vertical-align: top;
+  }
+  .ipd-cap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 14px;
+    padding: 12px 14px;
+    background: var(--color-doka-surface);
+    border-top: 1px solid var(--color-doka-border);
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--color-doka-text-muted);
+  }
+  .ipd-risk {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
     padding: 2px 8px;
     border-radius: 999px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 4px;
     white-space: nowrap;
   }
-  .demo-status-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #059669;
-    display: inline-block;
-  }
-  .demo-header-actions {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .doka-top-btn {
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-family: var(--font-sans);
-    cursor: pointer;
-    transition: all 0.15s ease;
-    border: 1px solid transparent;
-    white-space: nowrap;
-  }
-  .doka-top-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  .demo-btn-light { background: #FFFFFF; border-color: #CBD5E1; color: #334155; }
-  .demo-btn-orange { background: #ED8936; border-color: #DD6B20; color: #FFFFFF; }
-  .demo-btn-primary { background: #DD6B20; border-color: #C05621; color: #FFFFFF; font-weight: 700; }
-
-  /* === WORKSPACE GRID === */
-  .doka-workspace-grid {
-    display: grid;
-    grid-template-columns: 180px 1fr 1.3fr;
-  }
-
-  /* === SIDEBAR === */
-  .doka-sidebar {
-    background: #0B132B;
-    padding: 12px;
-    color: #FFFFFF;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-right: 1px solid #1E293B;
-    font-size: 12px;
-  }
-  .sidebar-btn-new {
-    width: 100%;
-    background: linear-gradient(180deg, #ED8936 0%, #DD6B20 100%);
-    color: #FFFFFF;
-    border: none;
-    padding: 8px 10px;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 11px;
-    cursor: pointer;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .sidebar-btn-msds {
-    width: 100%;
-    background: rgba(255,255,255,0.05);
-    color: #CBD5E1;
-    border: 1px solid #334155;
-    padding: 5px 8px;
-    border-radius: 6px;
-    font-size: 11px;
-    cursor: pointer;
-    margin-bottom: 14px;
-  }
-  .sidebar-history-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: #64748B;
-    margin-bottom: 6px;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-  .sidebar-file {
-    padding: 6px 8px;
-    border-radius: 0 4px 4px 0;
-    font-size: 11px;
-    color: #94A3B8;
-    cursor: pointer;
-    margin-bottom: 4px;
-  }
-  .sidebar-file.active {
-    background: rgba(255,255,255,0.1);
-    border-left: 3px solid #ED8936;
-    color: #FFFFFF;
-    font-weight: 600;
-  }
-  .sidebar-file-meta {
-    font-size: 11px;
-    color: #64748B;
-    font-weight: 400;
-    margin-top: 1px;
-  }
-  .sidebar-footer {
-    font-size: 8px;
-    color: #475569;
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    border-top: 1px solid #1E293B;
-    padding-top: 8px;
-  }
-
-  /* === PDF VIEWER === */
-  .doka-pdf-viewer {
-    background: #F1F5F9;
-    border-right: 1px solid #E2E8F0;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-  }
-  .pdf-toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 6px;
-    font-size: 11px;
-    color: #475569;
-    font-family: var(--font-mono);
-  }
-  .pdf-canvas {
-    background: #FFFFFF;
-    border: 1px solid #CBD5E1;
-    border-radius: 4px;
-    padding: 12px;
-    position: relative;
-    flex: 1;
-    overflow: hidden;
-    box-shadow: var(--shadow-doka-sm);
-  }
-  .pdf-ocr-box {
-    position: absolute;
-    top: 8px; left: 8px; right: 8px; bottom: 8px;
-    border: 2px solid #EF4444;
-    background: rgba(239, 68, 68, 0.02);
-    border-radius: 2px;
-    pointer-events: none;
-  }
-  .pdf-ocr-label {
-    position: absolute;
-    top: -9px; left: 6px;
-    background: #EF4444;
-    color: #FFFFFF;
-    font-size: 8px;
-    font-family: var(--font-mono);
-    padding: 1px 5px;
-    border-radius: 2px;
-    font-weight: 600;
-  }
-  .pdf-content {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: #1E293B;
-    line-height: 1.45;
-  }
-  .pdf-company-name {
-    font-weight: 700;
-    font-size: 11px;
-    text-align: center;
-    margin-bottom: 6px;
-  }
-  .pdf-details-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 6px;
-    border-bottom: 1px solid #E2E8F0;
-    padding-bottom: 4px;
-    gap: 8px;
-  }
-  .pdf-item-highlight {
-    margin-top: 8px;
-    background: #FFFBEB;
-    border: 1px solid #FCD34D;
-    padding: 4px;
-    border-radius: 3px;
-    font-size: 8px;
-  }
-
-  /* === DATA PANEL === */
-  .doka-data-panel {
-    background: #FFFFFF;
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow-y: auto;
-    min-height: 520px;
-  }
-  .demo-tab-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  /* === TABS === */
-  .demo-tabs {
-    display: flex;
-    gap: 2px;
-    border-bottom: 2px solid #E2E8F0;
-    padding-bottom: 6px;
-  }
-  .doka-tab-btn {
-    background: transparent;
-    border: none;
-    padding: 5px 10px;
-    font-size: 11px;
-    font-weight: 600;
-    color: #64748B;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -8px;
-    transition: color 0.15s ease;
-    white-space: nowrap;
-  }
-  .doka-tab-btn:hover { color: #334155; }
-  .doka-tab-btn.active {
-    color: #DD6B20;
-    border-bottom-color: #DD6B20;
-  }
-
-  /* === TAB: HEADER INFO === */
-  .header-info-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .header-info-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 8px;
-    background: #F8FAFC;
-    border: 1px solid #F1F5F9;
-    border-radius: 4px;
-    font-size: 11px;
-    gap: 8px;
-  }
-  .info-label {
-    color: #64748B;
-    font-weight: 500;
-    flex-shrink: 0;
-  }
-  .info-value {
-    color: #0F172A;
-    font-weight: 600;
-    text-align: right;
-    word-break: break-word;
-  }
-  .info-value.mono { font-family: var(--font-mono); }
-  .info-value.accent { color: #DD6B20; }
-  .header-status-bar {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 10px;
-    background: #ECFDF5;
-    border: 1px solid #A7F3D0;
-    border-radius: 6px;
-    font-size: 11px;
-    color: #065F46;
-    font-weight: 600;
-    margin-top: 8px;
-  }
-  .status-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-  .status-dot.green { background: #059669; }
-
-  /* === TAB: ITEMS === */
-  .items-toolbar {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .items-search {
-    font-size: 11px !important;
-    padding: 5px 8px !important;
-    min-width: 100px;
-    flex: 1;
-  }
-  .items-filter-badge {
-    font-size: 11px;
-    padding: 3px 6px;
-    border-radius: 4px;
-    font-weight: 600;
-  }
-  .items-filter-badge.green { background: #ECFDF5; border: 1px solid #A7F3D0; color: #065F46; }
-  .items-add-btn {
-    background: #DD6B20;
-    color: #FFFFFF;
-    border: none;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 700;
-    cursor: pointer;
+  .ipd-risk-ok { background: #ECFDF5; color: #047857; border: 1px solid #A7F3D0; }
+  .ipd-risk-warn { background: #FFFBEB; color: #B45309; border: 1px solid #FDE68A; }
+  .ipd-risk-bad { background: #FEF2F2; color: #B91C1C; border: 1px solid #FECACA; }
+  #ipd-case {
     margin-left: auto;
+    color: var(--color-doka-accent);
+    font-weight: 600;
+    text-decoration: none;
     white-space: nowrap;
   }
-  .items-selector {
-    display: flex;
-    gap: 6px;
-  }
-  .item-sel-btn {
-    background: #F1F5F9;
-    border: 1px solid #CBD5E1;
-    padding: 5px 8px;
-    border-radius: 4px;
-    font-size: 11px;
-    color: #334155;
-    cursor: pointer;
-    text-align: left;
-    flex: 1;
-    transition: all 0.15s ease;
-  }
-  .item-sel-btn.active {
-    background: #122A42;
-    color: #FFFFFF;
-    border-color: #122A42;
-    font-weight: 600;
-  }
-
-  .item-detail-card {
-    border: 1px solid #E2E8F0;
-    border-radius: 6px;
-    padding: 10px;
-    background: #FFFFFF;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    flex: 1;
-  }
-  .item-detail-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 8px;
-  }
-  .item-title-wrap { flex: 1; min-width: 0; }
-  .item-title {
-    font-weight: 700;
-    font-size: 12px;
-    color: #0F172A;
-    line-height: 1.3;
-    word-break: break-word;
-  }
-  .item-meta {
-    font-size: 11px;
-    color: #64748B;
-    margin-top: 2px;
-  }
-  .item-code-badge {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 700;
-    background: #F1F5F9;
-    border: 1px solid #CBD5E1;
-    padding: 3px 6px;
-    border-radius: 4px;
-    color: #0F172A;
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
-
-  .grafa31-box {
-    background: #F8FAFC;
-    border: 1px solid #E2E8F0;
-    border-radius: 4px;
-    padding: 8px;
-  }
-  .grafa31-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    font-family: var(--font-mono);
-    color: #64748B;
-    text-transform: uppercase;
-    margin-bottom: 3px;
-  }
-  .grafa31-copy {
-    color: #DD6B20;
-    cursor: pointer;
-  }
-  .grafa31-text {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: #1E293B;
-    line-height: 1.35;
-    max-height: 40px;
-    overflow-y: auto;
-    word-break: break-word;
-  }
-
-  .item-bottom-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 8px;
-    flex: 1;
-  }
-  .hs-code-box {
-    border: 1px solid #FCD34D;
-    background: #FFFBEB;
-    border-radius: 6px;
-    padding: 8px;
-  }
-  .hs-code-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    font-weight: 700;
-    color: #92400E;
-    font-family: var(--font-mono);
-    margin-bottom: 2px;
-  }
-  .hs-conf { color: #D97706; }
-  .hs-code-value {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 700;
-    color: #78350F;
-    margin-bottom: 2px;
-  }
-  .hs-rationale {
-    font-size: 11px;
-    color: #92400E;
-    line-height: 1.3;
-    max-height: 44px;
-    overflow-y: auto;
-  }
-  .hs-recheck-btn {
-    margin-top: 4px;
-    width: 100%;
-    background: #FFFFFF;
-    border: 1px solid #FCD34D;
-    color: #B45309;
-    padding: 3px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .risks-column {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .risk-badge {
-    border-radius: 4px;
-    padding: 5px 6px;
-    font-size: 11px;
-    font-weight: 600;
-    display: flex;
-    justify-content: space-between;
-  }
-  .risk-badge.green { background: #ECFDF5; border: 1px solid #A7F3D0; color: #065F46; }
-  .nontariff-box {
-    background: #F3E8FF;
-    border: 1px solid #D8B4FE;
-    border-radius: 4px;
-    padding: 5px 6px;
-    font-size: 11px;
-    color: #6B21A8;
-    line-height: 1.3;
-  }
-  .duties-box {
-    background: #F0F9FF;
-    border: 1px solid #BAE6FD;
-    border-radius: 4px;
-    padding: 5px 6px;
-    font-size: 11px;
-    color: #0369A1;
-  }
-  .duties-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    margin-top: 2px;
-    font-family: var(--font-mono);
-  }
-
-  /* === TAB: AI ANALYTICS === */
-  .ai-summary-card {
-    background: linear-gradient(135deg, #1A365D 0%, #0F172A 100%);
-    border-radius: 8px;
-    padding: 12px;
-    color: #FFFFFF;
-  }
-  .ai-section-title {
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .ai-icon { font-size: 16px; }
-  .ai-metric-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-  .ai-metric {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 6px;
-    padding: 8px;
-    text-align: center;
-  }
-  .ai-metric-value {
-    font-family: var(--font-mono);
-    font-size: 16px;
-    font-weight: 700;
-  }
-  .ai-metric-value.green { color: #34D399; }
-  .ai-metric-value.accent { color: #ED8936; }
-  .ai-metric-value.purple { color: #A78BFA; }
-  .ai-metric-label {
-    font-size: 11px;
-    color: #94A3B8;
-    margin-top: 2px;
-  }
-
-  .ai-agents-list {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .ai-agent-card {
-    background: #F8FAFC;
-    border: 1px solid #E2E8F0;
-    border-radius: 6px;
-    padding: 8px 10px;
-  }
-  .ai-agent-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 4px;
-    flex-wrap: wrap;
-    gap: 4px;
-  }
-  .ai-agent-badge {
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: 700;
-    font-size: 11px;
-  }
-  .ai-agent-badge.lawyer { background: #F3E8FF; color: #7C3AED; }
-  .ai-agent-badge.inspector { background: #FFF7ED; color: #DD6B20; }
-  .ai-agent-badge.coordinator { background: #ECFDF5; color: #059669; }
-  .ai-agent-status {
-    font-size: 11px;
-    padding: 2px 6px;
-    border-radius: 999px;
-    font-weight: 600;
-  }
-  .ai-agent-status.green { background: #ECFDF5; color: #059669; border: 1px solid #A7F3D0; }
-  .ai-agent-status.orange { background: #FFFBEB; color: #D97706; border: 1px solid #FDE68A; }
-  .ai-agent-finding {
-    font-size: 11px;
-    color: #334155;
-    line-height: 1.4;
-  }
-
-  .ai-timeline {
-    background: #0B132B;
-    border-radius: 6px;
-    padding: 10px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: #94A3B8;
-  }
-  .ai-timeline-title {
-    font-size: 11px;
-    font-weight: 700;
-    color: #CBD5E1;
-    margin-bottom: 6px;
-  }
-  .ai-log-entry {
-    padding: 2px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-  }
-  .ai-log-entry.success { color: #34D399; font-weight: 600; }
-  .log-time { color: #64748B; margin-right: 6px; }
-
-  /* === MOBILE RESPONSIVE === */
-  @media (max-width: 900px) {
-    .doka-workspace-grid {
-      grid-template-columns: 1fr !important;
-    }
-    .doka-sidebar { display: none; }
-  }
-  @media (max-width: 600px) {
-    .doka-pdf-viewer { display: none !important; }
-    .doka-data-panel { padding: 10px; gap: 8px; }
-    .item-bottom-grid { grid-template-columns: 1fr; }
-    .ai-metric-row { grid-template-columns: repeat(3, 1fr); gap: 4px; }
-    .ai-metric-value { font-size: 14px; }
-    .demo-header { padding: 6px 10px; }
-    .demo-header-actions .demo-btn-light { display: none; }
-  }
-  @media (max-width: 380px) {
-    .demo-tabs { gap: 0; }
-    .doka-tab-btn { padding: 4px 6px; font-size: 11px; }
-    .items-selector { flex-direction: column; }
-    .ai-metric-row { grid-template-columns: 1fr; }
+  #ipd-case:hover { text-decoration: underline; }
+  @media (max-width: 640px) {
+    .ipd-doc { flex: 1 1 calc(50% - 6px); }
+    #ipd-case { margin-left: 0; }
   }
 </style>
 
 <script is:inline>
-  const itemMockData = [
-    {
-      title: "S4112F-ON (E24W) - Dell EMC Switch S4112F-ON, 12 × 10GBaseT, 3 × 100GbE QSFP28",
-      meta: "Количество: 4 шт | Цена: 12 336.54 AED | Вес: — / —",
-      code: "8517620002",
-      grafa31: "S4112F-ON (E24W) - Dell EMC Switch S4112F-ON (E24W), 12 x 10GBaseT, 3 x 100GbE QSFP28, FAN to IO, 2 x AC PSU, OS10",
-      conf: "95%",
-      rationale: "Коммутатор Dell EMC S4112F-ON с 12 портами 10GBaseT, 3 портами 100GbE. Группа: 8517 — телекоммуникационное оборудование.",
-      riskLabel: "Норма",
-      measures: "ТР ТС 004, 020 (Низковольтное, ЭМС). Экспортный контроль.",
-      importDuty: "0.0%"
-    },
-    {
-      title: "Dell PowerEdge R7525 (16X 2.5 SAS/SATA + 8X 2.5 NVMe), (2)*AMD 7H12",
-      meta: "Количество: 1 шт | Цена: 45 200.00 EUR | Вес: 32.5 / 38.0 кг",
-      code: "8471300000",
-      grafa31: "Dell PowerEdge R7525 (16X 2.5 SAS/SATA + 8X 2.5 NVMe) (2)*AMD 7H12 (2.6GHz, 256M, 64C, 280W), 2048GB 3200MHz RDIMM",
-      conf: "95%",
-      rationale: "Сервер Dell PowerEdge R7525 с AMD EPYC. Группа 8471 — вычислительные машины. Отброшены: 84714 (без процессора), 84716 (мониторы).",
-      riskLabel: "Норма",
-      measures: "ТР ТС 004, 020. Экспортный контроль двойного назначения.",
-      importDuty: "0.0%"
+  (function () {
+    const root = document.getElementById("invoice-parser-demo");
+    if (!root) return;
+    const docs = JSON.parse(root.getAttribute("data-docs") || "[]");
+    if (!docs.length) return;
+
+    const shot = document.getElementById("ipd-shot");
+    const cap = document.getElementById("ipd-caption");
+    const riskEl = document.getElementById("ipd-risk");
+    const caseEl = document.getElementById("ipd-case");
+    const viewsBox = root.querySelector(".ipd-views");
+    let docId = docs[0].id;
+    let viewId = docs[0].views[0].id;
+
+    function findDoc(id) {
+      return docs.find((d) => d.id === id) || docs[0];
     }
-  ];
+    function findView(doc, id) {
+      return doc.views.find((v) => v.id === id) || doc.views[0];
+    }
 
-  function loadItemData(idx) {
-    document.querySelectorAll(".item-sel-btn").forEach((b, i) => {
-      b.classList.toggle("active", i === idx);
+    docs.forEach((d) => {
+      d.views.forEach((v) => {
+        const img = new Image();
+        img.src = v.src;
+      });
     });
-    const d = itemMockData[idx];
-    document.getElementById("item-title").innerText = d.title;
-    document.getElementById("item-meta").innerText = d.meta;
-    document.getElementById("item-code").innerText = d.code;
-    document.getElementById("item-code-large").innerText = d.code;
-    document.getElementById("item-grafa31").innerText = d.grafa31;
-    document.getElementById("item-conf").innerText = d.conf;
-    document.getElementById("item-rationale").innerText = d.rationale;
-    document.getElementById("item-risk-label").innerText = d.riskLabel;
-    document.getElementById("item-measures").innerText = d.measures;
-    document.getElementById("item-import-duty").innerText = d.importDuty;
-  }
 
-  function switchDemoTab(tabName) {
-    const tabs = ["header", "items", "ai"];
-    tabs.forEach(t => {
-      const btn = document.getElementById("dtab-" + t);
-      const content = document.getElementById("dcontent-" + t);
-      if (btn) btn.classList.toggle("active", t === tabName);
-      if (content) content.style.display = (t === tabName) ? "" : "none";
+    function paintViews(doc) {
+      viewsBox.innerHTML = "";
+      doc.views.forEach((v) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "ipd-view" + (v.id === viewId ? " is-on" : "");
+        b.setAttribute("role", "tab");
+        b.setAttribute("aria-selected", v.id === viewId ? "true" : "false");
+        b.dataset.view = v.id;
+        b.textContent = v.label;
+        viewsBox.appendChild(b);
+      });
+    }
+
+    function apply() {
+      const doc = findDoc(docId);
+      const view = findView(doc, viewId);
+      viewId = view.id;
+      shot.src = view.src;
+      shot.alt = view.alt;
+      cap.textContent = view.caption;
+      riskEl.textContent = "Риск: " + doc.risk;
+      riskEl.className = "ipd-risk ipd-risk-" + doc.riskTone;
+      caseEl.href = doc.caseHref;
+      caseEl.textContent = doc.caseLabel + " →";
+      root.querySelectorAll(".ipd-doc").forEach((b) => {
+        const on = b.dataset.doc === docId;
+        b.classList.toggle("is-on", on);
+        b.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      paintViews(doc);
+    }
+
+    root.addEventListener("click", (e) => {
+      const docBtn = e.target.closest(".ipd-doc");
+      const viewBtn = e.target.closest(".ipd-view");
+      if (docBtn) {
+        docId = docBtn.dataset.doc;
+        viewId = findDoc(docId).views[0].id;
+        apply();
+      } else if (viewBtn) {
+        viewId = viewBtn.dataset.view;
+        apply();
+      }
     });
-  }
+  })();
 </script>

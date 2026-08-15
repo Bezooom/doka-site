@@ -42,50 +42,98 @@ import LeadForm from "../../components/LeadForm.astro";
         </div>
       </div>
 
-      <!-- Main Case Article Content -->
+      <figure style="margin: 0 0 32px; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #0F172A;">
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          poster="/video/doka-demo-poster.jpg"
+          style="width: 100%; height: auto; display: block;"
+        >
+          <source src="/video/doka-demo.mp4" type="video/mp4" />
+        </video>
+        <figcaption style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+          Скринкаст прогона четырёх вымышленных инвойсов: Helionix, Aurelia Chemie, Nordvolt и Velaero (прекурсоры ПП-681). Контрагенты, ИНН и IBAN выдуманы.
+        </figcaption>
+      </figure>
+
       <div style="font-size: 1rem; color: var(--color-doka-text-muted); line-height: 1.8; margin-bottom: 40px;">
-        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">1. Проблема: Сверхплотные инвойсы и ручной ввод</h2>
+        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">1. Четыре разных оригинала, один контур</h2>
         <p>
-          До внедрения системы ДОКА специалисты по таможенному оформлению вручную переносили данные из коммерческих инвойсов (PDF и сканов) в программу Альта-ГТД. При поступлении многостраничных спецификаций на 30–50 страниц декларант тратил до 4 часов на ввод наименований, сопоставление весов, подсчет сумм и определение кодов ТН ВЭД ЕАЭС.
+          Для съёмки мы не используем чужие коммерческие PDF. Ниже — четыре вымышленных инвойса разной вёрстки: Gulf IT-трейдер, немецкая Handelsrechnung, голландская ERP-фактура и авиа-MRO с прекурсорами. Система должна узнать таблицу, а не «шаблон».
         </p>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin: 20px 0;" class="case-kpi-grid">
+          <img src="/screens/doka-pdf-helionix.jpg" alt="Инвойс Helionix" style="width:100%; height:auto; border:1px solid var(--color-doka-border); border-radius:8px;" />
+          <img src="/screens/doka-pdf-aurelia.jpg" alt="Инвойс Aurelia" style="width:100%; height:auto; border:1px solid var(--color-doka-border); border-radius:8px;" />
+          <img src="/screens/doka-pdf-nordvolt.jpg" alt="Инвойс Nordvolt" style="width:100%; height:auto; border:1px solid var(--color-doka-border); border-radius:8px;" />
+          <img src="/screens/doka-pdf-velaero.jpg" alt="Инвойс Velaero" style="width:100%; height:auto; border:1px solid var(--color-doka-border); border-radius:8px;" />
+        </div>
 
-        <!-- Screenshot 1 -->
+        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">2. Helionix: 2 позиции ИТ, коды без микросхем 8542</h2>
+        <p>
+          Коммутатор NX-S48 → 8517620002, сервер RX-2208 → 8471500000. Обе позиции назначены доменным правилом, не RAG top-1 (раньше такие описания уезжали в 8542). Консилиум ставит средний риск: в извлечённом заголовке нет контракта и Incoterms, хотя они есть на PDF.
+        </p>
         <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;">
-          <img src="/screens/doka-split-view-council.jpg" alt="Интерфейс ДОКА: Разбор инвойса Eastman и ИИ-Консилиум" style="width: 100%; height: auto; display: block;" />
+          <img src="/screens/doka-helionix-switch.jpg" alt="Разбор инвойса Helionix в ДОКА" style="width: 100%; height: auto; display: block;" />
           <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
-            <strong>Рис 1.</strong> Рабочее окно системы ДОКА. Слева: просмотр инвойса Eastman с интеллектуальным распознаванием. Справа: выводы команды ИИ-экспертов (Инспектор, Юрист, Координатор).
+            <strong>Рис 1.</strong> Helionix Trading FZE → ООО «Полярный Контур». 2/2 кодов назначено.
+          </div>
+        </div>
+        <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;">
+          <img src="/screens/doka-crop-helionix-reject.jpg" alt="Почему отброшены альтернативные коды ТН ВЭД" style="width: 100%; height: auto; display: block;" />
+          <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+            <strong>Рис 2.</strong> Фрагмент карточки: «почему не соседний код» — материал для ответа инспектору.
           </div>
         </div>
 
-        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">2. Решение: Умное распознавание и команда виртуальных экспертов</h2>
+        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">3. Aurelia: Графа 31 и консилиум, который ловит ошибку</h2>
         <p>
-          ДОКА применила эффективную технологию: систему умного визуального анализа сложных таблиц и трехступенчатый контроль (Инспектор, Юрист, Координатор). Система не просто извлекла тексты, но и сгенерировала Графу 31 с подробным юридическим обоснованием кода ТН ВЭД.
+          Две химические позиции и два разных решения: холинхлорид 75% на растительном носителе — 2309909601 (кормовой препарат), бетаин безводный 96% — 2923900000 (четвертичный аммоний). Консилиум: риск низкий, статус «Одобрено».
         </p>
-
-        <!-- Screenshot 2 -->
         <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;">
-          <img src="/screens/doka-items-grafa31-hs-code.jpg" alt="Спецификация позиции: Графа 31 и Обоснование ТН ВЭД 8517620002" style="width: 100%; height: auto; display: block;" />
+          <img src="/screens/doka-crop-aurelia-grafa31.jpg" alt="Графа 31 холинхлорида" style="width: 100%; height: auto; display: block;" />
           <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
-            <strong>Рис 2.</strong> Карточка позиции в ДОКА (Коммутатор Dell EMC). Сформирована Графа 31, присвоен код ТН ВЭД 8517620002 с уверенностью 95%, рассчитаны пошлина 0%, НДС 20% и проверены нетарифные меры.
+            <strong>Рис 3.</strong> Карточка позиции: Графа 31, код, пошлины, нетарифные меры (кормовая категория).
+          </div>
+        </div>
+        <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;">
+          <img src="/screens/doka-crop-aurelia-council.jpg" alt="Консилиум: риск низкий по Aurelia" style="width: 100%; height: auto; display: block;" />
+          <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+            <strong>Рис 4.</strong> Консилиум подтверждает 2309 и 2923, несовпадений главы нет.
           </div>
         </div>
 
-        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">3. Аргументация отказов от ложных кодов (Защита от КТС)</h2>
+        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">4. Nordvolt: 4 электропозиции из ERP-фактуры</h2>
         <p>
-          Ключевой фактор защиты от доначислений на таможне — прозрачное пояснение, почему отброшены альтернативные коды ТН ВЭД. На рисунке ниже показано обоснование для сервера Dell PowerEdge R7525: система четко указала, почему код 8471300000 верный, а альтернативы 84714 (машины без процессоров) отброшены.
+          Голландский складской бланк, 4 строки: сервопривод 8504409009, DIN-БП 8504409100, автомат 8536209007, трансформатор тока 8504318009. Все четыре извлечены и классифицированы, риск низкий.
         </p>
-
-        <!-- Screenshot 3 -->
         <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;">
-          <img src="/screens/doka-server-hs-code-8471300000.jpg" alt="Обоснование кода ТН ВЭД 8471300000 для сервера Dell PowerEdge" style="width: 100%; height: auto; display: block;" />
+          <img src="/screens/doka-nordvolt-list.jpg" alt="Разбор инвойса Nordvolt, 4 позиции" style="width: 100%; height: auto; display: block;" />
           <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
-            <strong>Рис 3.</strong> Разбор сервера Dell PowerEdge. Детализированное обоснование ТН ВЭД 8471300000 и явное указание причин отбрасывания субпозиций 84714 и 84716.
+            <strong>Рис 5.</strong> Nordvolt Components B.V. → ООО «Уралщит Электро». 4/4 назначено.
           </div>
         </div>
 
-        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">4. Результат: Мгновенный экспорт в Альта-ГТД и 1С:ERP</h2>
+        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">5. Velaero: прекурсоры — отдельный <a href="/cases/precursors-avia/" style="color: inherit;">кейс ПП-681</a></h2>
         <p>
-          По нажатию кнопки XML система формирует проект декларации, прошедший schema-валидацию, для импорта в Альта-ГТД. Финальную проверку перед подачей выполняет декларант.
+          Три чистых растворителя для MRO: МЭК (78-93-3), толуол (108-88-3), ацетон (67-64-1). Коды 2914.12 / 2902.30 / 2914.11. Это не «ещё одна химия»: табл. II ПП РФ № 681. Консилиум ставит <strong>высокий риск</strong>, требует лицензию на оборот и журнал учёта, не даёт статус «Одобрено».
+        </p>
+        <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;">
+          <img src="/screens/doka-velaero-council.jpg" alt="Консилиум по прекурсорам Velaero" style="width: 100%; height: auto; display: block;" />
+          <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+            <strong>Рис 6.</strong> Velaero Surface Chemie → ООО «Авиакон-Сервис». Прекурсоры табл. II, особый порядок.
+          </div>
+        </div>
+        <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;">
+          <img src="/screens/doka-crop-velaero-precursor.jpg" alt="Карточка МЭК: предупреждение о прекурсоре ПП-681" style="width: 100%; height: auto; display: block;" />
+          <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
+            <strong>Рис 7.</strong> Карточка позиции: предупреждение «Прекурсоры Пост. №681» и пакет документов.
+          </div>
+        </div>
+
+        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">6. Результат: XML в Альта-ГТД после сверки человеком</h2>
+        <p>
+          По кнопке XML система формирует проект декларации. Финальную проверку и подачу выполняет декларант. Экраны сняты с реального прогона, не из макета.
         </p>
       </div>
 
