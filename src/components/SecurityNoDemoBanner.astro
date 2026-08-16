@@ -12,37 +12,37 @@ import { COMPANY } from "../consts";
     <div style="flex: 1; min-width: 0;">
       <div style="display: flex; items-center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap;">
         <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #ED8936; font-weight: 700; text-transform: uppercase; tracking-spacing: 0.05em;">
-          Безопасность & Суверенный контур (152-ФЗ / 289-ФЗ)
+          Закрытый контур (152-ФЗ / 289-ФЗ)
         </span>
         <span class="doka-badge doka-badge-navy" style="font-size: 11px; background: rgba(255,255,255,0.1); color: #94A3B8; border-color: rgba(255,255,255,0.2);">
-          No-Cloud Policy
+          Без публичного облака
         </span>
       </div>
 
       <h2 style="font-size: clamp(1.25rem, 2.5vw, 1.6rem); color: #FFFFFF; font-weight: 700; margin-bottom: 14px; line-height: 1.3;">
-        Почему у ДОКА нет «публичного демо в интернете»?
+        Почему нет публичного демо с загрузкой инвойсов
       </h2>
 
       <p style="font-size: 0.9375rem; color: #94A3B8; line-height: 1.65; margin-bottom: 16px;">
-        Любой коммерческий инвойс или спецификация ВЭД — это чувствительная коммерческая тайна: закупочные цены поставщиков, наименования зарубежных фабрик, артикулы и условия Incoterms. <strong>Загружать такие файлы в открытые веб-сервисы или облачные нейросети (ChatGPT, Claude) — прямой риск утечки коммерческих данных и нарушение 152-ФЗ и 289-ФЗ.</strong>
+        Коммерческий инвойс или спецификация ВЭД это коммерческая тайна: закупочные цены поставщиков, названия зарубежных фабрик, артикулы и условия Incoterms. Загрузка таких файлов в открытые веб-сервисы или облачные нейросети (ChatGPT, Claude) даёт риск утечки и нарушает 152-ФЗ и 289-ФЗ.
       </p>
 
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;" class="security-reasons-grid">
         <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); padding: 14px; border-radius: 8px;">
           <div style="font-weight: 700; color: #FBD38D; font-size: 0.875rem; margin-bottom: 4px;">
-            🔒 On-Premises
+            On-Premises
           </div>
           <div style="font-size: 0.8125rem; color: #CBD5E1; line-height: 1.5;">
-            ДОКА разворачивается непосредственно на серверах вашей компании в защищённой локальной сети (LAN). Никакого взаимодействия со сторонними серверами.
+            ДОКА ставится на серверах компании в локальной сети (LAN). Со сторонними серверами система не обменивается.
           </div>
         </div>
 
         <div style="background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); padding: 14px; border-radius: 8px;">
           <div style="font-weight: 700; color: #FBD38D; font-size: 0.875rem; margin-bottom: 4px;">
-            📋 Проверка по NDA
+            Проверка по NDA
           </div>
           <div style="font-size: 0.8125rem; color: #CBD5E1; line-height: 1.5;">
-            Оценка точности подбора кодов ТН ВЭД проходит на 5 обезличенных инвойсах в изолированном контуре {COMPANY.name} с подписание договора конфиденциальности.
+            Точность кодов ТН ВЭД смотрим на 5 обезличенных инвойсах в изолированном контуре {COMPANY.name}, с договором конфиденциальности.
           </div>
         </div>
       </div>

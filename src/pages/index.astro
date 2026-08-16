@@ -30,13 +30,13 @@ const SCREENSHOTS = [
   {
     src: "/screens/doka-helionix-switch.jpg",
     alt: "Разбор инвойса Helionix: коммутатор NX-S48 и отказ от соседних кодов",
-    title: "Helionix — ИТ, 2 позиции",
-    caption: "Коммутатор NX-S48: 8517620002. Сервер RX-2208: 8471500000. Риск средний — в карточке нет контракта/Incoterms.",
+    title: "Helionix: ИТ, 2 позиции",
+    caption: "Коммутатор NX-S48: 8517620002. Сервер RX-2208: 8471500000. Риск средний: в карточке нет контракта/Incoterms.",
   },
   {
     src: "/screens/doka-crop-aurelia-grafa31.jpg",
     alt: "Графа 31 и код 2309909601 для холинхлорида",
-    title: "Aurelia — Графа 31",
+    title: "Aurelia: Графа 31",
     caption: "Хлорид холина 75% на носителе: 2309909601. Бетаин безводный: 2923900000.",
   },
   {
@@ -48,13 +48,13 @@ const SCREENSHOTS = [
   {
     src: "/screens/doka-crop-nordvolt-items.jpg",
     alt: "Четыре позиции электрокомплектующих Nordvolt",
-    title: "Nordvolt — 4 позиции из ERP",
-    caption: "Сервопривод, БП, автомат, трансформатор тока — 4/4 кода, риск низкий.",
+    title: "Nordvolt: 4 позиции из ERP",
+    caption: "Сервопривод, БП, автомат, трансформатор тока: 4/4 кода, риск низкий.",
   },
   {
     src: "/screens/doka-crop-velaero-council.jpg",
     alt: "Консилиум: особый порядок по прекурсорам ПП-681",
-    title: "Velaero — прекурсоры табл. II",
+    title: "Velaero: прекурсоры табл. II",
     caption: "МЭК, толуол, ацетон: риск высокий, лицензия и журнал учёта, не обычная химия.",
   },
 ];
@@ -128,11 +128,11 @@ const jsonLd = {
           <ul class="hero-offer-points">
             <li>Пришлите до 5 обезличенных PDF/сканов инвойсов или спецификаций</li>
             <li>В ответ: таблица позиций, коды ТН ВЭД, ориентир пошлин, риски КТС, XML для Альта-ГТД</li>
-            <li>Если формат не подходит — без счетов и давления «купить софт»</li>
+            <li>Если формат не подходит, счетов и давления «купить софт» не будет</li>
           </ul>
           <a href="/razbor/" class="doka-btn doka-btn-primary hero-offer-cta">Отправить 5 файлов</a>
           <p class="hero-offer-foot">
-            Дальше: пилот от 250&nbsp;000&nbsp;₽ · Enterprise от 650&nbsp;000&nbsp;₽ · железо on-prem — отдельно
+            Дальше: пилот от 250&nbsp;000&nbsp;₽ · Enterprise от 650&nbsp;000&nbsp;₽ · железо on-prem отдельно
           </p>
           <p class="hero-offer-proof">
             <a href="#proof">Скриншоты UI</a>
@@ -148,8 +148,8 @@ const jsonLd = {
   <section class="section section-muted" aria-labelledby="pain-title">
     <div class="container">
       <div class="section-header section-header-wide">
-        <h2 id="pain-title" class="section-title">Знакомо отделу ВЭД?</h2>
-        <p class="section-subtitle">Типичные узкие места, которые закрывает ДОКА — без «AI magic», на ваших документах.</p>
+        <h2 id="pain-title" class="section-title">Узкие места отдела ВЭД</h2>
+        <p class="section-subtitle">Типичные узкие места отдела ВЭД. Система работает на ваших документах, без выноса в публичные нейросети.</p>
       </div>
 
       <ol class="pain-list">
@@ -171,7 +171,7 @@ const jsonLd = {
     <div class="container">
       <div class="section-header">
         <h2 id="audience-title" class="section-title">Для кого ДОКА</h2>
-        <p class="section-subtitle">Один продукт — разные крючки для ролей в сделке.</p>
+        <p class="section-subtitle">Один контур. У руководителя ВЭД, декларанта и СБ задачи разные.</p>
       </div>
       <div class="audience-grid">
         {AUDIENCES.map((a) => (
@@ -192,7 +192,7 @@ const jsonLd = {
         <h2 id="proof-title" class="section-title">Как это выглядит у декларанта</h2>
         <p class="section-subtitle">
           Экраны и скринкаст с боевого контура на <strong>вымышленных</strong> инвойсах
-          (Helionix, Aurelia, Nordvolt, Velaero) — без чужих коммерческих документов.
+          (Helionix, Aurelia, Nordvolt, Velaero), без чужих коммерческих документов.
           <a href="/cases/">5 сценариев</a>: инвойс, Графа 31, XML в Альта, on-prem 152-ФЗ, прекурсоры ПП-681.
         </p>
       </div>
@@ -229,7 +229,7 @@ const jsonLd = {
         ))}
       </div>
 
-      <p class="proof-pdf-lead">Четыре вымышленных оригинала — разная вёрстка, чтобы OCR не «узнавал шаблон»:</p>
+      <p class="proof-pdf-lead">Четыре вымышленных оригинала разной вёрстки, чтобы OCR не цеплялся за один шаблон:</p>
       <div class="proof-pdf-row">
         {INVOICE_PDFS.map((p) => (
           <figure class="proof-pdf">
@@ -251,7 +251,7 @@ const jsonLd = {
     <div class="container">
       <div class="section-header">
         <h2 id="pillars-title" class="section-title">Что делает система</h2>
-        <p class="section-subtitle">От PDF до XML в Альта-ГТД и 1С — в закрытом контуре.</p>
+        <p class="section-subtitle">От PDF до XML в Альта-ГТД и 1С, в закрытом контуре.</p>
       </div>
       <div class="pillar-list">
         {PILLARS.map((p, idx) => (
@@ -274,7 +274,7 @@ const jsonLd = {
   <section class="section section-muted" id="offer" aria-labelledby="pricing-title">
     <div class="container">
       <div class="section-header section-header-wide">
-        <h2 id="pricing-title" class="section-title">Старт с 0 ₽ — внедрение по этапам</h2>
+        <h2 id="pricing-title" class="section-title">Старт с 0 ₽, внедрение по этапам</h2>
         <p class="section-subtitle">Без покупки лицензии до подтверждения результата на ваших данных.</p>
       </div>
 
@@ -361,8 +361,8 @@ const jsonLd = {
       <div class="section-header">
         <h2 id="demo-title" class="section-title">Интерфейс в работе</h2>
         <p class="section-subtitle">
-          Те же четыре вымышленных инвойса, что в скринкасте. Переключайте документ и вкладку — цифры совпадают с кейсами.
-          Боевой контур — только on-prem.
+          Те же четыре вымышленных инвойса, что в скринкасте. Переключайте документ и вкладку: цифры совпадают с кейсами.
+          Боевой контур только on-prem.
         </p>
       </div>
       <InvoiceParserDemo />

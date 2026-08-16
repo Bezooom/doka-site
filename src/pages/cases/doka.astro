@@ -7,8 +7,8 @@ import LeadForm from "../../components/LeadForm.astro";
 ---
 
 <BaseLayout
-  title="Кейс: Внедрение ИИ-системы ДОКА для декларирования сложной номенклатуры"
-  description="Подробный кейс автоматизации разбора 32-страничных инвойсов, классификации кодов ТН ВЭД и выгрузки XML-проектов в Альта-ГТД."
+  title="Кейс: 32-страничные инвойсы и коды ТН ВЭД — ДОКА"
+  description="Разбор 32-страничных инвойсов, классификация кодов ТН ВЭД и выгрузка XML-проектов в Альта-ГТД."
   canonical={`${SITE_CANONICAL_BASE}/cases/doka/`}
 >
   <section class="section" style="padding-top: 48px;">
@@ -16,10 +16,10 @@ import LeadForm from "../../components/LeadForm.astro";
       <div style="margin-bottom: 32px;">
         <span class="doka-badge doka-badge-orange" style="margin-bottom: 12px;">Практический кейс</span>
         <h1 style="font-size: clamp(2rem, 3.8vw, 2.8rem); line-height: 1.2; color: var(--color-doka-primary); margin-bottom: 16px;">
-          Автоматизация разбора инвойсов и подбора кодов ТН ВЭД для дистрибьютора промышленного оборудования
+          Разбор инвойсов и коды ТН ВЭД у дистрибьютора промышленного оборудования
         </h1>
         <div style="font-size: 1.0625rem; color: var(--color-doka-text-muted); line-height: 1.6;">
-          Как команда ИИ-экспертов ДОКА сократила время подготовки таможенной декларации с 4 часов до 3 минут на один инвойс.
+          На этом прогоне подготовка декларации с одного инвойса заняла около 3 минут вместо 4 часов.
         </div>
       </div>
 
@@ -61,7 +61,7 @@ import LeadForm from "../../components/LeadForm.astro";
       <div style="font-size: 1rem; color: var(--color-doka-text-muted); line-height: 1.8; margin-bottom: 40px;">
         <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">1. Четыре разных оригинала, один контур</h2>
         <p>
-          Для съёмки мы не используем чужие коммерческие PDF. Ниже — четыре вымышленных инвойса разной вёрстки: Gulf IT-трейдер, немецкая Handelsrechnung, голландская ERP-фактура и авиа-MRO с прекурсорами. Система должна узнать таблицу, а не «шаблон».
+          Для съёмки мы не используем чужие коммерческие PDF. Ниже четыре вымышленных инвойса разной вёрстки: Gulf IT-трейдер, немецкая Handelsrechnung, голландская ERP-фактура и авиа-MRO с прекурсорами. Система должна узнать таблицу, а не один шаблон.
         </p>
         <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin: 20px 0;" class="case-kpi-grid">
           <img src="/screens/doka-pdf-helionix.jpg" alt="Инвойс Helionix" style="width:100%; height:auto; border:1px solid var(--color-doka-border); border-radius:8px;" />
@@ -83,13 +83,13 @@ import LeadForm from "../../components/LeadForm.astro";
         <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;">
           <img src="/screens/doka-crop-helionix-reject.jpg" alt="Почему отброшены альтернативные коды ТН ВЭД" style="width: 100%; height: auto; display: block;" />
           <div style="padding: 12px; font-size: 0.8125rem; color: var(--color-doka-text-dim); background: var(--color-doka-surface-muted); border-top: 1px solid var(--color-doka-border);">
-            <strong>Рис 2.</strong> Фрагмент карточки: «почему не соседний код» — материал для ответа инспектору.
+            <strong>Рис 2.</strong> Фрагмент карточки: «почему не соседний код». Это материал для ответа инспектору.
           </div>
         </div>
 
         <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">3. Aurelia: Графа 31 и консилиум, который ловит ошибку</h2>
         <p>
-          Две химические позиции и два разных решения: холинхлорид 75% на растительном носителе — 2309909601 (кормовой препарат), бетаин безводный 96% — 2923900000 (четвертичный аммоний). Консилиум: риск низкий, статус «Одобрено».
+          Две химические позиции и два разных решения: холинхлорид 75% на растительном носителе идёт в 2309909601 (кормовой препарат), бетаин безводный 96% в 2923900000 (четвертичный аммоний). Консилиум: риск низкий, статус «Одобрено».
         </p>
         <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;">
           <img src="/screens/doka-crop-aurelia-grafa31.jpg" alt="Графа 31 холинхлорида" style="width: 100%; height: auto; display: block;" />
@@ -115,9 +115,9 @@ import LeadForm from "../../components/LeadForm.astro";
           </div>
         </div>
 
-        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">5. Velaero: прекурсоры — отдельный <a href="/cases/precursors-avia/" style="color: inherit;">кейс ПП-681</a></h2>
+        <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">5. Velaero: прекурсоры, отдельный <a href="/cases/precursors-avia/" style="color: inherit;">кейс ПП-681</a></h2>
         <p>
-          Три чистых растворителя для MRO: МЭК (78-93-3), толуол (108-88-3), ацетон (67-64-1). Коды 2914.12 / 2902.30 / 2914.11. Это не «ещё одна химия»: табл. II ПП РФ № 681. Консилиум ставит <strong>высокий риск</strong>, требует лицензию на оборот и журнал учёта, не даёт статус «Одобрено».
+          Три чистых растворителя для MRO: МЭК (78-93-3), толуол (108-88-3), ацетон (67-64-1). Коды 2914.12 / 2902.30 / 2914.11. Это табл. II ПП РФ № 681. Консилиум ставит высокий риск, требует лицензию на оборот и журнал учёта, статус «Одобрено» не даёт.
         </p>
         <div style="margin: 24px 0; border: 1px solid var(--color-doka-border); border-radius: var(--radius-doka-lg); overflow: hidden; background: #FFFFFF;">
           <img src="/screens/doka-velaero-council.jpg" alt="Консилиум по прекурсорам Velaero" style="width: 100%; height: auto; display: block;" />
