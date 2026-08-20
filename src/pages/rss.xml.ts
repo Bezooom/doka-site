@@ -37,6 +37,11 @@ export const GET: APIRoute = async () => {
   <link>${base}/aiprocesses/</link>
  </item>
  <item>
+  <title>Что декларант всё равно делает руками</title>
+  <description>Контур готовит проект. Сверка спорных кодов, веса, прекурсоры и подача остаются человеку.</description>
+  <link>${base}/materials/deklarant/</link>
+ </item>
+ <item>
   <title>Чеклист as-is до пилота</title>
   <description>Семь блоков вопросов Наумова. Оригинал на aiprocesses.ru.</description>
   <link>${base}/materials/as-is/</link>

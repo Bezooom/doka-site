@@ -32,7 +32,7 @@ const jsonLd = {
   description="Как ДОКА готовит XML из инвойса: распознавание, ИИ-консилиум (Юрист, Инспектор, Координатор), риски КТС, экспорт в Альта-ГТД. On-Premises."
   canonical={`${SITE_CANONICAL_BASE}/method/`}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <section class="section" style="padding-top: 48px;">
     <div class="container">
       <div class="section-header" style="max-width: 800px;">
@@ -44,6 +44,7 @@ const jsonLd = {
           Зачем сначала as-is, написано у архитектора:
           <a href="https://aiprocesses.ru/insights/as-is-checklist/">чеклист</a>
           и <a href="/materials/process/">пересказ метода</a>.
+          Что после прогона остаётся человеку: <a href="/materials/deklarant/">декларант всё равно делает руками</a>.
         </p>
       </div>
 

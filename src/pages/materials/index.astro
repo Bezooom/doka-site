@@ -16,16 +16,16 @@ const jsonLd = {
   name: "Материалы сети: ФОРОНЕЙ и архитектор",
   url: `${SITE_CANONICAL_BASE}/materials/`,
   description:
-    "Пересказы кейсов и инсайтов foroney.ru и aiprocesses.ru для контура ДОКА. Канон остаётся у автора.",
+    "Заметки контура ДОКА и пересказы foroney.ru и aiprocesses.ru. Канон соседних текстов остаётся у автора.",
 };
 ---
 
 <BaseLayout
   title="Материалы сети — ФОРОНЕЙ и архитектор · ДОКА"
-  description="Инсайты и кейсы foroney.ru и aiprocesses.ru, пересказанные для контура ДОКА. Чеклист as-is, локальный ИИ, метод процесса."
+  description="Заметки контура ДОКА и пересказы foroney.ru и aiprocesses.ru: что остаётся декларанту, чеклист as-is, локальный ИИ, метод процесса."
   canonical={`${SITE_CANONICAL_BASE}/materials/`}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
   <section class="section" style="padding-top: 48px;">
     <div class="container" style="max-width: 880px;">
@@ -35,7 +35,8 @@ const jsonLd = {
         </p>
         <h1 class="section-title">Материалы сети</h1>
         <p class="section-subtitle">
-          Здесь пересказ для декларанта и директора по ВЭД. Полный текст и схемы живут у автора:
+          Заметки контура ДОКА и пересказы foroney.ru / aiprocesses.ru для декларанта и директора по ВЭД.
+          Канон соседних текстов остаётся у автора:
           <a href="https://foroney.ru/insights/" target="_blank" rel="noopener noreferrer">foroney.ru/insights</a>
           и
           <a href="https://aiprocesses.ru/insights/" target="_blank" rel="noopener noreferrer">aiprocesses.ru/insights</a>.
@@ -54,7 +55,7 @@ const jsonLd = {
                 {item.description}
               </p>
               <p style="margin: 0; font-size: 0.8125rem; color: var(--color-doka-accent); font-weight: 600;">
-                Читать пересказ →
+                {item.source === "doka" ? "Читать →" : "Читать пересказ →"}
               </p>
             </article>
           </a>

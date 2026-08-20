@@ -195,6 +195,15 @@ export const RELATED_BY_PAGE = {
 /** Пересказы чужих материалов на этом домене (канон остаётся у автора) */
 export const LOCAL_MATERIALS = [
   {
+    slug: "deklarant",
+    source: "doka" as const,
+    kicker: "Материал ДОКА",
+    title: "Что декларант всё равно делает руками",
+    description: "Контур готовит проект. Список, который мы не обещаем автоматизировать.",
+    original: `${SITE_CANONICAL_BASE}/materials/deklarant/`,
+    originalLabel: "дока.рус/materials/deklarant/",
+  },
+  {
     slug: "local-ai",
     source: "foroney" as const,
     kicker: "Материал ГК «ФОРОНЕЙ»",

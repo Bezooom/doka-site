@@ -46,6 +46,7 @@ On-Premises. Данные не покидают периметр компани�
 - https://дока.рус/materials/as-is/
 - https://дока.рус/materials/local-ai/
 - https://дока.рус/materials/process/
+- https://дока.рус/materials/deklarant/
 - https://foroney.ru/insights/doka-invoice-xml/
 - https://foroney.ru/insights/naumov-as-is/
 - https://aiprocesses.ru/insights/gk-foroney/

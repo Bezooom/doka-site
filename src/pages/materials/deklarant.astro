@@ -1,0 +1,121 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RelatedReading from "../../components/RelatedReading.astro";
+import {
+  AUTHOR,
+  CO_AUTHOR,
+  COMPANY,
+  SITE_CANONICAL_BASE,
+  RELATED_BY_PAGE,
+} from "../../consts";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "Что декларант всё равно делает руками",
+  description:
+    "Контур ДОКА готовит проект декларации. Сверка спорных кодов, веса, прекурсоры и подача остаются человеку.",
+  inLanguage: "ru-RU",
+  datePublished: "2026-10-02",
+  author: [
+    { "@type": "Person", name: CO_AUTHOR.name, jobTitle: CO_AUTHOR.role },
+    { "@type": "Person", name: AUTHOR.name, jobTitle: AUTHOR.role, url: AUTHOR.personalAbout },
+  ],
+  publisher: { "@type": "Organization", name: COMPANY.name, url: COMPANY.url },
+  mainEntityOfPage: `${SITE_CANONICAL_BASE}/materials/deklarant/`,
+};
+
+const leftover = [
+  {
+    title: "Спорные коды",
+    body: "Сверяет позиции, где Юрист и Инспектор разошлись. Особенно соседние субпозиции: score 0.92 инспектору не нужен, нужен текст, почему не соседний код.",
+  },
+  {
+    title: "Веса и суммы",
+    body: "Если скан врал, цифры в карточке тоже врут. Декларант сверяет брутто, нетто и итог инвойса до XML, а не после отказа.",
+  },
+  {
+    title: "Прекурсоры и особый порядок",
+    body: "Толуол, ацетон, МЭК не выпускаются как обычный растворитель. Пакет документов, лицензия, журнал учёта — человек, не кнопка «одобрено».",
+  },
+  {
+    title: "Подача и инспектор",
+    body: "Подачу в таможню и разговор, если вопрос всё же пришёл, контур на себя не берёт. Графа 31 как раз для этого разговора.",
+  },
+];
+---
+
+<BaseLayout
+  title="Что декларант всё равно делает руками — ДОКА"
+  description="Контур готовит проект. Список, который мы не обещаем автоматизировать: спорные коды, веса, прекурсоры, подача."
+  canonical={`${SITE_CANONICAL_BASE}/materials/deklarant/`}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <section class="section" style="padding-top: 48px;">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header" style="max-width: 680px;">
+        <p class="section-kicker" style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-doka-accent); margin: 0 0 10px;">
+          Материал ДОКА · 2 октября 2026
+        </p>
+        <h1 class="section-title">Что декларант всё равно делает руками</h1>
+        <p class="section-subtitle">
+          После прогона остаётся работа человека. Мы её не прячем, иначе ждут автоподачу.
+        </p>
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+        <p style="margin: 0 0 14px;">
+          Контур готовит проект: спецификацию, коды ТН ВЭД, подсветку рисков КТС и XML для Альта-ГТД.
+          Юридическая и фактическая ответственность за декларацию остаётся у декларанта или таможенного представителя.
+        </p>
+        <p style="margin: 0;">
+          Ниже список, который мы не обещаем автоматизировать. Это не «потом допилим» — это граница продукта.
+        </p>
+      </div>
+
+      <div style="display: grid; gap: 12px; margin-bottom: 24px;">
+        {leftover.map((item, i) => (
+          <div class="doka-card" style="padding: 18px 20px;">
+            <h2 style="font-size: 1.05rem; margin: 0 0 6px; color: var(--color-doka-primary);">
+              <span style="font-family: var(--font-mono); color: var(--color-doka-accent);">{String(i + 1).padStart(2, "0")}.</span>
+              {item.title}
+            </h2>
+            <p style="margin: 0; font-size: 0.9rem; line-height: 1.6; color: var(--color-doka-text-muted);">{item.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="doka-card" style="padding: 24px; margin-bottom: 20px;">
+        <h2 style="font-size: 1.15rem; color: var(--color-doka-primary); margin: 0 0 12px;">Как понять, что контур встроился</h2>
+        <p style="margin: 0 0 12px; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          Если после пилота декларант пересобирает XML с нуля, контур не встроился.
+          Если правит пять полей из сорока — это уже другой разговор, обычно нормальный.
+        </p>
+        <p style="margin: 0; font-size: 0.9375rem; line-height: 1.7; color: var(--color-doka-text-muted);">
+          Графа 31 как раз для сверки: код и отказ от ложной субпозиции, не «модель думает, что это 8471».
+          Разбор обоснования: <a href="/cases/tnved-obosnovanie/">кейс по кодам ИТ</a>.
+          Особый порядок химии: <a href="/cases/precursors-avia/">прекурсоры ПП-681</a>.
+          Лестница внедрения: <a href="/services/">услуги и прайс</a>.
+        </p>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <a href="/razbor/" class="doka-btn doka-btn-navy" style="padding: 10px 16px; font-size: 0.875rem;">
+          Разбор 5 файлов
+        </a>
+        <a href="/method/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          Метод и роли
+        </a>
+        <a href="/services/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          Лестница внедрения
+        </a>
+        <a href="/materials/" class="doka-btn doka-btn-outline" style="padding: 10px 16px; font-size: 0.875rem;">
+          Все материалы
+        </a>
+      </div>
+
+      <RelatedReading heading="Тот же разговор у ФОРОНЕЯ и у архитектора" items={RELATED_BY_PAGE.method} />
+    </div>
+  </section>
+</BaseLayout>

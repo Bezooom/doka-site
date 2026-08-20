@@ -41,7 +41,7 @@ const jsonLd = {
   description="Авторы ДОКА: Аксёнов Юрий Васильевич, Наумов Павел Владимирович (aiprocesses.ru). Правообладатель ООО «ГК Фороней», Роспатент №2026681995."
   canonical={`${SITE_CANONICAL_BASE}/about/`}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
   <section class="section" style="padding-top: 48px;">
     <div class="container" style="max-width: 1040px;">

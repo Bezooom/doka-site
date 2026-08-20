@@ -2,7 +2,7 @@
 // Подробный кейс системы ДОКА с реальными скриншотами интерфейса
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import RelatedReading from "../../components/RelatedReading.astro";
-import { AUTHOR, CO_AUTHOR, CERT_ID, SITE_CANONICAL_BASE, RELATED_BY_PAGE } from "../../consts";
+import { SITE_CANONICAL_BASE, RELATED_BY_PAGE } from "../../consts";
 import LeadForm from "../../components/LeadForm.astro";
 ---
 
@@ -134,7 +134,9 @@ import LeadForm from "../../components/LeadForm.astro";
 
         <h2 style="font-size: 1.5rem; color: var(--color-doka-primary); margin: 32px 0 16px;">6. Результат: XML в Альта-ГТД после сверки человеком</h2>
         <p>
-          По кнопке XML система формирует проект декларации. Финальную проверку и подачу выполняет декларант. Экраны сняты с реального прогона, не из макета.
+          По кнопке XML система формирует проект декларации. Финальную проверку и подачу выполняет декларант.
+          Что именно остаётся руками: <a href="/materials/deklarant/">список, который мы не обещаем автоматизировать</a>.
+          Экраны сняты с реального прогона, не из макета.
         </p>
       </div>
 

@@ -87,7 +87,7 @@ const jsonLd = {
   description="Автоматизация ВЭД: инвойс → коды ТН ВЭД → риски КТС → XML Альта-ГТД. On-Premises. Бесплатный разбор 5 файлов за 24 часа."
   canonical={`${SITE_CANONICAL_BASE}/`}
 >
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
   <!-- 1. HERO: боль → выгода → CTA -->
   <section class="hero-section" aria-labelledby="hero-title">

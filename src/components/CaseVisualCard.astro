@@ -30,7 +30,7 @@ const { title, description, href, tag, tags, image, imageAlt } = Astro.props;
     <div class="case-card__body">
       <div class="case-card__meta">
         {tag && <span class="badge">{tag}</span>}
-        {tags?.map((t) => <span class="badge" key={t}>{t}</span>)}
+        {tags?.map((t) => <span class="badge">{t}</span>)}
       </div>
       <h3 class="case-card__title" itemprop="headline">{title}</h3>
       <p class="case-card__desc" itemprop="description">{description}</p>

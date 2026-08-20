@@ -29,7 +29,7 @@ const { title = "Архитектура решения", steps, aiRole, processF
 
   {steps && steps.length > 0 && (
     <ol class="arch-chart__steps" start={0}>
-      {steps.map((step, i) => (
+      {steps.map((step) => (
         <li class="arch-chart__step">
           <strong class="arch-chart__step-num">{step.num}</strong>
           <span class="arch-chart__step-title">{step.title}</span>

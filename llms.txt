@@ -47,6 +47,7 @@ llms: https://дока.рус/llms.txt
 - [Чеклист as-is](https://дока.рус/materials/as-is/)
 - [Локальный ИИ ФОРОНЕЯ](https://дока.рус/materials/local-ai/)
 - [Сначала процесс](https://дока.рус/materials/process/)
+- [Что декларант делает руками](https://дока.рус/materials/deklarant/)
 - [Контакты](https://дока.рус/contact/)
 
 ## Сеть сайтов
